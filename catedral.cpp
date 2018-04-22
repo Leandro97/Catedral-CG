@@ -1,15 +1,20 @@
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <OpenGL/glext.h>
-#include <GLUT/glut.h>
+// #include <OpenGL/gl.h>
+// #include <OpenGL/glu.h>
+// #include <OpenGL/glext.h>
+// #include <GLUT/glut.h>
+#include <GL/gl.h>
+#include <GL/glu.h>
+#include <GL/glext.h>
+#include <GL/glut.h>
 #include <iostream>
 #include <stdlib.h>
 #include <math.h>
 #include <cmath>
+#include <stdio.h>
 #define PI 3.14159265
 
 
-GLdouble centerX = 0, centerY = 0, centerZ = 0, phi = PI/2, theta = 0, radius = 10;
+GLdouble centerX = 0, centerY = 0, centerZ = 0, phi = PI/2, theta = 0, radius = 3;
 GLfloat angle, fAspect;
 //double inc = std::fmod(5*PI/180, PI/2);
 double inc = 5*PI/180;
@@ -52,92 +57,95 @@ void Desenha(void)
     //Chão
     glBegin(GL_POLYGON);    
         glColor3f(0.9, 0.9, 0.9); 
-        glVertex3f(  1.0, -0.6, -0.5 );      
-        glVertex3f(  1.0,  0.6, -0.5 );      
-        glVertex3f( -1.0,  0.6, -0.5 );      
-        glVertex3f( -1.0, -0.6, -0.5 );      
+        glVertex3f(1.0, -0.5, -0.6);      
+        glVertex3f(1.0, -0.5, 0.6);      
+        glVertex3f(-1.0, -0.5, 0.6);      
+        glVertex3f(-1.0, -0.5, -0.6);      
     glEnd();
 
-
+    
     //Parede direita - andar 1
     glColor3f( 0.96, 0.87, 0.7); //https://sistemas.riopomba.ifsudestemg.edu.br/dcc/materiais/926330044_Cores.pdf
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   0.5, -0.1 );
-        glVertex3f(  -1.0,  0.5, -0.1 );
-        glVertex3f(  -1.0,  0.5, -0.5 );
-        glVertex3f(  0.6,   0.5, -0.5 );
+        glVertex3f(-1.0, -0.1 ,0.5);
+        glVertex3f(-1.0, -0.5 ,0.5);
+        glVertex3f(0.6, -0.5, 0.5);
+        glVertex3f(0.6, -0.1 ,0.5);
     glEnd();
 
+
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   0.49, -0.1 );
-        glVertex3f(  -1.0,  0.49, -0.1 );
-        glVertex3f(  -1.0,  0.49, -0.5 );
-        glVertex3f(  0.6,   0.49, -0.5 );
+        glVertex3f(-1.0, -0.1, 0.49);
+        glVertex3f(-1.0, -0.5, 0.49);
+        glVertex3f(0.6, -0.5, 0.49);
+        glVertex3f(0.6, -0.1, 0.49);
     glEnd();
-     
+
+
+       
     //Parede esquerda - andar 1
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   -0.5, -0.1 );
-        glVertex3f(  -1.0,  -0.5, -0.1 );
-        glVertex3f(  -1.0,  -0.5, -0.5 );
-        glVertex3f(  0.6,   -0.5, -0.5 );
+        glVertex3f(0.6, -0.1,  -0.5 );
+        glVertex3f(-1.0, -0.1, -0.5);
+        glVertex3f(-1.0, -0.5, -0.5);
+        glVertex3f(0.6, -0.5 ,-0.5);
     glEnd();
 
+    
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   -0.49, -0.1 );
-        glVertex3f(  -1.0,  -0.49, -0.1 );
-        glVertex3f(  -1.0,  -0.49, -0.5 );
-        glVertex3f(  0.6,   -0.49, -0.5 );
+        glVertex3f(0.6, -0.1 , -0.49);
+        glVertex3f(-1.0, -0.1 ,-0.49);
+        glVertex3f(-1.0, -0.5, -0.49);
+        glVertex3f(0.6, -0.5, -0.49);
     glEnd();
 
     //Parede fundo - andar 1
     glBegin(GL_POLYGON);
-        glVertex3f(  -1.0,  -0.5, -0.1 );
-        glVertex3f(  -1.0,  0.5, -0.1 );
-        glVertex3f(  -1.0,  0.5, -0.5 );
-        glVertex3f(  -1.0,   -0.5, -0.5 );
+        glVertex3f(-1.0, -0.1, -0.5);
+        glVertex3f(-1.0, -0.1, 0.5);
+        glVertex3f(-1.0, -0.5, 0.5);
+        glVertex3f(-1.0, -0.5, -0.5);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex3f(  -0.79,     -0.5, -0.1 );
-        glVertex3f(  -0.79,  0.5, -0.1 );
-        glVertex3f(  -0.79,  0.5, -0.5 );
-        glVertex3f(  -0.79,   -0.5, -0.5 );
+        glVertex3f(-0.79, -0.1, -0.5);
+        glVertex3f(-0.79, -0.1, 0.5);
+        glVertex3f(-0.79, -0.5, 0.5);
+        glVertex3f(-0.79, -0.5, -0.5);
     glEnd();
-
-
+    
     //Teto - andar 1 - camada 1 // Falta fechar os lados
     glColor3f( 0.87,  0.72, 0.53);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.605,   -0.505, -0.1 );
-        glVertex3f(  -1.005,  -0.505, -0.1 );
-        glVertex3f(  -1.005,  0.505, -0.1 );
-        glVertex3f(  0.605,   0.505, -0.1 );
+        glVertex3f(0.605, -0.1, -0.505);
+        glVertex3f(-1.005, -0.1, -0.505);
+        glVertex3f(-1.005, -0.1, 0.505);
+        glVertex3f(0.605, -0.1, 0.505);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex3f(  0.605,     -0.505, -0.101 );
-        glVertex3f(  -1.005,  -0.505, -0.101 );
-        glVertex3f(  -1.005,  0.505, -0.101 );
-        glVertex3f(  0.605,   0.005, -0.101 );
+        glVertex3f(0.605, -0.101, -0.505);
+        glVertex3f(-1.005, -0.101, -0.505);
+        glVertex3f(-1.005, -0.101, 0.505);
+        glVertex3f(0.605, -0.101, 0.505);
     glEnd();
     
-
+    
     //Teto - andar 1 - camada 2 // Falta fechar os lados
     glBegin(GL_POLYGON);
-        glVertex3f(  0.61, -0.51, -0.109 );
-        glVertex3f(  -1.01,  -0.51, -0.101 );
-        glVertex3f(  -1.01,  0.51, -0.101 );
-        glVertex3f(  0.61,  0.51, -0.101 );
+        glVertex3f(0.61, -0.109, -0.51);
+        glVertex3f(-1.01, -0.101,  -0.51);
+        glVertex3f(-1.01, -0.101, 0.51);
+        glVertex3f(0.61, -0.101, 0.51);
     glEnd();
-
     glBegin(GL_POLYGON);
-        glVertex3f(  0.61, -0.51, -0.09 );
-        glVertex3f(  -1.01,  -0.51, -0.09 );
-        glVertex3f(  -1.01,  0.51, -0.09 );
-        glVertex3f(  0.61,  0.51, -0.09 );
+        glVertex3f(0.61, -0.09, -0.51);
+        glVertex3f(-1.01, -0.09,  -0.51);
+        glVertex3f(-1.01, -0.09, 0.51);
+        glVertex3f(0.61, -0.09, 0.51);
     glEnd();
 
+    /*
     //Parede direita - andar 2
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
@@ -443,6 +451,7 @@ void Desenha(void)
     drawColuna(0.59, 0.16,  -0.11, 0.010, 1.0);
     drawColuna(0.59, -0.16, -0.11, 0.010, 1.0);
 
+  */
   glFlush();
   glutSwapBuffers();
  }
@@ -497,6 +506,8 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 // Callback para gerenciar eventos do teclado para teclas especiais (F1, PgDn, entre outras)
 void SpecialKeys(int key, int x, int y)
         {
+        printf("%f\n", phi);
+
         glLoadIdentity();
         switch (key) {
             case GLUT_KEY_LEFT : 
@@ -507,11 +518,11 @@ void SpecialKeys(int key, int x, int y)
                 //isRotate = true; 
                 theta -= inc;
                 break;
-            case GLUT_KEY_UP :
+            case GLUT_KEY_DOWN:
                 //isRotate = true;
-                if(phi + inc <= PI) phi += inc;  
+                if(phi + inc <= PI/2) phi += inc;  
                 break;
-            case GLUT_KEY_DOWN : 
+            case GLUT_KEY_UP: 
                 //isRotate = true;
                 if(phi - inc >= 0) phi -= inc;
                 break;
@@ -522,7 +533,7 @@ void SpecialKeys(int key, int x, int y)
                 //centerZ -= 5;
                 break;
             case 'x' : 
-                radius += 0,1;
+                radius += 0.1;
                 //isRotate = false;
                 //walkZ += 5;
                 //centerZ += 5;
@@ -547,6 +558,8 @@ void SpecialKeys(int key, int x, int y)
 
         //if(isRotate) {
             gluLookAt(radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi), centerX,centerY,centerZ, 0,1,0);
+            //gluLookAt(radius*cos(phi),radius*cos(theta)*sin(phi)*-1, radius*sin(theta)*sin(phi), centerX,centerY,centerZ, 0,1,0);
+
         // } else {
         //     gluLookAt(X, 0, radius + walkZ, walkX,0,walkZ, 0,1,0);
         // }
