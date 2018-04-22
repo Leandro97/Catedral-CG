@@ -24,6 +24,7 @@ GLUquadricObj *obj = gluNewQuadric();
 
 void drawColuna(float x, float y, float z, float radius, float size){
   glPushMatrix();
+    glRotatef(90, 1.0, 0.0, 0.0 );
     glTranslatef(x, y, z);
     gluQuadricDrawStyle(obj, GLU_LINE);
     gluCylinder(obj, radius, radius, size, 100, 100);
@@ -33,7 +34,7 @@ void drawColuna(float x, float y, float z, float radius, float size){
 void drawDiskYZ(float x, float y, float z, float radiusIn, float radiusOut){
   glPushMatrix();
     glTranslatef(x, y, z);
-     glRotatef(90, 0.0, 1.0, 0.0 );
+    glRotatef(90, 0.0, 1.0, 0.0 );
     gluQuadricDrawStyle(obj, GLU_LINE);
     gluDisk(obj, radiusIn, radiusOut, 100, 100);
   glPopMatrix();
@@ -50,8 +51,9 @@ void drawDiskXZ(float x, float y, float z, float radiusIn, float radiusOut, floa
 }
 
 // Função callback chamada para fazer o desenho
-void Desenha(void)
-{
+void Display(void) {
+    glPushMatrix();
+    glRotatef(-90, 0.0, 1.0, 0.0 );
     glClear(GL_COLOR_BUFFER_BIT);
 
     //Chão
@@ -435,17 +437,17 @@ void Desenha(void)
         glVertex3f(0.53, 0.85, 0.45);
         glVertex3f(0.53, 0.85, 0.21);
     glEnd();
-
-    /*   
+ 
 
     //Colunas
-    glColor3f( 0.96, 0.96, 0.86);
-    drawColuna(0.59, 0.5, -0.5, 0.015, 1.4);
-    drawColuna(0.59, -0.5, -0.5, 0.015, 1.4);
-    drawColuna(0.59, 0.16,  -0.11, 0.010, 1.0);
-    drawColuna(0.59, -0.16, -0.11, 0.010, 1.0);
+    glColor3f(0.96, 0.96, 0.86);
+    drawColuna(0.59, 0.5, -0.89, 0.015, 1.4);
+    drawColuna(0.59, -0.5, -0.89, 0.015, 1.4);
+    drawColuna(0.59, 0.16, -0.89, 0.010, 1.0);
+    drawColuna(0.59, -0.16, -0.89, 0.010, 1.0);
 
-  */
+
+  glPopMatrix();  
   glFlush();
   glutSwapBuffers();
  }
@@ -504,6 +506,10 @@ void SpecialKeys(int key, int x, int y)
 
         glLoadIdentity();
         switch (key) {
+            case 0:
+                phi = PI/2;
+                theta = 0;
+                break;
             case GLUT_KEY_LEFT : 
                 //isRotate = true;
                 theta += inc;
@@ -569,7 +575,7 @@ int main(int argc, char** argv)
     glutInitWindowSize(1000,1000);
     glutCreateWindow("Catedral");
 
-    glutDisplayFunc(Desenha);
+    glutDisplayFunc(Display);
     glutReshapeFunc(AlteraTamanhoJanela);
     glutSpecialFunc(SpecialKeys);
     Inicializa();
