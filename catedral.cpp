@@ -145,304 +145,298 @@ void Desenha(void)
         glVertex3f(0.61, -0.09, 0.51);
     glEnd();
 
-    /*
+    
     //Parede direita - andar 2
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   0.5, 0.25 );
-        glVertex3f(  -1.0,  0.5, 0.25 );
-        glVertex3f(  -1.0,  0.5, -0.09 );
-        glVertex3f(  0.6,   0.5, -0.09 );
+        glVertex3f(0.6, 0.25, 0.5);
+        glVertex3f(-1.0, 0.25, 0.5);
+        glVertex3f(-1.0, -0.09, 0.5);
+        glVertex3f(0.6, -0.09, 0.5);
     glEnd();
 
+    glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   0.49, 0.25 );
-        glVertex3f(  -1.0,  0.49, 0.25 );
-        glVertex3f(  -1.0,  0.49, -0.09 );
-        glVertex3f(  0.6,   0.49, -0.09 );
+        glVertex3f(0.6, 0.25, 0.49);
+        glVertex3f(-1.0, 0.25, 0.49);
+        glVertex3f(-1.0, -0.09, 0.49);
+        glVertex3f(0.6, -0.09, 0.49);
     glEnd();
 
+    
     //Parede esquerda - andar 2
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   -0.5, 0.25 );
-        glVertex3f(  -1.0,  -0.5, 0.25 );
-        glVertex3f(  -1.0,  -0.5, -0.09 );
-        glVertex3f(  0.6,   -0.5, -0.09 );
+        glVertex3f(0.6, 0.25, -0.5);
+        glVertex3f(-1.0, 0.25, -0.5);
+        glVertex3f(-1.0, -0.09, -0.5);
+        glVertex3f(0.6, -0.09, -0.5);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   -0.49, 0.25 );
-        glVertex3f(  -1.0,  -0.49, 0.25 );
-        glVertex3f(  -1.0,  -0.49, -0.09 );
-        glVertex3f(  0.6,   -0.49, -0.09);
+        glVertex3f(0.6, 0.25, -0.49);
+        glVertex3f(-1.0, 0.25, -0.49);
+        glVertex3f(-1.0, -0.09, -0.49);
+        glVertex3f(0.6, -0.09, -0.49);
     glEnd();
 
     //Parede fundo - andar 1
     glBegin(GL_POLYGON);
-        glVertex3f(  -1.0,  -0.5, 0.25 );
-        glVertex3f(  -1.0,  0.5, 0.25 );
-        glVertex3f(  -1.0,  0.5, -0.09 );
-        glVertex3f(  -1.0,   -0.5, -0.09 );
+        glVertex3f(-1.0, 0.25, -0.5);
+        glVertex3f(-1.0, 0.25, 0.5);
+        glVertex3f(-1.0, -0.09, 0.5);
+        glVertex3f(  -1.0, -0.09, -0.5);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex3f(  -0.79,     -0.5, 0.25 );
-        glVertex3f(  -0.79,  0.5, 0.25);
-        glVertex3f(  -0.79,  0.5, -0.09 );
-        glVertex3f(  -0.79,   -0.5, -0.09 );
+        glVertex3f(-0.79, 0.25, -0.5);
+        glVertex3f(-0.79, 0.25, 0.5);
+        glVertex3f(-0.79, -0.09, 0.5);
+        glVertex3f(-0.79, -0.09, -0.5);
     glEnd();
 
     //Teto - andar 2 - camada 1 // Falta fechar os lados
     glColor3f( 0.87,  0.72, 0.53);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.605,     -0.505, 0.25 );
-        glVertex3f(  -1.005,  -0.505, 0.25 );
-        glVertex3f(  -1.005,  0.505, 0.25 );
-        glVertex3f(  0.605,   0.505, 0.25 );
+        glVertex3f(0.605, 0.25,  -0.505);
+        glVertex3f(-1.005, 0.25, -0.505);
+        glVertex3f(-1.005, 0.25, 0.505);
+        glVertex3f(0.605, 0.25, 0.505);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex3f(  0.605,     -0.505, 0.255 );
-        glVertex3f(  -1.005,  -0.505, 0.2501 );
-        glVertex3f(  -1.005,  0.505, 0.2501 );
-        glVertex3f(  0.605,   0.505, 0.2501 );
+        glVertex3f(0.605, 0.255,  -0.505);
+        glVertex3f(-1.005, 0.255, -0.505);
+        glVertex3f(-1.005, 0.255, 0.505);
+        glVertex3f(0.605, 0.255, 0.505);
     glEnd();
     
+
     //Teto - andar 2 - camada 2 // Falta fechar os lados
     glBegin(GL_POLYGON);
-        glVertex3f(  0.61,  -0.51, 0.2501 );
-        glVertex3f(  -1.01,  -0.51, 0.2501 );
-        glVertex3f(  -1.01,  0.51, 0.2501 );
-        glVertex3f(  0.61,   0.51, 0.2501 );
+        glVertex3f(0.61, 0.25, -0.51);
+        glVertex3f(-1.01, 0.25, -0.51);
+        glVertex3f(-1.01, 0.25, 0.51);
+        glVertex3f(0.61, 0.25, 0.51);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex3f(  0.61,  -0.51, 0.26 );
-        glVertex3f(  -1.01,  -0.51, 0.26 );
-        glVertex3f(  -1.01,  0.51, 0.26 );
-        glVertex3f(  0.61,   0.51, 0.26 );
+        glVertex3f(0.61, 0.26, -0.51);
+        glVertex3f(-1.01, 0.26, -0.51);
+        glVertex3f(-1.01, 0.26, 0.51);
+        glVertex3f(0.61, 0.26, 0.51);
     glEnd();
     
+      
     //Parede direita - andar 3
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   0.5, 0.5 );
-        glVertex3f(  0.3,  0.5, 0.5 );
-        glVertex3f(  0.3,  0.5, 0.26 );
-        glVertex3f(  0.6,   0.5, 0.26 );
+        glVertex3f(0.6, 0.5, 0.5);
+        glVertex3f(0.3, 0.5, 0.5);
+        glVertex3f(0.3, 0.26, 0.5);
+        glVertex3f(0.6, 0.26, 0.5);
     glEnd();
 
-
-    //Parede esquerda - andar 3
+    glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6,   -0.5, 0.5 );
-        glVertex3f(  0.3,  -0.5, 0.5 );
-        glVertex3f(  0.3,  -0.5, 0.26 );
-        glVertex3f(  0.6,  -0.5, 0.26 );
+        glVertex3f(0.6, 0.5, -0.5);
+        glVertex3f(0.3, 0.5, -0.5);
+        glVertex3f(0.3, 0.26, -0.5);
+        glVertex3f(0.6, 0.26, -0.5);
     glEnd();
 
+    
     //Parede fundo - andar 3
     glBegin(GL_POLYGON);
-        glVertex3f(  0.3, -0.5, 0.5 );
-        glVertex3f(  0.3,  0.5, 0.5 );
-        glVertex3f(  0.3,  0.5, 0.26 );
-        glVertex3f(  0.3,  -0.5, 0.26 );
+        glVertex3f(0.3, 0.5, -0.5);
+        glVertex3f(0.3, 0.5, 0.5);
+        glVertex3f(0.3, 0.26, 0.5);
+        glVertex3f(0.3, 0.26, -0.5);
     glEnd();
+
 
     //Parede frente - andar 3
     glBegin(GL_POLYGON);
-        glVertex3f(  0.6, -0.5, 0.5 );
-        glVertex3f(  0.6,  0.5, 0.5 );
-        glVertex3f(  0.6,  0.5, 0.26 );
-        glVertex3f(  0.6,  -0.5, 0.26 );
+        glVertex3f(0.6, 0.5, -0.5);
+        glVertex3f(0.6, 0.5, 0.5);
+        glVertex3f(0.6, 0.26, 0.5);
+        glVertex3f(0.6, 0.26, -0.5);
     glEnd();
 
     
     //Teto - andar 3 - camada 1 // Falta fechar os lados
     glColor3f( 0.87,  0.72, 0.53);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.61,  -0.51, 0.5 );
-        glVertex3f(  0.28,  -0.51, 0.5 );
-        glVertex3f(  0.28,  0.51, 0.5 );
-        glVertex3f(  0.61,   0.51, 0.5 );
+        glVertex3f(0.61, 0.5, -0.51);
+        glVertex3f(0.28, 0.5, -0.51);
+        glVertex3f(0.28, 0.5, 0.5);
+        glVertex3f(0.61, 0.5, 0.51);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex3f(  0.61,  -0.51, 0.51 );
-        glVertex3f(  0.28,  -0.51, 0.51 );
-        glVertex3f(  0.28,  0.51, 0.51 );
-        glVertex3f(  0.61,   0.51, 0.51 );
+        glVertex3f(0.61, 0.51, -0.51);
+        glVertex3f(0.28, 0.51, -0.51);
+        glVertex3f(0.28, 0.51, 0.5);
+        glVertex3f(0.61, 0.51, 0.51);
     glEnd();
+
 
     //Parede direita - andar 4 - torre direita
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.56,  0.48, 0.51 );
-        glVertex3f(  0.30,  0.48, 0.51 );
-        glVertex3f(  0.30,  0.48, 0.65 );
-        glVertex3f(  0.56,  0.48, 0.65 );
+        glVertex3f(0.56, 0.51, 0.48);
+        glVertex3f(0.30, 0.51, 0.48);
+        glVertex3f(0.30, 0.65, 0.48);
+        glVertex3f(0.56, 0.65, 0.48);
     glEnd();
 
-
-    //Parede esquerda - andar 4 - torre direita
     glBegin(GL_POLYGON);
-        glVertex3f(  0.56,  0.18, 0.51 );
-        glVertex3f(  0.30,  0.18, 0.51 );
-        glVertex3f(  0.30,  0.18, 0.65 );
-        glVertex3f(  0.56,  0.18, 0.65 );
+        glVertex3f(0.56, 0.51, 0.18);
+        glVertex3f(0.30, 0.51, 0.18);
+        glVertex3f(0.30, 0.65, 0.18);
+        glVertex3f(0.56, 0.65, 0.18);
     glEnd();
 
-    
     //Parede fundo - andar 4 - torre direita
     glBegin(GL_POLYGON);
-        glVertex3f(  0.30,  0.18, 0.51 );
-        glVertex3f(  0.30,  0.48, 0.51 );
-        glVertex3f(  0.30,  0.48, 0.65 );
-        glVertex3f(  0.30,  0.18, 0.65 );
+        glVertex3f(0.30, 0.51, 0.18);
+        glVertex3f(0.30, 0.51, 0.48);
+        glVertex3f(0.30, 0.65, 0.48);
+        glVertex3f(0.30, 0.65, 0.18);
     glEnd();
 
-    
     //Parede frente - andar 4 - torre direita
     glBegin(GL_POLYGON);
-        glVertex3f(  0.56,  0.18, 0.51 );
-        glVertex3f(  0.56,  0.48, 0.51 );
-        glVertex3f(  0.56,  0.48, 0.65 );
-        glVertex3f(  0.56,  0.18, 0.65 );
+        glVertex3f(0.56, 0.51, 0.18);
+        glVertex3f(0.56, 0.51, 0.48);
+        glVertex3f(0.56, 0.65, 0.48);
+        glVertex3f(0.56, 0.65, 0.18);
     glEnd();
 
     //Teto - andar 4 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.5605,    0.1805, 0.65 );
-        glVertex3f(  0.3005,  0.1805, 0.65 );
-        glVertex3f(  0.3005,  0.4805, 0.65 );
-        glVertex3f(  0.5605,   0.4805, 0.65 );
+        glVertex3f(0.5605, 0.655, 0.1805);
+        glVertex3f(0.3005, 0.655, 0.1805);
+        glVertex3f(0.3005, 0.655, 0.4805);
+        glVertex3f(0.5605, 0.655, 0.4805);
     glEnd();
 
-    glBegin(GL_POLYGON);
-        glVertex3f(  0.5605,    0.1805, 0.655 );
-        glVertex3f(  0.3005,  0.1805, 0.655 );
-        glVertex3f(  0.3005,  0.4805, 0.655 );
-        glVertex3f(  0.5605,   0.4805, 0.655 );
-    glEnd();
-    
     //Parede direita - andar 4 - torre esquerda
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.56,  -0.48, 0.51 );
-        glVertex3f(  0.30,  -0.48, 0.51 );
-        glVertex3f(  0.30,  -0.48, 0.65 );
-        glVertex3f(  0.56,  -0.48, 0.65 );
+        glVertex3f(0.56, 0.51, -0.48);
+        glVertex3f(0.30, 0.51, -0.48);
+        glVertex3f(0.30, 0.65, -0.48);
+        glVertex3f(0.56, 0.65, -0.48);
     glEnd();
 
-    //Parede esquerda - andar 4 - torre esquerda
+     //Parede esquerda - andar 4 - torre esquerda
     glBegin(GL_POLYGON);
-        glVertex3f(  0.56,  -0.18, 0.51 );
-        glVertex3f(  0.30,  -0.18, 0.51 );
-        glVertex3f(  0.30,  -0.18, 0.65 );
-        glVertex3f(  0.56,  -0.18, 0.65 );
+        glVertex3f(0.56, 0.51, -0.18);
+        glVertex3f(0.30, 0.51, -0.18);
+        glVertex3f(0.30, 0.65, -0.18);
+        glVertex3f(0.56, 0.65, -0.18);
     glEnd();
 
     //Parede fundo - andar 4 - torre esquerda
     glBegin(GL_POLYGON);
-        glVertex3f(  0.30,  -0.18, 0.51 );
-        glVertex3f(  0.30,  -0.48, 0.51 );
-        glVertex3f(  0.30,  -0.48, 0.65 );
-        glVertex3f(  0.30,  -0.18, 0.65 );
+        glVertex3f(0.30, 0.51, -0.18);
+        glVertex3f(0.30, 0.51, -0.48);
+        glVertex3f(0.30, 0.65, -0.48);
+        glVertex3f(0.30, 0.65, -0.18);
     glEnd();
-
 
     //Parede frente - andar 4 - torre esquerda
     glBegin(GL_POLYGON);
-        glVertex3f(  0.56,  -0.18, 0.51 );
-        glVertex3f(  0.56,  -0.48, 0.51 );
-        glVertex3f(  0.56,  -0.48, 0.65 );
-        glVertex3f(  0.56,  -0.18, 0.65 );
+        glVertex3f(0.56, 0.51, -0.18);
+        glVertex3f(0.56, 0.51, -0.48);
+        glVertex3f(0.56, 0.65, -0.48);
+        glVertex3f(0.56, 0.65, -0.18);
     glEnd();
 
-    //Teto - andar 4 - torre esquerda
+        //Teto - andar 4 - torre esquerda
     glColor3f( 0.87,  0.72, 0.53);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.5605,    -0.1805, 0.65 );
-        glVertex3f(  0.3005,  -0.1805, 0.65 );
-        glVertex3f(  0.3005,  -0.4805, 0.65 );
-        glVertex3f(  0.5605,   -0.4805, 0.65 );
+        glVertex3f(0.5605, 0.65, -0.1805);
+        glVertex3f(0.3005, 0.65, -0.1805);
+        glVertex3f(0.3005, 0.65, -0.4805);
+        glVertex3f(0.5605, 0.65, -0.4805);
     glEnd();
 
     glBegin(GL_POLYGON);
-        glVertex3f(  0.5605,    -0.1805, 0.655 );
-        glVertex3f(  0.3005,  -0.1805, 0.655 );
-        glVertex3f(  0.3005,  -0.4805, 0.655 );
-        glVertex3f(  0.5605,   -0.4805, 0.655 );
+        glVertex3f(0.5605, 0.655, -0.1805);
+        glVertex3f(0.3005, 0.655, -0.1805);
+        glVertex3f(0.3005, 0.655, -0.4805);
+        glVertex3f(0.5605, 0.655, -0.4805);
     glEnd();
 
     //Parede direita - andar 5 - torre direita 
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.53,  -0.45, 0.65 );
-        glVertex3f(  0.33,  -0.45, 0.65 );
-        glVertex3f(  0.33,  -0.45, 0.85 );
-        glVertex3f(  0.53,  -0.45, 0.85 );
+        glVertex3f(0.53, 0.65, -0.45);
+        glVertex3f(0.33, 0.65, -0.45);
+        glVertex3f(0.33, 0.85, -0.45);
+        glVertex3f(0.53, 0.85, -0.45);
     glEnd();
 
     //Parede esquerda - andar 5 - torre direita
     glBegin(GL_POLYGON);
-        glVertex3f(  0.53,  -0.21, 0.65 );
-        glVertex3f(  0.33,  -0.21, 0.65 );
-        glVertex3f(  0.33,  -0.21, 0.85 );
-        glVertex3f(  0.53,  -0.21, 0.85 );
+        glVertex3f(0.53, 0.65, -0.21);
+        glVertex3f(0.33, 0.65, -0.21);
+        glVertex3f(0.33, 0.85, -0.21);
+        glVertex3f(0.53, 0.85, -0.21);
     glEnd();
 
     //Parede fundo - andar 5 - torre direita
     glBegin(GL_POLYGON);
-        glVertex3f( 0.33,  -0.21, 0.65 );
-        glVertex3f( 0.33,  -0.45, 0.65 );
-        glVertex3f( 0.33,  -0.45, 0.85 );
-        glVertex3f( 0.33,  -0.21, 0.85 );
+        glVertex3f(0.33, 0.65, -0.21);
+        glVertex3f(0.33, 0.65, -0.45);
+        glVertex3f(0.33, 0.85, -0.45);
+        glVertex3f(0.33, 0.85, -0.21);
     glEnd();
-
 
     //Parede frente - andar 5 - torre direita
     glBegin(GL_POLYGON);
-        glVertex3f(  0.53,  -0.21, 0.65 );
-        glVertex3f(  0.53,  -0.45, 0.65 );
-        glVertex3f(  0.53,  -0.45, 0.85 );
-        glVertex3f(  0.53,  -0.21, 0.85 );
+        glVertex3f(0.53, 0.65, -0.21);
+        glVertex3f(0.53, 0.65, -0.45);
+        glVertex3f(0.53, 0.85, -0.45);
+        glVertex3f(0.53, 0.85, -0.21);
     glEnd();
-    
-    //Parede direita - andar 5 - torre direita 
+
+    //Parede direita - andar 5 - torre esquerda 
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
-        glVertex3f(  0.53,  0.45, 0.65 );
-        glVertex3f(  0.33,  0.45, 0.65 );
-        glVertex3f(  0.33,  0.45, 0.85 );
-        glVertex3f(  0.53,  0.45, 0.85 );
+        glVertex3f(0.53, 0.65, 0.45);
+        glVertex3f(0.33, 0.65, 0.45);
+        glVertex3f(0.33, 0.85, 0.45);
+        glVertex3f(0.53, 0.85, 0.45);
     glEnd();
 
     //Parede esquerda - andar 5 - torre esquerda
     glBegin(GL_POLYGON);
-        glVertex3f(  0.53,  0.21, 0.65 );
-        glVertex3f(  0.33,  0.21, 0.65 );
-        glVertex3f(  0.33,  0.21, 0.85 );
-        glVertex3f(  0.53,  0.21, 0.85 );
+        glVertex3f(0.53, 0.65, 0.21);
+        glVertex3f(0.33, 0.65, 0.21);
+        glVertex3f(0.33, 0.85, 0.21);
+        glVertex3f(0.53, 0.85, 0.21);
     glEnd();
 
     //Parede fundo - andar 5 - torre esquerda
     glBegin(GL_POLYGON);
-        glVertex3f( 0.33,  0.21, 0.65 );
-        glVertex3f( 0.33,  0.45, 0.65 );
-        glVertex3f( 0.33,  0.45, 0.85 );
-        glVertex3f( 0.33,  0.21, 0.85 );
+        glVertex3f(0.33, 0.65, 0.21);
+        glVertex3f(0.33, 0.65, 0.45);
+        glVertex3f(0.33, 0.85, 0.45);
+        glVertex3f(0.33, 0.85, 0.21);
     glEnd();
-
 
     //Parede frente - andar 5 - torre esquerda
     glBegin(GL_POLYGON);
-        glVertex3f(  0.53,  0.21, 0.65 );
-        glVertex3f(  0.53,  0.45, 0.65 );
-        glVertex3f(  0.53,  0.45, 0.85 );
-        glVertex3f(  0.53,  0.21, 0.85 );
+        glVertex3f(0.53, 0.65, 0.21);
+        glVertex3f(0.53, 0.65, 0.45);
+        glVertex3f(0.53, 0.85, 0.45);
+        glVertex3f(0.53, 0.85, 0.21);
     glEnd();
+
+    /*   
 
     //Colunas
     glColor3f( 0.96, 0.96, 0.86);
