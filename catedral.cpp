@@ -293,7 +293,7 @@ void Display(void) {
     glEnd();
 
 
-    //Parede direita - andar 4 - torre direita
+    //Parede direita - andar 4 - torre esquerda
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, 0.48);
@@ -302,7 +302,16 @@ void Display(void) {
         glVertex3f(0.56, 1.15, 0.48);
     glEnd();
 
-    //Parede fundo - andar 4 - torre direita
+    //Parede esquerda - andar 4 - torre esquerda
+    glColor3f( 0.96, 0.87, 0.7);
+    glBegin(GL_POLYGON);
+        glVertex3f(0.56, 1.01, 0.18);
+        glVertex3f(0.30, 1.01, 0.18);
+        glVertex3f(0.30, 1.15, 0.18);
+        glVertex3f(0.56, 1.15, 0.18);
+    glEnd();
+
+    //Parede fundo - andar 4 - torre esquerda
     glBegin(GL_POLYGON);
         glVertex3f(0.30, 1.01, 0.18);
         glVertex3f(0.30, 1.01, 0.48);
@@ -310,7 +319,7 @@ void Display(void) {
         glVertex3f(0.30, 1.15, 0.18);
     glEnd();
 
-    //Parede frente - andar 4 - torre direita
+    //Parede frente - andar 4 - torre esquerda
     glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, 0.18);
         glVertex3f(0.56, 1.01, 0.48);
@@ -327,7 +336,7 @@ void Display(void) {
         glVertex3f(0.5605, 1.155, 0.4805);
     glEnd();
 
-    //Parede direita - andar 4 - torre esquerda
+    //Parede direita - andar 4 - torre direita
     glColor3f( 0.96, 0.87, 0.7);
     glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, -0.48);
@@ -336,7 +345,7 @@ void Display(void) {
         glVertex3f(0.56, 1.15, -0.48);
     glEnd();
 
-     //Parede esquerda - andar 4 - torre esquerda
+     //Parede esquerda - andar 4 - torre direita
     glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, -0.18);
         glVertex3f(0.30, 1.01, -0.18);
@@ -344,7 +353,7 @@ void Display(void) {
         glVertex3f(0.56, 1.15, -0.18);
     glEnd();
 
-    //Parede fundo - andar 4 - torre esquerda
+    //Parede fundo - andar 4 - torre direita
     glBegin(GL_POLYGON);
         glVertex3f(0.30, 1.01, -0.18);
         glVertex3f(0.30, 1.01, -0.48);
@@ -352,7 +361,7 @@ void Display(void) {
         glVertex3f(0.30, 1.15, -0.18);
     glEnd();
 
-    //Parede frente - andar 4 - torre esquerda
+    //Parede frente - andar 4 - torre direita
     glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, -0.18);
         glVertex3f(0.56, 1.01, -0.48);
@@ -360,7 +369,7 @@ void Display(void) {
         glVertex3f(0.56, 1.15, -0.18);
     glEnd();
 
-        //Teto - andar 4 - torre esquerda
+        //Teto - andar 4 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
     glBegin(GL_POLYGON);
         glVertex3f(0.5605, 1.15, -0.1805);
@@ -461,7 +470,7 @@ void Inicializa (void)
 {   
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     angle=45;
-    
+
 }
 
 // Função usada para especificar a posição do observador virtual
