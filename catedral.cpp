@@ -282,7 +282,7 @@ void Display(void) {
         glVertex3f(0.39, 0.0, 0.2);
     glEnd();glPopMatrix();
 
-    //Parede interior corredo direita 
+    //Parede interior corredor direita 
     glColor3f( 0.96, 0.87, 0.7);
     glPushMatrix();glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.75, 0.15);
@@ -299,9 +299,6 @@ void Display(void) {
         glVertex3f(0.39, 0.0, -0.15);
         glVertex3f(0.59, 0.0, -0.15);
     glEnd();glPopMatrix();
-
-
-
 
     //Teto - andar 1 - camada 1 // Falta fechar os lados
     glColor3f( 0.87,  0.72, 0.53);
@@ -381,6 +378,22 @@ void Display(void) {
         glVertex3f(-0.99, 0.75, 0.5);
         glVertex3f(-0.99, 0.41, 0.5);
         glVertex3f(-0.99, 0.41, -0.5);
+    glEnd();glPopMatrix();
+
+    //Parede frente - andar 2
+    glColor3f( 0.96, 0.87, 0.7);
+    glPushMatrix();glBegin(GL_POLYGON);
+        glVertex3f(0.60, 0.75, -0.5);
+        glVertex3f(0.60, 0.75, 0.5);
+        glVertex3f(0.60, 0.41, 0.5);
+        glVertex3f(0.60, 0.41, -0.5);
+    glEnd();glPopMatrix();
+    glColor3f(0.96, 0.87, 0.87);
+    glPushMatrix();glBegin(GL_POLYGON);
+        glVertex3f(0.59, 0.75, -0.5);
+        glVertex3f(0.59, 0.75, 0.5);
+        glVertex3f(0.59, 0.41, 0.5);
+        glVertex3f(0.59, 0.41, -0.5);
     glEnd();glPopMatrix();
 
     //Teto
