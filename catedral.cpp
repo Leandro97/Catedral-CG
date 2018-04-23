@@ -48,7 +48,6 @@ void drawDiskXZ(float x, float y, float z, float radiusIn, float radiusOut, floa
   glPushMatrix();
     glTranslatef(x, y, z);
         glRotatef(-90, 1.0, 0.0, 0.0 );
-
     gluQuadricDrawStyle(obj, GLU_LINE);
     gluDisk(obj, radiusIn, radiusOut, 100, 100);
   glPopMatrix();
@@ -87,8 +86,6 @@ void Display(void) {
         glVertex3f(0.6, 0.4, 0.49);
     glEnd();glPopMatrix();
 
-
-       
     //Parede esquerda - andar 1
     glColor3f( 0.96, 0.87, 0.7);
     glPushMatrix();glBegin(GL_POLYGON);
@@ -669,10 +666,10 @@ void Display(void) {
     //Teto - andar 8 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
     glPushMatrix();glBegin(GL_POLYGON);
-        glVertex3f(0.455, 1.26, 0.295);
-        glVertex3f(0.455, 1.26, 0.365);
-        glVertex3f(0.405, 1.26, 0.365);
-        glVertex3f(0.405, 1.26, 0.295);
+        glVertex3f(0.455, 1.26, -0.295);
+        glVertex3f(0.455, 1.26, -0.365);
+        glVertex3f(0.405, 1.26, -0.365);
+        glVertex3f(0.405, 1.26, -0.295);
     glEnd();glPopMatrix();
 
 
@@ -720,15 +717,15 @@ void Display(void) {
     glEnd();glPopMatrix();
     
 
-
     //Colunas
+    glEnable(GL_DEPTH_TEST);
     glColor3f(0.96, 0.96, 0.86);
     drawColuna(0.59, 0.5, 0.0, 0.015, 1.2);
     drawColuna(0.59, -0.5, 0.0, 0.015, 1.2);
-    drawColuna(0.59, 0.16, 0.41, 0.010, 0.8);
-    drawColuna(0.59, -0.16, 0.41, 0.010, 0.8);
+    drawColuna(0.62, 0.16, 0.41, 0.010, 0.8);
+    drawColuna(0.62, -0.16, 0.41, 0.010, 0.8);
     drawColuna(0.59, 0, 1.0, 0.02, 0.3);
-
+    glClear(GL_DEPTH_BUFFER_BIT);
 
   glPopMatrix();  
   glFlush();
@@ -828,7 +825,7 @@ void SpecialKeys(int key, int x, int y)
 int main(int argc, char** argv) 
 {
     glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
+    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
     glutInitWindowSize(1000,1000);
     glutCreateWindow("Catedral");
 
