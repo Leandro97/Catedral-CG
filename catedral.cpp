@@ -18,8 +18,10 @@
 #define PI 3.14159265
 
 
-GLdouble centerX = 0, centerY = 0.4, centerZ = 11, phi = PI/2, theta = 0, radius = 10;
+GLdouble eyeX = 0, eyeY = 0.4, eyeZ = 11, phi = PI/2, theta = 0, radius = 10;
+GLdouble centerX =0, centerY = 0, centerZ = 0;
 GLfloat doorAngle, angle, fAspect;
+//int mult = 1;
 bool openingDoor = false; 
 //double inc = std::fmod(5*PI/180, PI/2);
 double inc = 0.8*PI/180;
@@ -99,19 +101,20 @@ void Display(void) {
     
     glRotatef(-90, 0.0, 1.0, 0.0 );
     glTranslatef(10,0,0);
+
     glClear(GL_COLOR_BUFFER_BIT);
-    
       glPushMatrix();
       glScalef(3.5,3.5,2);
 
       //Chão
       glPushMatrix();glBegin(GL_POLYGON);    
-          glColor3f(0.5, 0.5, 0.5); 
+          glColor3f(0.4, 0.4, 0.4); 
           glVertex3f(1.0, 0.0, -1.0);      
           glVertex3f(1.0, 0.0, 1.0);      
           glVertex3f(-1.0, 0.0, 1.0);      
           glVertex3f(-1.0, 0.0, -1.0);      
       glEnd();glPopMatrix();
+
 
       //Andar 1
       //Parede direita - andar 1
@@ -162,85 +165,85 @@ void Display(void) {
           glVertex3f(-0.99, 0.0, -0.5);
       glEnd();glPopMatrix();
 
-      //Parede frente - andar 1 - superior
-      glColor3f( 0.96, 0.87, 0.7);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.6, 0.75, -0.5);
-          glVertex3f(0.6, 0.75, 0.5);
-          glVertex3f(0.6, 0.2, 0.5);
-          glVertex3f(0.6, 0.2, -0.5);
-      glEnd();glPopMatrix();
-      glColor3f(0.96, 0.87, 0.87);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.59, 0.75, -0.5);
-          glVertex3f(0.59, 0.75, 0.5);
-          glVertex3f(0.59, 0.2, 0.5);
-          glVertex3f(0.59, 0.2, -0.5);
-      glEnd();glPopMatrix();
+      // //Parede frente - andar 1 - superior
+      // glColor3f( 0.96, 0.87, 0.7);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.6, 0.75, -0.5);
+      //     glVertex3f(0.6, 0.75, 0.5);
+      //     glVertex3f(0.6, 0.2, 0.5);
+      //     glVertex3f(0.6, 0.2, -0.5);
+      // glEnd();glPopMatrix();
+      // glColor3f(0.96, 0.87, 0.87);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.59, 0.75, -0.5);
+      //     glVertex3f(0.59, 0.75, 0.5);
+      //     glVertex3f(0.59, 0.2, 0.5);
+      //     glVertex3f(0.59, 0.2, -0.5);
+      // glEnd();glPopMatrix();
 
-      //Parede frente - andar 1 - inferior esquerda
-      glColor3f( 0.96, 0.87, 0.7);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.6, 0.2, 0.4);
-          glVertex3f(0.6, 0.2, 0.5);
-          glVertex3f(0.6, 0.0, 0.5);
-          glVertex3f(0.6, 0.0, 0.4);
-      glEnd();glPopMatrix();
-      glColor3f(0.96, 0.87, 0.87);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.59, 0.2, 0.4);
-          glVertex3f(0.59, 0.2, 0.5);
-          glVertex3f(0.59, 0.0, 0.5);
-          glVertex3f(0.59, 0.0, 0.4);
-      glEnd();glPopMatrix();
+      // //Parede frente - andar 1 - inferior esquerda
+      // glColor3f( 0.96, 0.87, 0.7);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.6, 0.2, 0.4);
+      //     glVertex3f(0.6, 0.2, 0.5);
+      //     glVertex3f(0.6, 0.0, 0.5);
+      //     glVertex3f(0.6, 0.0, 0.4);
+      // glEnd();glPopMatrix();
+      // glColor3f(0.96, 0.87, 0.87);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.59, 0.2, 0.4);
+      //     glVertex3f(0.59, 0.2, 0.5);
+      //     glVertex3f(0.59, 0.0, 0.5);
+      //     glVertex3f(0.59, 0.0, 0.4);
+      // glEnd();glPopMatrix();
 
-       //Parede frente - andar 1 - inferior direita
-      glColor3f( 0.96, 0.87, 0.7);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.6, 0.2, -0.4);
-          glVertex3f(0.6, 0.2, -0.5);
-          glVertex3f(0.6, 0.0, -0.5);
-          glVertex3f(0.6, 0.0, -0.4);
-      glEnd();glPopMatrix();
-      glColor3f(0.96, 0.87, 0.87);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.59, 0.2, -0.4);
-          glVertex3f(0.59, 0.2, -0.5);
-          glVertex3f(0.59, 0.0, -0.5);
-          glVertex3f(0.59, 0.0, -0.4);
-      glEnd();glPopMatrix();
+      //  //Parede frente - andar 1 - inferior direita
+      // glColor3f( 0.96, 0.87, 0.7);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.6, 0.2, -0.4);
+      //     glVertex3f(0.6, 0.2, -0.5);
+      //     glVertex3f(0.6, 0.0, -0.5);
+      //     glVertex3f(0.6, 0.0, -0.4);
+      // glEnd();glPopMatrix();
+      // glColor3f(0.96, 0.87, 0.87);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.59, 0.2, -0.4);
+      //     glVertex3f(0.59, 0.2, -0.5);
+      //     glVertex3f(0.59, 0.0, -0.5);
+      //     glVertex3f(0.59, 0.0, -0.4);
+      // glEnd();glPopMatrix();
       
-      //Parede frente - andar 1 - inferior centro direita
-      glColor3f( 0.96, 0.87, 0.7);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.6, 0.2, -0.2);
-          glVertex3f(0.6, 0.2, -0.1);
-          glVertex3f(0.6, 0.0, -0.1);
-          glVertex3f(0.6, 0.0, -0.2);
-      glEnd();glPopMatrix();
-      glColor3f(0.96, 0.87, 0.87);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.59, 0.2, -0.2);
-          glVertex3f(0.59, 0.2, -0.1);
-          glVertex3f(0.59, 0.0, -0.1);
-          glVertex3f(0.59, 0.0, -0.2);
-      glEnd();glPopMatrix();
+      // //Parede frente - andar 1 - inferior centro direita
+      // glColor3f( 0.96, 0.87, 0.7);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.6, 0.2, -0.2);
+      //     glVertex3f(0.6, 0.2, -0.1);
+      //     glVertex3f(0.6, 0.0, -0.1);
+      //     glVertex3f(0.6, 0.0, -0.2);
+      // glEnd();glPopMatrix();
+      // glColor3f(0.96, 0.87, 0.87);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.59, 0.2, -0.2);
+      //     glVertex3f(0.59, 0.2, -0.1);
+      //     glVertex3f(0.59, 0.0, -0.1);
+      //     glVertex3f(0.59, 0.0, -0.2);
+      // glEnd();glPopMatrix();
 
-      //Parede frente - andar 1 - inferior centro esquerda
-      glColor3f( 0.96, 0.87, 0.7);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.6, 0.2, 0.2);
-          glVertex3f(0.6, 0.2, 0.1);
-          glVertex3f(0.6, 0.0, 0.1);
-          glVertex3f(0.6, 0.0, 0.2);
-      glEnd();glPopMatrix();
-      glColor3f(0.96, 0.87, 0.87);
-      glPushMatrix();glBegin(GL_POLYGON);
-          glVertex3f(0.59, 0.2, 0.2);
-          glVertex3f(0.59, 0.2, 0.1);
-          glVertex3f(0.59, 0.0, 0.1);
-          glVertex3f(0.59, 0.0, 0.2);
-      glEnd();glPopMatrix();
+      // //Parede frente - andar 1 - inferior centro esquerda
+      // glColor3f( 0.96, 0.87, 0.7);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.6, 0.2, 0.2);
+      //     glVertex3f(0.6, 0.2, 0.1);
+      //     glVertex3f(0.6, 0.0, 0.1);
+      //     glVertex3f(0.6, 0.0, 0.2);
+      // glEnd();glPopMatrix();
+      // glColor3f(0.96, 0.87, 0.87);
+      // glPushMatrix();glBegin(GL_POLYGON);
+      //     glVertex3f(0.59, 0.2, 0.2);
+      //     glVertex3f(0.59, 0.2, 0.1);
+      //     glVertex3f(0.59, 0.0, 0.1);
+      //     glVertex3f(0.59, 0.0, 0.2);
+      // glEnd();glPopMatrix();
 
       //Interior
       //Essas paredes são uma translação da frente da catedral, a entrada
@@ -932,8 +935,96 @@ void Display(void) {
     drawSemiDiskXY(2.12, 0.8, 0.6, 0.0, 0.15);
     drawSemiDiskXY(2.12, 0.8, -0.6, 0.0, 0.15);
 
+    //profundidade 3 a -3
+    //altura 0.1 a 2.5
+    //largura 0.85 a -0.85
 
+  //cruz
+    glPushMatrix();
+      glColor3f(0.4,0.2,0);
+      glTranslatef(-3.0, 2, 0);
+      glScalef(0.5,0.198,2.48);
+      glutSolidCube(0.2);
+    glPopMatrix();  
+
+    glPushMatrix();
+      glColor3f(0.4,0.2,0);
+      glTranslatef(-3.0, 1.8, 0);
+      glScalef(0.5,4,0.5);
+      glutSolidCube(0.2);
+    glPopMatrix();  
+
+  //altar
+  glPushMatrix();
+      glColor3f(0.65,0.65,0.65);
+      glTranslatef(-2.70, 0.1, 0);
+      glScalef(1,3,5);
+      glutSolidCube(0.2);
   glPopMatrix();   
+
+
+  //candelabro esquerdo do fundo
+  glPushMatrix();
+      glColor3f(1,0.8,0.4);
+      glTranslatef(-2.70, 2.3, 0.7);
+      glScalef(0.03,3,0.03);
+      glutSolidCube(0.2);
+  glPopMatrix(); 
+
+  glPushMatrix();
+      glColor3f(1,1,0.4);
+      glTranslatef(-2.70, 2, 0.7);
+      glutSolidSphere(0.09, 50, 50);
+  glPopMatrix(); 
+
+//candelabro direito do fundo
+  glPushMatrix();
+      glColor3f(1,0.8,0.4);
+      glTranslatef(-2.70, 2.3, -0.7);
+      glScalef(0.03,3,0.03);
+      glutSolidCube(0.2);
+  glPopMatrix(); 
+
+  glPushMatrix();
+      glColor3f(1,1,0.4);
+      glTranslatef(-2.70, 2.0, -0.7);
+      glutSolidSphere(0.09, 50, 50);
+  glPopMatrix(); 
+  
+  //candelabro esquerdo da frente
+  glPushMatrix();
+      glColor3f(1,0.8,0.4);
+      glTranslatef(0.5, 2.3, -0.7);
+      glScalef(0.03,3,0.03);
+      glutSolidCube(0.2);
+  glPopMatrix(); 
+
+  glPushMatrix();
+      glColor3f(1,1,0.4);
+      glTranslatef(0.5, 2.0, -0.7);
+      glutSolidSphere(0.09, 50, 50);
+  glPopMatrix(); 
+
+  //candelabro direito da frente
+  glPushMatrix();
+      glColor3f(1,0.8,0.4);
+      glTranslatef(0.5, 2.3, 0.7);
+      glScalef(0.03,3,0.03);
+      glutSolidCube(0.2);
+  glPopMatrix(); 
+
+  glPushMatrix();
+      glColor3f(1,1,0.4);
+      glTranslatef(0.5, 2.0, 0.7);
+      glutSolidSphere(0.09, 50, 50);
+  glPopMatrix(); 
+
+
+
+
+
+
+  glPopMatrix();  
   glClear(GL_DEPTH_BUFFER_BIT);
   glFlush();
   glutSwapBuffers();
@@ -988,9 +1079,7 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
 }
 
 // Callback para gerenciar eventos do teclado para teclas especiais (F1, PgDn, entre outras)
-void keyPressed(unsigned char key, int x, int y)
-        {
-        printf("%f\n", phi);
+void keyPressed(unsigned char key, int x, int y) {
 
         glLoadIdentity();
         switch (key) {
@@ -1009,46 +1098,47 @@ void keyPressed(unsigned char key, int x, int y)
                 break;
             case 's':
                 isRotate = false;
-                radius += 0.3;
+                radius += 0.25;
                 break;
             case 'w': 
                 isRotate = false;
-                radius -= 0.3;
+                radius -= 0.25;
                 break;
             case 'l' : 
                 isRotate = true;
-                //if(radius < 31) 
                 theta += inc;
                 break;
             case 'j': 
                 isRotate = true;
-                //if(radius < 31) 
                 theta -= inc;
                 break;    
             case 'i':
                 isRotate = true;
-                phi -= inc;  
+                if(phi > PI/3) phi -= inc;  
                 break;
             case 'k': 
                 isRotate = true;
-                phi += inc;
+                if(phi < PI/2) phi += inc;
                 break;
             case 'q':
                 exit(0);    
         }
 
         //printf("%f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi) + 0.4,radius*cos(theta)*sin(phi));
-        printf("Aquió: %f.\n", theta);
+        printf("Aquió: %f %f.\n", theta, -PI/3);
         //gluLookAt(0, 0.4, radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
         //gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
 
         if(!isRotate) {
             gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
-            centerX = radius*sin(theta)*sin(phi);
-            centerY = radius*cos(phi) + 0.4;
-            centerZ = radius*cos(theta)*sin(phi) + radius + 1;
+            eyeX = radius*sin(theta)*sin(phi);
+            eyeY = radius*cos(phi);
+            eyeZ = radius*cos(theta)*sin(phi);
         } else {
-            gluLookAt(centerX, centerY, centerZ, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
+            gluLookAt(eyeX, eyeY + 0.4, eyeZ + radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
+            // centerX = radius*sin(theta)*sin(phi);
+            // centerY = radius*cos(phi);
+            // centerZ = radius*cos(theta)*sin(phi);
         }   
 
         glutPostRedisplay();
