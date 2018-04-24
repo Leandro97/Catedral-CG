@@ -18,10 +18,10 @@
 #define PI 3.14159265
 
 
-GLdouble centerX = 0, centerY = 0, centerZ = 0, phi = PI/2, theta = 0, radius = 15;
+GLdouble centerX = 0, centerY = 0, centerZ = 0, phi = PI/2, theta = 0, radius = 20;
 GLfloat angle, fAspect;
 //double inc = std::fmod(5*PI/180, PI/2);
-double inc = 5*PI/180;
+double inc = 0.3*PI/180;
 //bool isRotate;
 
 GLUquadricObj *obj = gluNewQuadric();
@@ -58,859 +58,860 @@ void Display(void) {
     glPushMatrix();
     
     glRotatef(-90, 0.0, 1.0, 0.0 );
+    glTranslatef(10,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
 
     glScalef(3.5,4,2);
     
     //Chão
-    glPushMatrix();glBegin(GL_POLYGON);    
+    glBegin(GL_POLYGON);    
         glColor3f(0.5, 0.5, 0.5); 
         glVertex3f(1.0, 0.0, -1.0);      
         glVertex3f(1.0, 0.0, 1.0);      
         glVertex3f(-1.0, 0.0, 1.0);      
         glVertex3f(-1.0, 0.0, -1.0);      
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Andar 1
     //Parede direita - andar 1
     glColor3f(0.96, 0.87, 0.7); //https://sistemas.riopomba.ifsudestemg.edu.br/dcc/materiais/926330044_Cores.pdf
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(-1.0, 0.4 ,0.5);
         glVertex3f(-1.0, 0.0 ,0.5);
         glVertex3f(0.6, 0.0, 0.5);
         glVertex3f(0.6, 0.4 ,0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(-1.0, 0.4, 0.49);
         glVertex3f(-1.0, 0.0, 0.49);
         glVertex3f(0.6, 0.0, 0.49);
         glVertex3f(0.6, 0.4, 0.49);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 1
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.4,  -0.5 );
         glVertex3f(-1.0, 0.4, -0.5);
         glVertex3f(-1.0, 0.0, -0.5);
         glVertex3f(0.6, 0.0 ,-0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.4 , -0.49);
         glVertex3f(-1.0, 0.4 ,-0.49);
         glVertex3f(-1.0, 0.0, -0.49);
         glVertex3f(0.6, 0.0, -0.49);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede fundo - andar 1
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(-1.0, 0.4, -0.5);
         glVertex3f(-1.0, 0.4, 0.5);
         glVertex3f(-1.0, 0.0, 0.5);
         glVertex3f(-1.0, 0.0, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(-0.99, 0.4, -0.5);
         glVertex3f(-0.99, 0.4, 0.5);
         glVertex3f(-0.99, 0.0, 0.5);
         glVertex3f(-0.99, 0.0, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 1 - superior
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.4, -0.5);
         glVertex3f(0.6, 0.4, 0.5);
         glVertex3f(0.6, 0.2, 0.5);
         glVertex3f(0.6, 0.2, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.4, -0.5);
         glVertex3f(0.59, 0.4, 0.5);
         glVertex3f(0.59, 0.2, 0.5);
         glVertex3f(0.59, 0.2, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 1 - inferior esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.2, 0.4);
         glVertex3f(0.6, 0.2, 0.5);
         glVertex3f(0.6, 0.0, 0.5);
         glVertex3f(0.6, 0.0, 0.4);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.2, 0.4);
         glVertex3f(0.59, 0.2, 0.5);
         glVertex3f(0.59, 0.0, 0.5);
         glVertex3f(0.59, 0.0, 0.4);
-    glEnd();glPopMatrix();
+    glEnd();
 
      //Parede frente - andar 1 - inferior direita
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.2, -0.4);
         glVertex3f(0.6, 0.2, -0.5);
         glVertex3f(0.6, 0.0, -0.5);
         glVertex3f(0.6, 0.0, -0.4);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.2, -0.4);
         glVertex3f(0.59, 0.2, -0.5);
         glVertex3f(0.59, 0.0, -0.5);
         glVertex3f(0.59, 0.0, -0.4);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede frente - andar 1 - inferior centro direita
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.2, -0.2);
         glVertex3f(0.6, 0.2, -0.1);
         glVertex3f(0.6, 0.0, -0.1);
         glVertex3f(0.6, 0.0, -0.2);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.2, -0.2);
         glVertex3f(0.59, 0.2, -0.1);
         glVertex3f(0.59, 0.0, -0.1);
         glVertex3f(0.59, 0.0, -0.2);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 1 - inferior centro esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.2, 0.2);
         glVertex3f(0.6, 0.2, 0.1);
         glVertex3f(0.6, 0.0, 0.1);
         glVertex3f(0.6, 0.0, 0.2);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.2, 0.2);
         glVertex3f(0.59, 0.2, 0.1);
         glVertex3f(0.59, 0.0, 0.1);
         glVertex3f(0.59, 0.0, 0.2);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Interior
     //Essas paredes são uma translação da frente da catedral, a entrada
     //Parede interior - superior
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.4, 0.4, -0.5);
         glVertex3f(0.4, 0.4, 0.5);
         glVertex3f(0.4, 0.2, 0.5);
         glVertex3f(0.4, 0.2, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.39, 0.4, -0.5);
         glVertex3f(0.39, 0.4, 0.5);
         glVertex3f(0.39, 0.2, 0.5);
         glVertex3f(0.39, 0.2, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede interior - inferior esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.4, 0.2, 0.4);
         glVertex3f(0.4, 0.2, 0.5);
         glVertex3f(0.4, 0.0, 0.5);
         glVertex3f(0.4, 0.0, 0.4);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.39, 0.2, 0.4);
         glVertex3f(0.39, 0.2, 0.5);
         glVertex3f(0.39, 0.0, 0.5);
         glVertex3f(0.39, 0.0, 0.4);
-    glEnd();glPopMatrix();
+    glEnd();
 
      //Parede interior - inferior direita
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.4, 0.2, -0.4);
         glVertex3f(0.4, 0.2, -0.5);
         glVertex3f(0.4, 0.0, -0.5);
         glVertex3f(0.4, 0.0, -0.4);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.39, 0.2, -0.4);
         glVertex3f(0.39, 0.2, -0.5);
         glVertex3f(0.39, 0.0, -0.5);
         glVertex3f(0.39, 0.0, -0.4);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede interior - inferior centro direita
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.4, 0.2, -0.2);
         glVertex3f(0.4, 0.2, -0.1);
         glVertex3f(0.4, 0.0, -0.1);
         glVertex3f(0.4, 0.0, -0.2);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.39, 0.2, -0.2);
         glVertex3f(0.39, 0.2, -0.1);
         glVertex3f(0.39, 0.0, -0.1);
         glVertex3f(0.39, 0.0, -0.2);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - inferior centro esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.4, 0.2, 0.2);
         glVertex3f(0.4, 0.2, 0.1);
         glVertex3f(0.4, 0.0, 0.1);
         glVertex3f(0.4, 0.0, 0.2);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.39, 0.2, 0.2);
         glVertex3f(0.39, 0.2, 0.1);
         glVertex3f(0.39, 0.0, 0.1);
         glVertex3f(0.39, 0.0, 0.2);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede interior corredor direita 
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.75, 0.15);
         glVertex3f(0.39, 0.75, 0.15);
         glVertex3f(0.39, 0.0, 0.15);
         glVertex3f(0.59, 0.0, 0.15);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede interior corredor esquerda 
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.75, -0.15);
         glVertex3f(0.39, 0.75, -0.15);
         glVertex3f(0.39, 0.0, -0.15);
         glVertex3f(0.59, 0.0, -0.15);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto - andar 1 - camada 1 // Falta fechar os lados
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.605, 0.4, -0.505);
         glVertex3f(0.4, 0.4, -0.505);
         glVertex3f(0.4, 0.4, 0.505);
         glVertex3f(0.605, 0.4, 0.505);
-    glEnd();glPopMatrix();
+    glEnd();
 
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.605, 0.405, -0.505);
         glVertex3f(0.4, 0.405, -0.505);
         glVertex3f(0.4, 0.405, 0.505);
         glVertex3f(0.605, 0.405, 0.505);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Teto - andar 1 - camada 2 // Falta fechar os lados
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.61,  0.405, -0.51);
         glVertex3f(0.4, 0.405,  -0.51);
         glVertex3f(0.4, 0.405, 0.51);
         glVertex3f(0.61, 0.405, 0.51);
-    glEnd();glPopMatrix();
+    glEnd();
 
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.61, 0.41, -0.51);
         glVertex3f(0.4, 0.41,  -0.51);
         glVertex3f(0.4, 0.41, 0.51);
         glVertex3f(0.61, 0.41, 0.51);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Andar 2
     //Parede direita - andar 2
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.75, 0.5);
         glVertex3f(-1.0, 0.75, 0.5);
         glVertex3f(-1.0, 0.41, 0.5);
         glVertex3f(0.6, 0.41, 0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.75, 0.49);
         glVertex3f(-1.0, 0.75, 0.49);
         glVertex3f(-1.0, 0.41, 0.49);
         glVertex3f(0.6, 0.41, 0.49);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 2
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.75, -0.5);
         glVertex3f(-1.0, 0.75, -0.5);
         glVertex3f(-1.0, 0.41, -0.5);
         glVertex3f(0.6, 0.41, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 0.75, -0.49);
         glVertex3f(-1.0, 0.75, -0.49);
         glVertex3f(-1.0, 0.41, -0.49);
         glVertex3f(0.6, 0.41, -0.49);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede fundo - andar 2
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(-1.0, 0.75, -0.5);
         glVertex3f(-1.0, 0.75, 0.5);
         glVertex3f(-1.0, 0.41, 0.5);
         glVertex3f(-1.0, 0.41, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(-0.99, 0.75, -0.5);
         glVertex3f(-0.99, 0.75, 0.5);
         glVertex3f(-0.99, 0.41, 0.5);
         glVertex3f(-0.99, 0.41, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 2
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.60, 0.75, -0.5);
         glVertex3f(0.60, 0.75, 0.5);
         glVertex3f(0.60, 0.41, 0.5);
         glVertex3f(0.60, 0.41, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     glColor3f(0.96, 0.87, 0.87);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.59, 0.75, -0.5);
         glVertex3f(0.59, 0.75, 0.5);
         glVertex3f(0.59, 0.41, 0.5);
         glVertex3f(0.59, 0.41, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 2 - camada 1 // Falta fechar os lados
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.605, 0.75,  -0.505);
         glVertex3f(-1.005, 0.75, -0.505);
         glVertex3f(-1.005, 0.75, 0.505);
         glVertex3f(0.605, 0.75, 0.505);
-    glEnd();glPopMatrix();
+    glEnd();
 
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.605, 0.755,  -0.505);
         glVertex3f(-1.005, 0.755, -0.505);
         glVertex3f(-1.005, 0.755, 0.505);
         glVertex3f(0.605, 0.755, 0.505);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Teto - andar 2 - camada 2 // Falta fechar os lados
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.61, 0.755, -0.51);
         glVertex3f(-1.01, 0.755, -0.51);
         glVertex3f(-1.01, 0.755, 0.51);
         glVertex3f(0.61, 0.755, 0.51);
-    glEnd();glPopMatrix();
+    glEnd();
 
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.61, 0.76, -0.51);
         glVertex3f(-1.01, 0.76, -0.51);
         glVertex3f(-1.01, 0.76, 0.51);
         glVertex3f(0.61, 0.76, 0.51);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Andar 3  
     //Parede direita - andar 3
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 1.0, 0.5);
         glVertex3f(0.3, 1.0, 0.5);
         glVertex3f(0.3, 0.76, 0.5);
         glVertex3f(0.6, 0.76, 0.5);
-    glEnd();glPopMatrix();
+    glEnd();
 
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 1.0, -0.5);
         glVertex3f(0.3, 1.0, -0.5);
         glVertex3f(0.3, 0.76, -0.5);
         glVertex3f(0.6, 0.76, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede fundo - andar 3
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.3, 1.0, -0.5);
         glVertex3f(0.3, 1.0, 0.5);
         glVertex3f(0.3, 0.76, 0.5);
         glVertex3f(0.3, 0.76, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 3
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.6, 1.0, -0.5);
         glVertex3f(0.6, 1.0, 0.5);
         glVertex3f(0.6, 0.76, 0.5);
         glVertex3f(0.6, 0.76, -0.5);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 3 - camada 1 // Falta fechar os lados
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.61, 1.0, -0.51);
         glVertex3f(0.28, 1.0, -0.5);
         glVertex3f(0.28, 1.0, 0.5);
         glVertex3f(0.61, 1.0, 0.51);
-    glEnd();glPopMatrix();
+    glEnd();
 
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.61, 1.01, -0.51);
         glVertex3f(0.28, 1.01, -0.5);
         glVertex3f(0.28, 1.01, 0.5);
         glVertex3f(0.61, 1.01, 0.51);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Andar 4
     //Parede direita - andar 4 - torre esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, 0.48);
         glVertex3f(0.30, 1.01, 0.48);
         glVertex3f(0.30, 1.08, 0.48);
         glVertex3f(0.56, 1.08, 0.48);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 4 - torre esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, 0.18);
         glVertex3f(0.30, 1.01, 0.18);
         glVertex3f(0.30, 1.08, 0.18);
         glVertex3f(0.56, 1.08, 0.18);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede fundo - andar 4 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.30, 1.01, 0.18);
         glVertex3f(0.30, 1.01, 0.48);
         glVertex3f(0.30, 1.08, 0.48);
         glVertex3f(0.30, 1.08, 0.18);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 4 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, 0.18);
         glVertex3f(0.56, 1.01, 0.48);
         glVertex3f(0.56, 1.08, 0.48);
         glVertex3f(0.56, 1.08, 0.18);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 4 - torre esquerda
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.5605, 1.08, 0.1805);
         glVertex3f(0.3005, 1.08, 0.1805);
         glVertex3f(0.3005, 1.08, 0.4805);
         glVertex3f(0.5605, 1.08, 0.4805);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede direita - andar 4 - torre direita
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, -0.48);
         glVertex3f(0.30, 1.01, -0.48);
         glVertex3f(0.30, 1.08, -0.48);
         glVertex3f(0.56, 1.08, -0.48);
-    glEnd();glPopMatrix();
+    glEnd();
 
      //Parede esquerda - andar 4 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, -0.18);
         glVertex3f(0.30, 1.01, -0.18);
         glVertex3f(0.30, 1.08, -0.18);
         glVertex3f(0.56, 1.08, -0.18);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede fundo - andar 4 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.30, 1.01, -0.18);
         glVertex3f(0.30, 1.01, -0.48);
         glVertex3f(0.30, 1.08, -0.48);
         glVertex3f(0.30, 1.08, -0.18);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 4 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.56, 1.01, -0.18);
         glVertex3f(0.56, 1.01, -0.48);
         glVertex3f(0.56, 1.08, -0.48);
         glVertex3f(0.56, 1.08, -0.18);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 4 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.5605, 1.08, -0.1805);
         glVertex3f(0.3005, 1.08, -0.1805);
         glVertex3f(0.3005, 1.08, -0.4805);
         glVertex3f(0.5605, 1.08, -0.4805);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Andar 5
     //Parede direita - andar 5 - torre direita 
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.53, 1.08, -0.45);
         glVertex3f(0.33, 1.08, -0.45);
         glVertex3f(0.33, 1.20, -0.45);
         glVertex3f(0.53, 1.20, -0.45);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 5 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.53, 1.08, -0.21);
         glVertex3f(0.33, 1.08, -0.21);
         glVertex3f(0.33, 1.20, -0.21);
         glVertex3f(0.53, 1.20, -0.21);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede fundo - andar 5 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.33, 1.08, -0.21);
         glVertex3f(0.33, 1.08, -0.45);
         glVertex3f(0.33, 1.20, -0.45);
         glVertex3f(0.33, 1.20, -0.21);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 5 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.53, 1.08, -0.21);
         glVertex3f(0.53, 1.08, -0.45);
         glVertex3f(0.53, 1.20, -0.45);
         glVertex3f(0.53, 1.20, -0.21);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 5 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.53, 1.20, -0.21);
         glVertex3f(0.53, 1.20, -0.45);
         glVertex3f(0.33, 1.20, -0.45);
         glVertex3f(0.33, 1.20, -0.21);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede direita - andar 5 - torre esquerda 
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.53, 1.08, 0.45);
         glVertex3f(0.33, 1.08, 0.45);
         glVertex3f(0.33, 1.20, 0.45);
         glVertex3f(0.53, 1.20, 0.45);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 5 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.53, 1.08, 0.21);
         glVertex3f(0.33, 1.08, 0.21);
         glVertex3f(0.33, 1.20, 0.21);
         glVertex3f(0.53, 1.20, 0.21);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede fundo - andar 5 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.33, 1.08, 0.21);
         glVertex3f(0.33, 1.08, 0.45);
         glVertex3f(0.33, 1.20, 0.45);
         glVertex3f(0.33, 1.20, 0.21);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 5 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.53, 1.08, 0.21);
         glVertex3f(0.53, 1.08, 0.45);
         glVertex3f(0.53, 1.20, 0.45);
         glVertex3f(0.53, 1.20, 0.21);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 5 - torre esquerda
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.53, 1.20, 0.21);
         glVertex3f(0.53, 1.20, 0.45);
         glVertex3f(0.33, 1.20, 0.45);
         glVertex3f(0.33, 1.20, 0.21);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Pirâmides 
     //Andar 6
     //Parede direita - andar 6 - torre direita
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.505, 1.20, -0.425);
         glVertex3f(0.355, 1.20, -0.425);
         glVertex3f(0.355, 1.22, -0.425);
         glVertex3f(0.505, 1.22, -0.425);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 6 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.505, 1.20, -0.24);
         glVertex3f(0.355, 1.20, -0.24);
         glVertex3f(0.355, 1.22, -0.24);
         glVertex3f(0.505, 1.22, -0.24);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 6 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.505, 1.20, -0.24);
         glVertex3f(0.505, 1.20, -0.425);
         glVertex3f(0.505, 1.22, -0.425);
         glVertex3f(0.505, 1.22, -0.24);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede traz - andar 6 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.355, 1.20, -0.24);
         glVertex3f(0.355, 1.20, -0.425);
         glVertex3f(0.355, 1.22, -0.425);
         glVertex3f(0.355, 1.22, -0.24);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 6 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.505, 1.22, -0.24);
         glVertex3f(0.505, 1.22, -0.425);
         glVertex3f(0.355, 1.22, -0.425);
         glVertex3f(0.355, 1.22, -0.24);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede direita - andar 6 - torre esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.505, 1.20, 0.425);
         glVertex3f(0.355, 1.20, 0.425);
         glVertex3f(0.355, 1.22, 0.425);
         glVertex3f(0.505, 1.22, 0.425);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 6 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.505, 1.20, 0.24);
         glVertex3f(0.355, 1.20, 0.24);
         glVertex3f(0.355, 1.22, 0.24);
         glVertex3f(0.505, 1.22, 0.24);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 6 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.505, 1.20, 0.24);
         glVertex3f(0.505, 1.20, 0.425);
         glVertex3f(0.505, 1.22, 0.425);
         glVertex3f(0.505, 1.22, 0.24);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede traz - andar 6 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.355, 1.20, 0.24);
         glVertex3f(0.355, 1.20, 0.425);
         glVertex3f(0.355, 1.22, 0.425);
         glVertex3f(0.355, 1.22, 0.24);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 6 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.505, 1.22, 0.24);
         glVertex3f(0.505, 1.22, 0.425);
         glVertex3f(0.355, 1.22, 0.425);
         glVertex3f(0.355, 1.22, 0.24);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede direita - andar 7 - torre direita
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.48, 1.22, -0.395);
         glVertex3f(0.38, 1.22, -0.395);
         glVertex3f(0.38, 1.24, -0.395);
         glVertex3f(0.48, 1.24, -0.395);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 7 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.48, 1.22, -0.265);
         glVertex3f(0.38, 1.22, -0.265);
         glVertex3f(0.38, 1.24, -0.265);
         glVertex3f(0.48, 1.24, -0.265);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 7 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.48, 1.22, -0.265);
         glVertex3f(0.48, 1.22, -0.395);
         glVertex3f(0.48, 1.24, -0.395);
         glVertex3f(0.48, 1.24, -0.265);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede traz - andar 7 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.38, 1.22, -0.265);
         glVertex3f(0.38, 1.22, -0.395);
         glVertex3f(0.38, 1.24, -0.395);
         glVertex3f(0.38, 1.24, -0.265);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto - andar 7 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.48, 1.24, -0.265);
         glVertex3f(0.48, 1.24, -0.395);
         glVertex3f(0.38, 1.24, -0.395);
         glVertex3f(0.38, 1.24, -0.265);
-    glEnd();glPopMatrix();
+    glEnd();
 
   //Parede direita - andar 7 - torre esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.48, 1.22, 0.395);
         glVertex3f(0.38, 1.22, 0.395);
         glVertex3f(0.38, 1.24, 0.395);
         glVertex3f(0.48, 1.24, 0.395);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 7 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.48, 1.22, 0.265);
         glVertex3f(0.38, 1.22, 0.265);
         glVertex3f(0.38, 1.24, 0.265);
         glVertex3f(0.48, 1.24, 0.265);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 7 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.48, 1.22, 0.265);
         glVertex3f(0.48, 1.22, 0.395);
         glVertex3f(0.48, 1.24, 0.395);
         glVertex3f(0.48, 1.24, 0.265);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede traz - andar 7 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.38, 1.22, 0.265);
         glVertex3f(0.38, 1.22, 0.395);
         glVertex3f(0.38, 1.24, 0.395);
         glVertex3f(0.38, 1.24, 0.265);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto - andar 7 - torre esquerda
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.48, 1.24, 0.265);
         glVertex3f(0.48, 1.24, 0.395);
         glVertex3f(0.38, 1.24, 0.395);
         glVertex3f(0.38, 1.24, 0.265);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Andar 8
     //Parede direita - andar 8 - torre direita
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.455, 1.24, -0.365);
         glVertex3f(0.405, 1.24, -0.365);
         glVertex3f(0.405, 1.26, -0.365);
         glVertex3f(0.455, 1.26, -0.365);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 8 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.455, 1.24, -0.295);
         glVertex3f(0.405, 1.24, -0.295);
         glVertex3f(0.405, 1.26, -0.295);
         glVertex3f(0.455, 1.26, -0.295);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 8 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.455, 1.24, -0.295);
         glVertex3f(0.455, 1.24, -0.365);
         glVertex3f(0.455, 1.26, -0.365);
         glVertex3f(0.455, 1.26, -0.295);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede traz - andar 8 - torre direita
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.405, 1.24, -0.295);
         glVertex3f(0.405, 1.24, -0.365);
         glVertex3f(0.405, 1.26, -0.365);
         glVertex3f(0.405, 1.26, -0.295);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto
     //Teto - andar 8 - torre direita
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.455, 1.26, -0.295);
         glVertex3f(0.455, 1.26, -0.365);
         glVertex3f(0.405, 1.26, -0.365);
         glVertex3f(0.405, 1.26, -0.295);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Andar 8
     //Parede direita - andar 8 - torre esquerda
     glColor3f( 0.96, 0.87, 0.7);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.455, 1.24, 0.365);
         glVertex3f(0.405, 1.24, 0.365);
         glVertex3f(0.405, 1.26, 0.365);
         glVertex3f(0.455, 1.26, 0.365);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede esquerda - andar 8 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.455, 1.24, 0.295);
         glVertex3f(0.405, 1.24, 0.295);
         glVertex3f(0.405, 1.26, 0.295);
         glVertex3f(0.455, 1.26, 0.295);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Parede frente - andar 8 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.455, 1.24, 0.295);
         glVertex3f(0.455, 1.24, 0.365);
         glVertex3f(0.455, 1.26, 0.365);
         glVertex3f(0.455, 1.26, 0.295);
-    glEnd();glPopMatrix();
+    glEnd();
     
     //Parede traz - andar 8 - torre esquerda
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.405, 1.24, 0.295);
         glVertex3f(0.405, 1.24, 0.365);
         glVertex3f(0.405, 1.26, 0.365);
         glVertex3f(0.405, 1.26, 0.295);
-    glEnd();glPopMatrix();
+    glEnd();
 
     //Teto - andar 8 - torre esquerda
     glColor3f( 0.87,  0.72, 0.53);
-    glPushMatrix();glBegin(GL_POLYGON);
+    glBegin(GL_POLYGON);
         glVertex3f(0.455, 1.26, 0.295);
         glVertex3f(0.455, 1.26, 0.365);
         glVertex3f(0.405, 1.26, 0.365);
         glVertex3f(0.405, 1.26, 0.295);
-    glEnd();glPopMatrix();
+    glEnd();
     
 
     //Colunas
@@ -988,31 +989,32 @@ void SpecialKeys(int key, int x, int y)
                 theta = 0;
                 break;
             case GLUT_KEY_LEFT : 
-                theta += inc;
+                theta -= inc;
                 break;
             case GLUT_KEY_RIGHT :
-                theta -= inc;
+                theta += inc;
                 break;
             case GLUT_KEY_DOWN:
                 if(phi + inc <= PI/2) phi += inc;  
                 break;
             case GLUT_KEY_UP: 
-                if(phi - inc >= 0) phi -= inc;
+                if(phi - inc >= PI/3) phi -= inc;
                 break;
-            case 'z' :
-                radius -= 1;
+            case GLUT_KEY_PAGE_UP :
+                if(radius > 7) radius -= 1;
                 break;
-            case 'x' : 
-                radius += 1;
+            case GLUT_KEY_PAGE_DOWN : 
+                if(radius < 31) radius += 1;
                 break;
             case 'q':
                 exit(0);    
         }
 
-        phi = std::fmod(phi, 2*PI);
-        gluLookAt(radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi), centerX,centerY,centerZ, 0,1,0);
+        //printf("%f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi) + 0.4,radius*cos(theta)*sin(phi));
+        printf("Aqui: %f.\n", theta);
+        gluLookAt(0, 0.4, radius + 1, radius*sin(theta)*sin(phi),radius*cos(phi) + 0.4,radius*cos(theta)*sin(phi), 0,1,0);
         glutPostRedisplay();
-        }
+}
 
 // Programa Principal
 int main(int argc, char** argv) 
