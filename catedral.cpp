@@ -18,12 +18,11 @@
 #define PI 3.14159265
 
 
-GLdouble centerX = 0, centerY = 0, centerZ = 0, phi = PI/2, theta = 0, radius = 15;
+GLdouble centerX = 0, centerY = 0, centerZ = 0, phi = PI/2, theta = 0, radius = 20;
 GLfloat doorAngle, angle, fAspect;
 bool openingDoor = false; 
-
 //double inc = std::fmod(5*PI/180, PI/2);
-double inc = 5*PI/180;
+double inc = 0.3*PI/180;
 //bool isRotate;
 
 GLUquadricObj *obj = gluNewQuadric();
@@ -99,7 +98,9 @@ void Display(void) {
     glPushMatrix();
     
     glRotatef(-90, 0.0, 1.0, 0.0 );
+    glTranslatef(10,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
+<<<<<<< HEAD
     
       glPushMatrix();
       glScalef(3.5,3.5,2);
@@ -999,29 +1000,30 @@ void SpecialKeys(int key, int x, int y)
                 theta = 0;
                 break;
             case GLUT_KEY_LEFT : 
-                theta += inc;
+                theta -= inc;
                 break;
             case GLUT_KEY_RIGHT :
-                theta -= inc;
+                theta += inc;
                 break;
             case GLUT_KEY_DOWN:
                 if(phi + inc <= PI/2) phi += inc;  
                 break;
             case GLUT_KEY_UP: 
-                if(phi - inc >= 0) phi -= inc;
+                if(phi - inc >= PI/3) phi -= inc;
                 break;
-            case 'z' :
-                radius -= 1;
+            case GLUT_KEY_PAGE_UP :
+                if(radius > 7) radius -= 1;
                 break;
-            case 'x' : 
-                radius += 1;
+            case GLUT_KEY_PAGE_DOWN : 
+                if(radius < 31) radius += 1;
                 break;
             case 'q':
                 exit(0);    
         }
 
-        phi = std::fmod(phi, 2*PI);
-        gluLookAt(radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi), centerX,centerY,centerZ, 0,1,0);
+        //printf("%f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi) + 0.4,radius*cos(theta)*sin(phi));
+        printf("Aqui: %f.\n", theta);
+        gluLookAt(0, 0.4, radius + 1, radius*sin(theta)*sin(phi),radius*cos(phi) + 0.4,radius*cos(theta)*sin(phi), 0,1,0);
         glutPostRedisplay();
 }
 
