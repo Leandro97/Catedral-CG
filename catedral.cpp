@@ -29,10 +29,18 @@ bool isRotate;
 
 GLUquadricObj *obj = gluNewQuadric();
 
-void drawColumn(float x, float y, float z, float radius, float size){
+void drawColumnY(float x, float y, float z, float radius, float size){
   glPushMatrix();
     glRotatef(-90, 1.0, 0.0, 0.0 );
     glTranslatef(x, y, z);
+    gluQuadricDrawStyle(obj, GLU_FILL);
+    gluCylinder(obj, radius, radius, size, 100, 100);
+  glPopMatrix();
+}
+
+void drawColumnZ(float x, float y, float z, float radius, float size){
+  glPushMatrix();
+  	glTranslatef(x, y, z);
     gluQuadricDrawStyle(obj, GLU_FILL);
     gluCylinder(obj, radius, radius, size, 100, 100);
   glPopMatrix();
@@ -47,10 +55,10 @@ void drawDiskXY(float x, float y, float z, float radiusIn, float radiusOut){
   glPopMatrix();
 }
 
-void drawDiskZY(float x, float y, float z, float radiusIn, float radiusOut, float rotate){
+void drawDiskZY(float x, float y, float z, float radiusIn, float radiusOut){
   glPushMatrix();
     glTranslatef(x, y, z);
-    glRotatef(-90, 1.0, 0.0, 0.0 );
+    glRotatef(-90, 0.0, 0.0, 1.0 );
     gluQuadricDrawStyle(obj, GLU_FILL);
     gluDisk(obj, radiusIn, radiusOut, 100, 100);
   glPopMatrix();
@@ -157,7 +165,8 @@ void Display(void) {
           glVertex3f(-1.0, 0.0, 0.5);
           glVertex3f(-1.0, 0.0, -0.5);
       glEnd();glPopMatrix();
-      glColor3f(0.96, 0.87, 0.87);
+
+      glColor3f(0.69, 0.93, 0.93);
       glPushMatrix();glBegin(GL_POLYGON);
           glVertex3f(-0.99, 0.75, -0.5);
           glVertex3f(-0.99, 0.75, 0.5);
@@ -165,85 +174,85 @@ void Display(void) {
           glVertex3f(-0.99, 0.0, -0.5);
       glEnd();glPopMatrix();
 
-      // //Parede frente - andar 1 - superior
-      // glColor3f( 0.96, 0.87, 0.7);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.6, 0.75, -0.5);
-      //     glVertex3f(0.6, 0.75, 0.5);
-      //     glVertex3f(0.6, 0.2, 0.5);
-      //     glVertex3f(0.6, 0.2, -0.5);
-      // glEnd();glPopMatrix();
-      // glColor3f(0.96, 0.87, 0.87);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.59, 0.75, -0.5);
-      //     glVertex3f(0.59, 0.75, 0.5);
-      //     glVertex3f(0.59, 0.2, 0.5);
-      //     glVertex3f(0.59, 0.2, -0.5);
-      // glEnd();glPopMatrix();
+      // Parede frente - andar 1 - superior
+      glColor3f( 0.96, 0.87, 0.7);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.6, 0.75, -0.5);
+          glVertex3f(0.6, 0.75, 0.5);
+          glVertex3f(0.6, 0.2, 0.5);
+          glVertex3f(0.6, 0.2, -0.5);
+      glEnd();glPopMatrix();
+      glColor3f(0.96, 0.87, 0.87);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.59, 0.75, -0.5);
+          glVertex3f(0.59, 0.75, 0.5);
+          glVertex3f(0.59, 0.2, 0.5);
+          glVertex3f(0.59, 0.2, -0.5);
+      glEnd();glPopMatrix();
 
-      // //Parede frente - andar 1 - inferior esquerda
-      // glColor3f( 0.96, 0.87, 0.7);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.6, 0.2, 0.4);
-      //     glVertex3f(0.6, 0.2, 0.5);
-      //     glVertex3f(0.6, 0.0, 0.5);
-      //     glVertex3f(0.6, 0.0, 0.4);
-      // glEnd();glPopMatrix();
-      // glColor3f(0.96, 0.87, 0.87);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.59, 0.2, 0.4);
-      //     glVertex3f(0.59, 0.2, 0.5);
-      //     glVertex3f(0.59, 0.0, 0.5);
-      //     glVertex3f(0.59, 0.0, 0.4);
-      // glEnd();glPopMatrix();
+      //Parede frente - andar 1 - inferior esquerda
+      glColor3f( 0.96, 0.87, 0.7);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.6, 0.2, 0.4);
+          glVertex3f(0.6, 0.2, 0.5);
+          glVertex3f(0.6, 0.0, 0.5);
+          glVertex3f(0.6, 0.0, 0.4);
+      glEnd();glPopMatrix();
+      glColor3f(0.96, 0.87, 0.87);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.59, 0.2, 0.4);
+          glVertex3f(0.59, 0.2, 0.5);
+          glVertex3f(0.59, 0.0, 0.5);
+          glVertex3f(0.59, 0.0, 0.4);
+      glEnd();glPopMatrix();
 
-      //  //Parede frente - andar 1 - inferior direita
-      // glColor3f( 0.96, 0.87, 0.7);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.6, 0.2, -0.4);
-      //     glVertex3f(0.6, 0.2, -0.5);
-      //     glVertex3f(0.6, 0.0, -0.5);
-      //     glVertex3f(0.6, 0.0, -0.4);
-      // glEnd();glPopMatrix();
-      // glColor3f(0.96, 0.87, 0.87);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.59, 0.2, -0.4);
-      //     glVertex3f(0.59, 0.2, -0.5);
-      //     glVertex3f(0.59, 0.0, -0.5);
-      //     glVertex3f(0.59, 0.0, -0.4);
-      // glEnd();glPopMatrix();
+       //Parede frente - andar 1 - inferior direita
+      glColor3f( 0.96, 0.87, 0.7);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.6, 0.2, -0.4);
+          glVertex3f(0.6, 0.2, -0.5);
+          glVertex3f(0.6, 0.0, -0.5);
+          glVertex3f(0.6, 0.0, -0.4);
+      glEnd();glPopMatrix();
+      glColor3f(0.96, 0.87, 0.87);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.59, 0.2, -0.4);
+          glVertex3f(0.59, 0.2, -0.5);
+          glVertex3f(0.59, 0.0, -0.5);
+          glVertex3f(0.59, 0.0, -0.4);
+      glEnd();glPopMatrix();
       
-      // //Parede frente - andar 1 - inferior centro direita
-      // glColor3f( 0.96, 0.87, 0.7);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.6, 0.2, -0.2);
-      //     glVertex3f(0.6, 0.2, -0.1);
-      //     glVertex3f(0.6, 0.0, -0.1);
-      //     glVertex3f(0.6, 0.0, -0.2);
-      // glEnd();glPopMatrix();
-      // glColor3f(0.96, 0.87, 0.87);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.59, 0.2, -0.2);
-      //     glVertex3f(0.59, 0.2, -0.1);
-      //     glVertex3f(0.59, 0.0, -0.1);
-      //     glVertex3f(0.59, 0.0, -0.2);
-      // glEnd();glPopMatrix();
+      //Parede frente - andar 1 - inferior centro direita
+      glColor3f( 0.96, 0.87, 0.7);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.6, 0.2, -0.2);
+          glVertex3f(0.6, 0.2, -0.1);
+          glVertex3f(0.6, 0.0, -0.1);
+          glVertex3f(0.6, 0.0, -0.2);
+      glEnd();glPopMatrix();
+      glColor3f(0.96, 0.87, 0.87);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.59, 0.2, -0.2);
+          glVertex3f(0.59, 0.2, -0.1);
+          glVertex3f(0.59, 0.0, -0.1);
+          glVertex3f(0.59, 0.0, -0.2);
+      glEnd();glPopMatrix();
 
-      // //Parede frente - andar 1 - inferior centro esquerda
-      // glColor3f( 0.96, 0.87, 0.7);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.6, 0.2, 0.2);
-      //     glVertex3f(0.6, 0.2, 0.1);
-      //     glVertex3f(0.6, 0.0, 0.1);
-      //     glVertex3f(0.6, 0.0, 0.2);
-      // glEnd();glPopMatrix();
-      // glColor3f(0.96, 0.87, 0.87);
-      // glPushMatrix();glBegin(GL_POLYGON);
-      //     glVertex3f(0.59, 0.2, 0.2);
-      //     glVertex3f(0.59, 0.2, 0.1);
-      //     glVertex3f(0.59, 0.0, 0.1);
-      //     glVertex3f(0.59, 0.0, 0.2);
-      // glEnd();glPopMatrix();
+      //Parede frente - andar 1 - inferior centro esquerda
+      glColor3f( 0.96, 0.87, 0.7);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.6, 0.2, 0.2);
+          glVertex3f(0.6, 0.2, 0.1);
+          glVertex3f(0.6, 0.0, 0.1);
+          glVertex3f(0.6, 0.0, 0.2);
+      glEnd();glPopMatrix();
+      glColor3f(0.96, 0.87, 0.87);
+      glPushMatrix();glBegin(GL_POLYGON);
+          glVertex3f(0.59, 0.2, 0.2);
+          glVertex3f(0.59, 0.2, 0.1);
+          glVertex3f(0.59, 0.0, 0.1);
+          glVertex3f(0.59, 0.0, 0.2);
+      glEnd();glPopMatrix();
 
       //Interior
       //Essas paredes são uma translação da frente da catedral, a entrada
@@ -894,6 +903,7 @@ void Display(void) {
 
 
       //Portas
+      glColor3f( 0.82,  0.71, 0.55);
       glPushMatrix();
         glTranslatef(0.6, 0.1, -0.1);
         drawDoor(-doorAngle);
@@ -914,12 +924,14 @@ void Display(void) {
       //Colunas
       glEnable(GL_DEPTH_TEST);
       glColor3f(0.96, 0.96, 0.86);
+      drawColumnY(0.59, 0.5, 0.0, 0.015, 1.2);
+      drawColumnY(0.59, -0.5, 0.0, 0.015, 1.2);
+      drawColumnY(0.62, 0.16, 0.41, 0.010, 0.8);
+      drawColumnY(0.62, -0.16, 0.41, 0.010, 0.8);
+      drawColumnY(0.59, 0, 1.0, 0.015, 0.3);
 
-      drawColumn(0.59, 0.5, 0.0, 0.015, 1.2);
-      drawColumn(0.59, -0.5, 0.0, 0.015, 1.2);
-      drawColumn(0.62, 0.16, 0.41, 0.010, 0.8);
-      drawColumn(0.62, -0.16, 0.41, 0.010, 0.8);
-      drawColumn(0.59, 0, 1.0, 0.02, 0.3);
+      drawColumnY(0.585, 0, 1.3, 0.008, 0.07);
+      drawColumnZ(0.585, 1.35, -0.035, 0.005, 0.07);
 
     glPopMatrix(); //Aqui acaba a matriz de objetos afetados pela escala
 
@@ -934,6 +946,28 @@ void Display(void) {
     drawSemiDiskXY(2.12, 0.8, 0.0, 0.0, 0.15);
     drawSemiDiskXY(2.12, 0.8, 0.6, 0.0, 0.15);
     drawSemiDiskXY(2.12, 0.8, -0.6, 0.0, 0.15);
+
+    //Arco Teto
+    glColor3f( 0.87,  0.72, 0.53);  
+    drawSemiDiskXY(2.12, 3.50, 0.0, 0.0, 0.4);
+    drawSemiDiskXY(1.82, 3.50, 0.0, 0.0, 0.4);
+    
+    //Circunferências do segundo andar
+    glColor3f( 0.87,  0.72, 0.53);
+    drawDiskXY(2.12, 3.1, 0.0, 0.15, 0.2);
+    drawDiskXY(2.12, 3.1, 0.65, 0.1, 0.15);
+	drawDiskXY(2.12, 3.1, -0.65, 0.1, 0.15);
+
+	drawDiskZY(1.6, 3.1, 1.01, 0.1, 0.15);
+	drawDiskZY(1.6, 3.1, -1.01, 0.1, 0.15);
+
+	glColor3f( 0.66, 0.66, 0.66); 
+    drawDiskXY(2.12, 3.1, 0.0, 0.0, 0.15);
+    drawDiskXY(2.12, 3.1, 0.65, 0.0, 0.1);
+	drawDiskXY(2.12, 3.1, -0.65, 0.0, 0.1);
+
+	drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1);
+	drawDiskZY(1.6, 3.1, -1.01, 0.0, 0.1);
 
     //profundidade 3 a -3
     //altura 0.1 a 2.5
@@ -1018,10 +1052,6 @@ void Display(void) {
       glTranslatef(0.5, 2.0, 0.7);
       glutSolidSphere(0.09, 50, 50);
   glPopMatrix(); 
-
-
-
-
 
 
   glPopMatrix();  
