@@ -100,7 +100,6 @@ void Display(void) {
     glRotatef(-90, 0.0, 1.0, 0.0 );
     glTranslatef(10,0,0);
     glClear(GL_COLOR_BUFFER_BIT);
-<<<<<<< HEAD
     
       glPushMatrix();
       glScalef(3.5,3.5,2);
@@ -1011,10 +1010,10 @@ void SpecialKeys(int key, int x, int y)
             case GLUT_KEY_UP: 
                 if(phi - inc >= PI/3) phi -= inc;
                 break;
-            case GLUT_KEY_PAGE_UP :
+            case 'x' :
                 if(radius > 7) radius -= 1;
                 break;
-            case GLUT_KEY_PAGE_DOWN : 
+            case 'z' : 
                 if(radius < 31) radius += 1;
                 break;
             case 'q':
