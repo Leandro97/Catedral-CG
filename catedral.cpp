@@ -984,14 +984,14 @@ void Display(void) {
     glPushMatrix();
       glColor3f(0.4,0.2,0);
       glTranslatef(-3.0, 1.8, 0);
-      glScalef(0.5,4,0.5);
+      glScalef(0.4,4.3,0.5);
       glutSolidCube(0.2);
     glPopMatrix();  
 
   //altar
   glPushMatrix();
       glColor3f(0.65,0.65,0.65);
-      glTranslatef(-2.70, 0.3, 0);
+      glTranslatef(-2.70, 0.235, 0);
       glScalef(1,2.3,5);
       glutSolidCube(0.2);
   glPopMatrix();   
