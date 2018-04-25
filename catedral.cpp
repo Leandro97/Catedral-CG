@@ -24,7 +24,7 @@ GLfloat doorAngle, angle, fAspect;
 //int mult = 1;
 bool openingDoor = false; 
 //double inc = std::fmod(5*PI/180, PI/2);
-double inc = 0.8*PI/180;
+double inc = 2*PI/180;
 bool isRotate;
 
 GLUquadricObj *obj = gluNewQuadric();
@@ -107,8 +107,10 @@ void drawDoor(float angle){
 void Display(void) {
     glPushMatrix();
     
-    glRotatef(-90, 0.0, 1.0, 0.0 );
-    glTranslatef(10,0,0);
+    glRotatef(-90, 0.0, 1.0, 0.0);
+    
+    //Translação para câmera 2
+    //glTranslatef(10,0,0);
 
     glClear(GL_COLOR_BUFFER_BIT);
       glPushMatrix();
@@ -1130,8 +1132,8 @@ void Display(void) {
   glutSwapBuffers();
  }
 
-// Inicializa parâmetros de rendering
-void Inicializa (void)
+// init parâmetros de rendering
+void init (void)
 {   
     glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
     angle=45;
@@ -1139,32 +1141,38 @@ void Inicializa (void)
 }
 
 // Função usada para especificar a posição do observador virtual
-void PosicionaObservador(void)
+void setCam(void)
 {
     // Especifica sistema de coordenadas do modelo
     glMatrixMode(GL_MODELVIEW);
-    // Inicializa sistema de coordenadas do modelo
+    // init sistema de coordenadas do modelo
     glLoadIdentity();
     // Especifica posição do observador e do alvo
-    gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
+    
+    //Cãmera 1
+    gluLookAt(0,1,radius, 0,0,0, 0,1,0);
+
+    //Câmera 2
+    //gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
+    
 }
 
 // Função usada para especificar o volume de visualização
-void EspecificaParametrosVisualizacao(void)
+void viewParameters(void)
 {
     // Especifica sistema de coordenadas de projeção
     glMatrixMode(GL_PROJECTION);
-    // Inicializa sistema de coordenadas de projeção
+    // init sistema de coordenadas de projeção
     glLoadIdentity();
 
     // Especifica a projeção perspectiva(angulo,aspecto,zMin,zMax)
     gluPerspective(angle,fAspect,0.5,500);
 
-    PosicionaObservador();
+    setCam();
 }
 
 // Função callback chamada quando o tamanho da janela é alterado 
-void AlteraTamanhoJanela(GLsizei w, GLsizei h)
+void reShape(GLsizei w, GLsizei h)
 {
     // Para previnir uma divisão por zero
     if ( h == 0 ) h = 1;
@@ -1175,76 +1183,103 @@ void AlteraTamanhoJanela(GLsizei w, GLsizei h)
     // Calcula a correção de aspecto
     fAspect = (GLfloat)w/(GLfloat)h;
 
-    EspecificaParametrosVisualizacao();
+    viewParameters();
 }
 
-// Callback para gerenciar eventos do teclado para teclas especiais (F1, PgDn, entre outras)
+//Câmera 1
+//Callback para gerenciar eventos do teclado para teclas especiais (F1, PgDn, entre outras)
 void keyPressed(unsigned char key, int x, int y) {
-
         glLoadIdentity();
         switch (key) {
-            case 'p':
-                isRotate = false;
-                phi = PI/2;
-                theta = 0;
-                break;
-            case 'a': 
-                isRotate = false;
-                theta -= inc;
+            case 'a' : 
+                theta += inc;
                 break;
             case 'd' :
-                isRotate = false;
-                theta += inc;
-                break;
-            case 's':
-                isRotate = false;
-                radius += 0.25;
-                break;
-            case 'w': 
-                isRotate = false;
-                radius -= 0.25;
-                break;
-            case 'l' : 
-                isRotate = true;
-                theta += inc;
-                break;
-            case 'j': 
-                isRotate = true;
                 theta -= inc;
-                break;    
-            case 'i':
-                isRotate = true;
-                //if(phi > PI/3) 
-                phi -= inc;  
                 break;
-            case 'k': 
-                isRotate = true;
-                //if(phi < PI/2) 
-                phi += inc;
+            case 'w' :
+                if(phi + inc <= PI) phi += inc;  
                 break;
-            case 'q':
-                exit(0);    
+            case 's' : 
+                if(phi - inc >= 0) phi -= inc;
+                break;
+            case 'i' :
+                radius -= 1;
+                break;
+            case 'k' : 
+                radius += 1;
+                break;
+                
         }
 
-        //printf("%f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi) + 0.4,radius*cos(theta)*sin(phi));
-        printf("Aquió: %f %f.\n", theta, -PI/3);
-        //gluLookAt(0, 0.4, radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
-        //gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
-
-        if(!isRotate) {
-            gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
-            eyeX = radius*sin(theta)*sin(phi);
-            eyeY = radius*cos(phi);
-            eyeZ = radius*cos(theta)*sin(phi);
-        } else {
-            gluLookAt(eyeX, eyeY + 0.4, eyeZ + radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
-            // centerX = radius*sin(theta)*sin(phi);
-            // centerY = radius*cos(phi);
-            // centerZ = radius*cos(theta)*sin(phi);
-        }   
+        phi = std::fmod(phi, 2*PI);
+        printf("%f %f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi));
+        gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
 
         glutPostRedisplay();
 }
+
+//Câmera 2
+// Callback para gerenciar eventos do teclado para teclas especiais (F1, PgDn, entre outras)
+// void keyPressed(unsigned char key, int x, int y) {
+
+//         glLoadIdentity();
+//         switch (key) {
+//             case 'p':
+//                 isRotate = false;
+//                 phi = PI/2;
+//                 theta = 0;
+//                 break;
+//             case 'a': 
+//                 isRotate = false;
+//                 theta -= inc;
+//                 break;
+//             case 'd' :
+//                 isRotate = false;
+//                 theta += inc;
+//                 break;
+//             case 's':
+//                 isRotate = false;
+//                 radius += 0.25;
+//                 break;
+//             case 'w': 
+//                 isRotate = false;
+//                 radius -= 0.25;
+//                 break;
+//             case 'l' : 
+//                 isRotate = true;
+//                 theta += inc;
+//                 break;
+//             case 'j': 
+//                 isRotate = true;
+//                 theta -= inc;
+//                 break;    
+//             case 'i':
+//                 isRotate = true;
+//                 //if(phi > PI/3) 
+//                 phi -= inc;  
+//                 break;
+//             case 'k': 
+//                 isRotate = true;
+//                 //if(phi < PI/2) 
+//                 phi += inc;
+//                 break;
+//             case 'q':
+//                 exit(0);    
+//         }
+
+//         if(!isRotate) {
+//             gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
+//             eyeX = radius*sin(theta)*sin(phi);
+//             eyeY = radius*cos(phi);
+//             eyeZ = radius*cos(theta)*sin(phi);
+//         } else {
+//             gluLookAt(eyeX, eyeY + 0.4, eyeZ + radius + 1, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
+
+//         }   
+
+//         glutPostRedisplay();
+// }
 
 void mouseFunc(int button, int state, int x, int y) {
     if (button == GLUT_LEFT_BUTTON)
@@ -1274,11 +1309,11 @@ int main(int argc, char** argv)
     glutCreateWindow("Catedral");
 
     glutDisplayFunc(Display);
-    glutReshapeFunc(AlteraTamanhoJanela);
+    glutReshapeFunc(reShape);
     glutKeyboardFunc(keyPressed);
     glutMouseFunc(mouseFunc);
     glutTimerFunc(33, Timer, 1);
-    Inicializa();
+    init();
     glutMainLoop();
 }
 
