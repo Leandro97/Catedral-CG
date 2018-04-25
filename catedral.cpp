@@ -991,13 +991,13 @@ void Display(void) {
   //altar
   glPushMatrix();
       glColor3f(0.65,0.65,0.65);
-      glTranslatef(-2.70, 0.1, 0);
-      glScalef(1,3,5);
+      glTranslatef(-2.70, 0.3, 0);
+      glScalef(1,2.3,5);
       glutSolidCube(0.2);
   glPopMatrix();   
 
-
-  //candelabro esquerdo do fundo
+  
+  //lustre esquerdo do fundo
   glPushMatrix();
       glColor3f(1,0.8,0.4);
       glTranslatef(-2.70, 2.3, 0.7);
@@ -1011,7 +1011,7 @@ void Display(void) {
       glutSolidSphere(0.09, 50, 50);
   glPopMatrix(); 
 
-//candelabro direito do fundo
+//lustre direito do fundo
   glPushMatrix();
       glColor3f(1,0.8,0.4);
       glTranslatef(-2.70, 2.3, -0.7);
@@ -1025,7 +1025,7 @@ void Display(void) {
       glutSolidSphere(0.09, 50, 50);
   glPopMatrix(); 
   
-  //candelabro esquerdo da frente
+  //lustre esquerdo da frente
   glPushMatrix();
       glColor3f(1,0.8,0.4);
       glTranslatef(0.5, 2.3, -0.7);
@@ -1039,7 +1039,7 @@ void Display(void) {
       glutSolidSphere(0.09, 50, 50);
   glPopMatrix(); 
 
-  //candelabro direito da frente
+  //lustre direito da frente
   glPushMatrix();
       glColor3f(1,0.8,0.4);
       glTranslatef(0.5, 2.3, 0.7);
@@ -1053,6 +1053,76 @@ void Display(void) {
       glutSolidSphere(0.09, 50, 50);
   glPopMatrix(); 
 
+
+  for(int i = 0; i < 4; i++) {
+      //Esquerda
+      //Assento
+      glPushMatrix();
+          glColor3f(0.4,0.2,0);
+          glTranslatef(-1 + (0.5 * i), 0.03, 0.5);
+          glScalef(0.5,0.198,2.48);
+          glutSolidCube(0.2);
+      glPopMatrix();  
+
+      //Encosto
+      glPushMatrix();
+          glColor3f(0.2,0.1,0);
+          glTranslatef(-0.95 + (0.5 * i), 0.110, 0.5);
+          glRotatef(90,0,0,1);
+          glScalef(0.5,0.198,2.48);
+          glutSolidCube(0.2);
+      glPopMatrix();
+
+      //Pé esquerdo
+      glPushMatrix();
+          glColor3f(0.2,0.1,0);
+          glTranslatef(-0.92 + (0.5 * i), 0.01, 0.695);
+          glScalef(0.5,0.1,0.2);
+          glutSolidCube(0.1);
+      glPopMatrix();   
+
+      //Pé direito
+      glPushMatrix();
+          glColor3f(0.2,0.1,0);
+          glTranslatef(-0.92 + (0.5 * i), 0.01, 0.305);
+          glScalef(0.5,0.1,0.2);
+          glutSolidCube(0.1);
+      glPopMatrix();  
+
+      //Direita
+      //Assento
+      glPushMatrix();
+          glColor3f(0.4,0.2,0);
+          glTranslatef(-1 + (0.5 * i), 0.03, -0.5);
+          glScalef(0.5,0.198,2.48);
+          glutSolidCube(0.2);
+      glPopMatrix();  
+
+      //Encosto
+      glPushMatrix();
+          glColor3f(0.2,0.1,0);
+          glTranslatef(-0.95 + (0.5 * i), 0.110, -0.5);
+          glRotatef(90,0,0,1);
+          glScalef(0.5,0.198,2.48);
+          glutSolidCube(0.2);
+      glPopMatrix();
+
+      //Pé esquerdo
+      glPushMatrix();
+          glColor3f(0.2,0.1,0);
+          glTranslatef(-0.92 + (0.5 * i), 0.01, -0.695);
+          glScalef(0.5,0.1,0.2);
+          glutSolidCube(0.1);
+      glPopMatrix();   
+
+      //Pé direito
+      glPushMatrix();
+          glColor3f(0.2,0.1,0);
+          glTranslatef(-0.92 + (0.5 * i), 0.01, -0.305);
+          glScalef(0.5,0.1,0.2);
+          glutSolidCube(0.1);
+      glPopMatrix();  
+  }
 
   glPopMatrix();  
   glClear(GL_DEPTH_BUFFER_BIT);
@@ -1144,11 +1214,13 @@ void keyPressed(unsigned char key, int x, int y) {
                 break;    
             case 'i':
                 isRotate = true;
-                if(phi > PI/3) phi -= inc;  
+                //if(phi > PI/3) 
+                phi -= inc;  
                 break;
             case 'k': 
                 isRotate = true;
-                if(phi < PI/2) phi += inc;
+                //if(phi < PI/2) 
+                phi += inc;
                 break;
             case 'q':
                 exit(0);    
