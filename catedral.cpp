@@ -20,6 +20,7 @@
 
 GLdouble eyeX = 0, eyeY = 0.4, eyeZ = 11, phi = PI/2, theta = 0, radius = 10;
 GLdouble centerX =0, centerY = 0, centerZ = 0;
+GLdouble superiorSp[4] = {0.0, 1.0, 0.0, 0.5};
 GLfloat doorAngle, angle, fAspect;
 bool openingDoor = false; 
 double inc = 2*PI/180;
@@ -98,6 +99,19 @@ void drawDoor(float angle){
 
   glutSolidCube(1.0f);
   glPopMatrix();
+}
+
+void drawSemiSphere(float radius) {
+  glPushMatrix(); 
+  glColor3f(0.45,0.5,0.6);
+    glBegin(GL_POINTS);
+      for(float thetaT = 0; thetaT < 2*PI; thetaT += 0.01) {
+        for(float phiT = 0; phiT < PI/2; phiT += 0.01) {
+          glVertex3f(radius*sin(thetaT)*sin(phiT), radius*cos(phiT), radius*cos(thetaT)*sin(phiT));
+        }
+      }
+    glEnd();
+  glPopMatrix(); 
 }
 
 
@@ -904,39 +918,39 @@ void Display(void) {
 
     //Portas da esquerda
       glPushMatrix();
-        glTranslatef(0.6, 0.1, 0.15);
-        drawDoor(-doorAngle);
+      glTranslatef(0.6, 0.1, 0.15);
+      drawDoor(-doorAngle);
       glPopMatrix();
 
       glPushMatrix();
-        glTranslatef(0.6, 0.1, 0.45);
-        glRotatef(180,0,1,0);
-        drawDoor(doorAngle);
+      glTranslatef(0.6, 0.1, 0.45);
+      glRotatef(180,0,1,0);
+      drawDoor(doorAngle);
       glPopMatrix();
 
     //Portas do meio
       glColor3f( 0.82,  0.71, 0.55);
       glPushMatrix();
-        glTranslatef(0.6, 0.1, -0.15);
-        drawDoor(-doorAngle);
+      glTranslatef(0.6, 0.1, -0.15);
+      drawDoor(-doorAngle);
       glPopMatrix();
 
       glPushMatrix();
-        glTranslatef(0.6, 0.1, 0.15);
-        glRotatef(180,0,1,0);
-        drawDoor(doorAngle);
+      glTranslatef(0.6, 0.1, 0.15);
+      glRotatef(180,0,1,0);
+      drawDoor(doorAngle);
       glPopMatrix();
 
       //Portas da direita
       glPushMatrix();
-        glTranslatef(0.6, 0.1, -0.45);
-        drawDoor(-doorAngle);
+      glTranslatef(0.6, 0.1, -0.45);
+      drawDoor(-doorAngle);
       glPopMatrix();  
 
       glPushMatrix();
-        glTranslatef(0.6, 0.1, -0.15);
-        glRotatef(180,0,1,0);
-        drawDoor(doorAngle);
+      glTranslatef(0.6, 0.1, -0.15);
+      glRotatef(180,0,1,0);
+      drawDoor(doorAngle);
       glPopMatrix();
 
       //Colunas
@@ -1015,32 +1029,49 @@ void Display(void) {
 
     //Lustres
     for(int i = 0; i < 2; i++) {
-      //lustres direitos
+    //Lustres direitos
+      //Haste
       glPushMatrix();
-      glColor3f(1,0.8,0.4);
+      glColor3f(0.45,0.5,0.7);
       glTranslatef(-2.70 + 3.2 * i, 2.3, -0.7);
       glScalef(0.03,3,0.03);
       glutSolidCube(0.2);
       glPopMatrix(); 
 
+      //Lâmpada
       glPushMatrix();
       glColor3f(1,1,0.4);
       glTranslatef(-2.70 + 3.2 * i, 2.0, -0.7);
       glutSolidSphere(0.09, 50, 50);
       glPopMatrix(); 
 
-      //lustres esquerdos
+      //Detalhe lâmpada
       glPushMatrix();
-      glColor3f(1,0.8,0.4);
+        glTranslatef(-2.70 + 3.2 * i, 2.0, -0.7);
+        drawSemiSphere(0.1);
+      glPopMatrix(); 
+
+
+    //Lustres esquerdos
+      //Haste
+      glPushMatrix();
+      glColor3f(0.45,0.5,0.7);
       glTranslatef(-2.70 + 3.2 * i, 2.3, 0.7);
       glScalef(0.03,3,0.03);
       glutSolidCube(0.2);
       glPopMatrix(); 
 
+      //Lâmpada
       glPushMatrix();
       glColor3f(1,1,0.4);
       glTranslatef(-2.70 + 3.2 * i, 2, 0.7);
       glutSolidSphere(0.09, 50, 50);
+      glPopMatrix(); 
+
+      //Detalhe lâmpada
+      glPushMatrix();
+        glTranslatef(-2.70 + 3.2 * i, 2.0, 0.7);
+        drawSemiSphere(0.1);
       glPopMatrix(); 
     }
 
@@ -1067,17 +1098,17 @@ void Display(void) {
       //Pés
       for(int j = 0; j < 2; j++) {
         glPushMatrix();
-          glColor3f(0.2,0.1,0);
-          glTranslatef(-1 + (0.5 * i), 0.06, 0.695 - 0.39*j);
-          glScalef(0.2,1,0.2);
-          glutSolidCube(0.1);
+        glColor3f(0.2,0.1,0);
+        glTranslatef(-1 + (0.5 * i), 0.06, 0.695 - 0.39*j);
+        glScalef(0.2,1,0.2);
+        glutSolidCube(0.1);
         glPopMatrix(); 
 
         glPushMatrix();
-          glColor3f(0.2,0.1,0);
-          glTranslatef(-1 + (0.5 * i), 0.015, 0.695 - 0.39*j);
-          glScalef(1.8,0.1,0.2);
-          glutSolidCube(0.1);
+        glColor3f(0.2,0.1,0);
+        glTranslatef(-1 + (0.5 * i), 0.015, 0.695 - 0.39*j);
+        glScalef(1.8,0.1,0.2);
+        glutSolidCube(0.1);
         glPopMatrix(); 
       }
 
@@ -1102,17 +1133,17 @@ void Display(void) {
       //Pés
       for(int j = 0; j < 2; j++) {
         glPushMatrix();
-          glColor3f(0.2,0.1,0);
-          glTranslatef(-1 + (0.5 * i), 0.06, -0.695 + 0.39*j);
-          glScalef(0.2,1,0.2);
-          glutSolidCube(0.1);
+        glColor3f(0.2,0.1,0);
+        glTranslatef(-1 + (0.5 * i), 0.06, -0.695 + 0.39*j);
+        glScalef(0.2,1,0.2);
+        glutSolidCube(0.1);
         glPopMatrix(); 
 
         glPushMatrix();
-          glColor3f(0.2,0.1,0);
-          glTranslatef(-1 + (0.5 * i), 0.015, -0.695 + 0.39*j);
-          glScalef(1.8,0.1,0.2);
-          glutSolidCube(0.1);
+        glColor3f(0.2,0.1,0);
+        glTranslatef(-1 + (0.5 * i), 0.015, -0.695 + 0.39*j);
+        glScalef(1.8,0.1,0.2);
+        glutSolidCube(0.1);
         glPopMatrix(); 
       }
     }
@@ -1166,7 +1197,7 @@ void Display(void) {
   void reShape(GLsizei w, GLsizei h) {
     // Para previnir uma divisão por zero
     if ( h == 0 ) h = 1;
-  
+
     // Especifica o tamanho da viewport
     glViewport(0, 0, w, h);
 
@@ -1244,4 +1275,3 @@ void Display(void) {
     init();
     glutMainLoop();
   }
-
