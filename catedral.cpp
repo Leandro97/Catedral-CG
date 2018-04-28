@@ -100,6 +100,16 @@ void drawDoor(float angle){
   glPopMatrix();
 }
 
+void drawSemiSphere(float radius) {
+    glBegin(GL_POINTS); 
+        for(float thetaT = 0; thetaT < 2*PI; thetaT += 0.01) {
+            for(float phiT = 0; phiT < PI/2; phiT += 0.01) {
+                glVertex3f(radius*sin(thetaT)*sin(phiT), radius*cos(phiT), radius*cos(thetaT)*sin(phiT));
+            }
+        }
+    glEnd();
+}
+
 
 // Função callback chamada para fazer o desenho
 void Display(void) {
@@ -903,6 +913,7 @@ void Display(void) {
 
 
     //Portas da esquerda
+      glColor3f( 0.82,  0.71, 0.55);
       glPushMatrix();
         glTranslatef(0.6, 0.1, 0.15);
         drawDoor(-doorAngle);
@@ -915,7 +926,6 @@ void Display(void) {
       glPopMatrix();
 
     //Portas do meio
-      glColor3f( 0.82,  0.71, 0.55);
       glPushMatrix();
         glTranslatef(0.6, 0.1, -0.15);
         drawDoor(-doorAngle);
@@ -1015,7 +1025,8 @@ void Display(void) {
 
     //Lustres
     for(int i = 0; i < 2; i++) {
-      //lustres direitos
+      //Lustres direitos
+      //Haste
       glPushMatrix();
       glColor3f(1,0.8,0.4);
       glTranslatef(-2.70 + 3.2 * i, 2.3, -0.7);
@@ -1023,13 +1034,21 @@ void Display(void) {
       glutSolidCube(0.2);
       glPopMatrix(); 
 
+      //Lâmpada
       glPushMatrix();
       glColor3f(1,1,0.4);
       glTranslatef(-2.70 + 3.2 * i, 2.0, -0.7);
       glutSolidSphere(0.09, 50, 50);
       glPopMatrix(); 
 
-      //lustres esquerdos
+      //Detalhe superior
+      glPushMatrix();
+      glColor3f(0,0,0.4);
+      glTranslatef(-2.70 + 3.2 * i, 2, -0.7);
+      drawSemiSphere(0.1);
+      glPopMatrix(); 
+
+      //Lustres esquerdos
       glPushMatrix();
       glColor3f(1,0.8,0.4);
       glTranslatef(-2.70 + 3.2 * i, 2.3, 0.7);
@@ -1041,6 +1060,13 @@ void Display(void) {
       glColor3f(1,1,0.4);
       glTranslatef(-2.70 + 3.2 * i, 2, 0.7);
       glutSolidSphere(0.09, 50, 50);
+      glPopMatrix();
+
+      //Detalhe superior
+      glPushMatrix();
+      glColor3f(0,0,0.4);
+      glTranslatef(-2.70 + 3.2 * i, 2, 0.7);
+      drawSemiSphere(0.1);
       glPopMatrix(); 
     }
 
@@ -1141,7 +1167,7 @@ void Display(void) {
     // Especifica posição do observador e do alvo
     
     //Cãmera 1
-    gluLookAt(0,0,radius , 0,1,0, 0,1,0);
+    gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
 
     //Câmera 2
     //gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
@@ -1204,7 +1230,7 @@ void Display(void) {
 
     phi = std::fmod(phi, 2*PI);
     printf("%f %f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi));
-    gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi), radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
+    gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
 
     glutPostRedisplay();
   }
