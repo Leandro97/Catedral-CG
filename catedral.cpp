@@ -146,78 +146,38 @@ void Display(void) {
   // drawPlaneTC(0.61, 0.755, -0.51, -1.01, 0.755, 0.51);
   // drawPlaneTC(0.61, 0.76, -0.51, -1.01, 0.76, 0.51);
 
-  //aaaaaa    
-  //Andar 2  
-  //Parede direita - andar 2
-  glColor3f( 0.96, 0.87, 0.7);
-  drawPlaneED(0.6, 1.0, 0.5, 0.3, 0.76, 0.5);
+  // //Andar 2  
+  // //Parede direita - andar 2
+  // glColor3f( 0.96, 0.87, 0.7);
+  // drawPlaneED(0.6, 1.0, 0.5, 0.3, 0.76, 0.5);
   
-  //Parede esquerda - andar 2
-  drawPlaneED(0.6, 1.0, -0.5, 0.3, 0.76, -0.5);
+  // //Parede esquerda - andar 2
+  // drawPlaneED(0.6, 1.0, -0.5, 0.3, 0.76, -0.5);
       
-  //Parede fundo - andar 2
-  drawPlaneFF(0.3, 1.0, -0.5, 0.3, 0.76, 0.5);
+  // //Parede fundo - andar 2
+  // drawPlaneFF(0.3, 1.0, -0.5, 0.3, 0.76, 0.5);
 
+  // //Parede frente - andar 2
+  // drawPlaneFF(0.6, 1.0, -0.5, 0.6, 0.76, 0.5);
 
-      //Parede frente - andar 2
-      glBegin(GL_POLYGON);
-      glVertex3f(0.6, 1.0, -0.5);
-      glVertex3f(0.6, 1.0, 0.5);
-      glVertex3f(0.6, 0.76, 0.5);
-      glVertex3f(0.6, 0.76, -0.5);
-      glEnd();
+  // //Teto
+  // //Teto - andar 2 - camada 1 // Falta fechar os lados
+  // glColor3f( 0.87,  0.72, 0.53);
+  // drawPlaneTC(0.61, 1.0, -0.51, 0.28, 1.0, 0.5);
+  // drawPlaneTC(0.61, 1.01, -0.51, 0.28, 1.01, 0.5);
 
-      //Teto
-      //Teto - andar 2 - camada 1 // Falta fechar os lados
-      glColor3f( 0.87,  0.72, 0.53);
-      glBegin(GL_POLYGON);
-      glVertex3f(0.61, 1.0, -0.51);
-      glVertex3f(0.28, 1.0, -0.5);
-      glVertex3f(0.28, 1.0, 0.5);
-      glVertex3f(0.61, 1.0, 0.51);
-      glEnd();
+  //Andar 3
+  //Parede direita - andar 3 - torre esquerda
+  glColor3f( 0.96, 0.87, 0.7);
+  drawPlaneED(0.56, 1.01, 0.48, 0.30, 1.08, 0.48);
 
-      glBegin(GL_POLYGON);
-      glVertex3f(0.61, 1.01, -0.51);
-      glVertex3f(0.28, 1.01, -0.5);
-      glVertex3f(0.28, 1.01, 0.5);
-      glVertex3f(0.61, 1.01, 0.51);
-      glEnd();
+  //Parede esquerda - andar 3 - torre esquerda
+  drawPlaneED(0.56, 1.01, 0.18, 0.30, 1.08, 0.18);
 
-      //Andar 3
-      //Parede direita - andar 3 - torre esquerda
-      glColor3f( 0.96, 0.87, 0.7);
-      glBegin(GL_POLYGON);
-      glVertex3f(0.56, 1.01, 0.48);
-      glVertex3f(0.30, 1.01, 0.48);
-      glVertex3f(0.30, 1.08, 0.48);
-      glVertex3f(0.56, 1.08, 0.48);
-      glEnd();
-
-      //Parede esquerda - andar 3 - torre esquerda
-      glColor3f( 0.96, 0.87, 0.7);
-      glBegin(GL_POLYGON);
-      glVertex3f(0.56, 1.01, 0.18);
-      glVertex3f(0.30, 1.01, 0.18);
-      glVertex3f(0.30, 1.08, 0.18);
-      glVertex3f(0.56, 1.08, 0.18);
-      glEnd();
-
-      //Parede fundo - andar 3 - torre esquerda
-      glBegin(GL_POLYGON);
-      glVertex3f(0.30, 1.01, 0.18);
-      glVertex3f(0.30, 1.01, 0.48);
-      glVertex3f(0.30, 1.08, 0.48);
-      glVertex3f(0.30, 1.08, 0.18);
-      glEnd();
-
-      //Parede frente - andar 3 - torre esquerda
-      glBegin(GL_POLYGON);
-      glVertex3f(0.56, 1.01, 0.18);
-      glVertex3f(0.56, 1.01, 0.48);
-      glVertex3f(0.56, 1.08, 0.48);
-      glVertex3f(0.56, 1.08, 0.18);
-      glEnd();
+  //Parede fundo - andar 3 - torre esquerda
+  drawPlaneFF(0.30, 1.01, 0.18, 0.30, 1.08, 0.48);
+  //Parede frente - andar 3 - torre esquerda
+  drawPlaneFF(0.56, 1.01, 0.18, 0.56, 1.08, 0.48);
 
       //Teto
       //Teto - andar 3 - torre esquerda
