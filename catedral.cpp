@@ -615,22 +615,25 @@ void Display(void) {
     glLoadIdentity();
     switch (key) {
       case 'a' : 
-      theta += inc;
-      break;
+      	theta += inc;
+      	break;
       case 'd' :
-      theta -= inc;
-      break;
+      	theta -= inc;
+      	break;
       case 'w' :
-      if(phi + inc <= PI) phi += inc;  
-      break;
+      	if(phi + inc <= PI) phi += inc;  
+      	break;
       case 's' : 
-      if(phi - inc >= 0) phi -= inc;
-      break;
+      	if(phi - inc >= 0) phi -= inc;
+      	break;
       case 'i' :
-      radius -= 0.5;
-      break;
+      	radius -= 0.5;
+      	break;
       case 'k' : 
-      radius += 0.5;
+      	radius += 0.5;
+      	break;
+      case 'q' : 
+      	exit(0);
       break;
 
     }
