@@ -8,7 +8,7 @@
     #include <GL/glu.h>
     #include <GL/glext.h>
     #include <GL/glut.h>
-#endif 
+#endif
 
 #include <iostream>
 #include <stdlib.h>
@@ -24,25 +24,152 @@ bool openingDoor = false;
 double inc = 2*PI/180;
 bool isRotate;
 
-void DisplayE(void) {
-  glClear(GL_COLOR_BUFFER_BIT); 
-  glPushMatrix();
-  glColor3f(0.4,0.2,0);
-  // glutSolidCube(2);
+// inicia parâmetros de rendering
+void init(void) {   
+  // Define a cor de fundo da janela de visualização como branca
+  glClearColor(1.0f, 1.0f, 1.0f, 1.0f);    
 
-  drawPlaneED(-1.0, 0.75 , 0.5, 0.6, 0.0, 0.5);
+  // Habilita a definição da cor do material a partir da cor corrente
+  glEnable(GL_COLOR_MATERIAL);
 
-  drawPlaneED(0.6, 0.75, -0.5, -1.0, 0.0, -0.5);
+  //Habilita o uso de iluminação
+  glEnable(GL_LIGHTING);  
 
-  drawPlaneFF(-0.99, 0.75, -0.5, -0.99, 0.0, 0.5);
+  // Habilita a luz de número 0
+  glEnable(GL_LIGHT0);
 
-  drawPlaneFF(0.6, 0.75, -0.5, 0.6, 0.0, 0.5);
+  // Habilita o depth-buffering
+  glEnable(GL_DEPTH_TEST);
+
+  // Habilita o modelo de colorização de Gouraud
+  glShadeModel(GL_SMOOTH);
+
+  // Inicializa a variável que especifica o ângulo da projeção
+  angle=45;
+}
+
+// Função usada para especificar aspectos de iluminação
+void setLight(void) {
+  GLfloat luzAmbiente[4]={0.3,0.3,0.3,1.0}; 
+  GLfloat luzDifusa[4]={0.6,0.6,0.6,1.0}; // "cor" 
+  GLfloat luzEspecular[4]={0.2, 0.2, 0.2, 1.0}; // "brilho" 
+  GLfloat posicaoLuz[4]={50.0, 10.0, 0.0, 1.0};
+
+  // Capacidade de brilho do material
+  //GLfloat especularidade[4]={1.0,1.0,1.0,1.0}; 
+  //GLint especMaterial = 0;
+
+  // Define a refletância do material 
+  //glMaterialfv(GL_FRONT,GL_SPECULAR, especularidade);
+
+  // Ativa o uso da luz ambiente 
+  glLightModelfv(GL_LIGHT_MODEL_AMBIENT, luzAmbiente);
+
+  // Define os parâmetros da luz de número 0
+  glLightfv(GL_LIGHT0, GL_AMBIENT, luzAmbiente); 
+  glLightfv(GL_LIGHT0, GL_DIFFUSE, luzDifusa);
+  glLightfv(GL_LIGHT0, GL_SPECULAR, luzEspecular);
+  glLightfv(GL_LIGHT0, GL_POSITION, posicaoLuz);   
+}
+
+// Função usada para especificar a posição do observador virtual
+void setCam(void) {
+    // Especifica sistema de coordenadas do modelo
+  glMatrixMode(GL_MODELVIEW);
+    // init sistema de coordenadas do modelo
+  glLoadIdentity();
+  setLight();
+    // Especifica posição do observador e do alvo
 
 
-  glPopMatrix();  
-  glClear(GL_DEPTH_BUFFER_BIT);
-  glFlush();
-  glutSwapBuffers();
+    //Cãmera 1
+  gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
+
+    //Câmera 2
+    //gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
+
+}
+
+// Função usada para especificar o volume de visualização
+void viewParameters(void) {
+    // Especifica sistema de coordenadas de projeção
+  glMatrixMode(GL_PROJECTION);
+    // init sistema de coordenadas de projeção
+  glLoadIdentity();
+
+    // Especifica a projeção perspectiva(angulo,aspecto,zMin,zMax)
+  gluPerspective(angle,fAspect,0.5,500);
+
+  setCam();
+}
+
+// Função callback chamada quando o tamanho da janela é alterado 
+void reShape(GLsizei w, GLsizei h) {
+    // Para previnir uma divisão por zero
+  if ( h == 0 ) h = 1;
+  
+    // Especifica o tamanho da viewport
+  glViewport(0, 0, w, h);
+
+    // Calcula a correção de aspecto
+  fAspect = (GLfloat)w/(GLfloat)h;
+
+  viewParameters();
+}
+
+//Câmera 1
+//Callback para gerenciar eventos do teclado para teclas especiais (F1, PgDn, entre outras)
+void keyPressed(unsigned char key, int x, int y) {
+  glLoadIdentity();
+  switch (key) {
+    case 'a' : 
+    theta += inc;
+    break;
+    case 'd' :
+    theta -= inc;
+    break;
+    case 'w' :
+    if(phi + inc <= PI) phi += inc;  
+    break;
+    case 's' : 
+    if(phi - inc >= 0) phi -= inc;
+    break;
+    case 'i' :
+    radius -= 0.5;
+    break;
+    case 'k' : 
+    radius += 0.5;
+    break;
+    case 'q' : 
+    exit(0);
+    break;
+
+  }
+
+  phi = std::fmod(phi, 2*PI);
+  printf("%f %f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi));
+  gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
+
+  glutPostRedisplay();
+}
+
+void mouseFunc(int button, int state, int x, int y) {
+  if (button == GLUT_LEFT_BUTTON)
+   if (state == GLUT_DOWN) {
+    openingDoor = !openingDoor;
+  }
+  glutPostRedisplay();
+}
+
+void Timer(int value){    
+  if(openingDoor && doorAngle < 90){
+    doorAngle += 5;
+  }else if(!openingDoor && doorAngle > 0){
+    doorAngle -= 5;
+  }
+
+  glutPostRedisplay();
+  glutTimerFunc(33,Timer, 1);
 }
 
 // Função callback chamada para fazer o desenho
@@ -52,6 +179,7 @@ void Display(void) {
   glRotatef(-90, 0.0, 1.0, 0.0);
 
   glClear(GL_COLOR_BUFFER_BIT); 
+  setLight();
   glPushMatrix();
   glScalef(3.5,3.5,2);
 
@@ -578,110 +706,6 @@ void Display(void) {
   glClear(GL_DEPTH_BUFFER_BIT);
   glFlush();
   glutSwapBuffers();
-}
-
-// inicia parâmetros de rendering
-void init(void) {   
-  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-  angle=45;
-}
-
-// Função usada para especificar a posição do observador virtual
-void setCam(void) {
-    // Especifica sistema de coordenadas do modelo
-  glMatrixMode(GL_MODELVIEW);
-    // init sistema de coordenadas do modelo
-  glLoadIdentity();
-    // Especifica posição do observador e do alvo
-
-    //Cãmera 1
-  gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
-
-    //Câmera 2
-    //gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
-
-}
-
-// Função usada para especificar o volume de visualização
-void viewParameters(void) {
-    // Especifica sistema de coordenadas de projeção
-  glMatrixMode(GL_PROJECTION);
-    // init sistema de coordenadas de projeção
-  glLoadIdentity();
-
-    // Especifica a projeção perspectiva(angulo,aspecto,zMin,zMax)
-  gluPerspective(angle,fAspect,0.5,500);
-
-  setCam();
-}
-
-// Função callback chamada quando o tamanho da janela é alterado 
-void reShape(GLsizei w, GLsizei h) {
-    // Para previnir uma divisão por zero
-  if ( h == 0 ) h = 1;
-  
-    // Especifica o tamanho da viewport
-  glViewport(0, 0, w, h);
-
-    // Calcula a correção de aspecto
-  fAspect = (GLfloat)w/(GLfloat)h;
-
-  viewParameters();
-}
-
-//Câmera 1
-//Callback para gerenciar eventos do teclado para teclas especiais (F1, PgDn, entre outras)
-void keyPressed(unsigned char key, int x, int y) {
-  glLoadIdentity();
-  switch (key) {
-    case 'a' : 
-    theta += inc;
-    break;
-    case 'd' :
-    theta -= inc;
-    break;
-    case 'w' :
-    if(phi + inc <= PI) phi += inc;  
-    break;
-    case 's' : 
-    if(phi - inc >= 0) phi -= inc;
-    break;
-    case 'i' :
-    radius -= 0.5;
-    break;
-    case 'k' : 
-    radius += 0.5;
-    break;
-    case 'q' : 
-    exit(0);
-    break;
-
-  }
-
-  phi = std::fmod(phi, 2*PI);
-  printf("%f %f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi));
-  gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
-
-  glutPostRedisplay();
-}
-
-void mouseFunc(int button, int state, int x, int y) {
-  if (button == GLUT_LEFT_BUTTON)
-   if (state == GLUT_DOWN) {
-    openingDoor = !openingDoor;
-  }
-  glutPostRedisplay();
-}
-
-void Timer(int value){    
-  if(openingDoor && doorAngle < 90){
-    doorAngle += 5;
-  }else if(!openingDoor && doorAngle > 0){
-    doorAngle -= 5;
-  }
-
-  glutPostRedisplay();
-  glutTimerFunc(33,Timer, 1);
 }
 
 // Programa Principal
