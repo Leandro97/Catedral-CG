@@ -24,13 +24,34 @@ bool openingDoor = false;
 double inc = 2*PI/180;
 bool isRotate;
 
+void DisplayE(void) {
+  glClear(GL_COLOR_BUFFER_BIT); 
+  glPushMatrix();
+  glColor3f(0.4,0.2,0);
+  // glutSolidCube(2);
+
+  drawPlaneED(-1.0, 0.75 , 0.5, 0.6, 0.0, 0.5);
+
+  drawPlaneED(0.6, 0.75, -0.5, -1.0, 0.0, -0.5);
+
+  drawPlaneFF(-0.99, 0.75, -0.5, -0.99, 0.0, 0.5);
+
+  drawPlaneFF(0.6, 0.75, -0.5, 0.6, 0.0, 0.5);
+
+
+  glPopMatrix();  
+  glClear(GL_DEPTH_BUFFER_BIT);
+  glFlush();
+  glutSwapBuffers();
+}
+
 // Função callback chamada para fazer o desenho
 void Display(void) {
   glPushMatrix();
 
   glRotatef(-90, 0.0, 1.0, 0.0);
 
-  glClear(GL_COLOR_BUFFER_BIT);
+  glClear(GL_COLOR_BUFFER_BIT); 
   glPushMatrix();
   glScalef(3.5,3.5,2);
 
@@ -74,7 +95,7 @@ void Display(void) {
   drawPlaneFF(0.59, 0.2, -0.4, 0.59, 0.0, -0.5);
   glColor3f(0.96, 0.87, 0.7);
   drawPlaneFF(0.6, 0.2, -0.4, 0.6, 0.0, -0.5);
-      
+
   //Parede frente - andar 1 - inferior centro direita
   glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.59, 0.2, -0.2, 0.59, 0.0, -0.1);
@@ -106,7 +127,7 @@ void Display(void) {
   drawPlaneFF(0.39, 0.2, -0.4, 0.39, 0.0, -0.5);
   glColor3f(0.96, 0.87, 0.7);
   drawPlaneFF(0.4, 0.2, -0.4, 0.4, 0.0, -0.5);   
-      
+
   //Parede interior - inferior centro direita
   glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.39, 0.2, -0.2, 0.39, 0.0, -0.1);
@@ -122,7 +143,7 @@ void Display(void) {
   //Parede interior corredor direita 
   glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.59, 0.75, 0.15, 0.39, 0.0, 0.15);
-      
+
   //Parede interior corredor esquerda 
   glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.59, 0.75, -0.15, 0.39, 0.0, -0.15);
@@ -131,7 +152,7 @@ void Display(void) {
   glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.6, 0.4, -0.5, 0.4, 0.4, 0.5);
   drawPlaneTC(0.6, 0.405, -0.5, 0.4, 0.405, 0.5);
-      
+
   //Varanda - andar 1 - camada 2 // Falta fechar os lados
   drawPlaneTC(0.6,  0.405, -0.5, 0.4, 0.405, 0.5);
   drawPlaneTC(0.6,  0.41, -0.5, 0.4, 0.41, 0.5);
@@ -141,7 +162,7 @@ void Display(void) {
   glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.605, 0.75, -0.505, -1.005, 0.75, 0.505);
   drawPlaneTC(0.605, 0.755, -0.505, -1.005, 0.755, 0.505);
-      
+
   //Teto - andar 1 - camada 2 // Falta fechar os lados
   drawPlaneTC(0.61, 0.755, -0.51, -1.01, 0.755, 0.51);
   drawPlaneTC(0.61, 0.76, -0.51, -1.01, 0.76, 0.51);
@@ -153,7 +174,7 @@ void Display(void) {
   
   //Parede esquerda - andar 2
   drawPlaneED(0.6, 1.0, -0.5, 0.3, 0.76, -0.5);
-      
+
   //Parede fundo - andar 2
   drawPlaneFF(0.3, 1.0, -0.5, 0.3, 0.76, 0.5);
 
@@ -218,7 +239,7 @@ void Display(void) {
   //Teto - andar 4 - torre direita
   glColor3f(0.87,  0.72, 0.53);
   drawPlaneTC(0.53, 1.20, -0.21, 0.33, 1.20, -0.45);
-      
+
   //Parede direita - andar 4 - torre esquerda 
   glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.53, 1.08, 0.45, 0.33, 1.20, 0.45);
@@ -235,7 +256,7 @@ void Display(void) {
   //Teto - andar 4 - torre esquerda
   glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.53, 1.20, 0.21, 0.33, 1.20, 0.45);
-      
+
   //Pirâmides 
   //Andar 5
   //Parede direita - andar 5 - torre direita
@@ -247,10 +268,10 @@ void Display(void) {
 
   //Parede frente - andar 5 - torre direita
   drawPlaneFF(0.505, 1.20, -0.24, 0.505, 1.22, -0.425);
-      
+
   //Parede traz - andar 5 - torre direita
   drawPlaneFF(0.355, 1.20, -0.24, 0.355, 1.22, -0.425);
-      
+
   //Teto - andar 5 - torre direita
   glColor3f(0.87,  0.72, 0.53);
   drawPlaneTC(0.505, 1.22, -0.24, 0.355, 1.22, -0.425);
@@ -264,14 +285,14 @@ void Display(void) {
 
   //Parede frente - andar 5 - torre esquerda
   drawPlaneFF(0.505, 1.20, 0.24, 0.505, 1.22, 0.425);
-      
+
   //Parede fundo - andar 5 - torre esquerda
   drawPlaneFF(0.355, 1.20, 0.24, 0.355, 1.22, 0.425);
 
   //Teto - andar 5 - torre direita
   glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.505, 1.22, 0.24, 0.355, 1.22, 0.425);
-      
+
   //Parede direita - andar 6 - torre direita
   glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.48, 1.22, -0.395, 0.38, 1.24, -0.395);
@@ -298,7 +319,7 @@ void Display(void) {
 
   //Parede frente - andar 6 - torre esquerda
   drawPlaneFF(0.48, 1.22, 0.265, 0.48, 1.24, 0.395);
-      
+
   //Parede fundo - andar 6 - torre esquerda
   drawPlaneFF(0.38, 1.22, 0.265, 0.38, 1.24, 0.395);
 
@@ -316,14 +337,14 @@ void Display(void) {
 
   //Parede frente - andar 7 - torre direita
   drawPlaneFF(0.455, 1.24, -0.295, 0.455, 1.26, -0.365);
-      
+
   //Parede fundo - andar 7 - torre direita
   drawPlaneFF(0.405, 1.24, -0.295, 0.405, 1.26, -0.365);
 
   //Teto - andar 7 - torre direita
   glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.455, 1.26, -0.295, 0.405, 1.26, -0.365);
-      
+
   //Parede direita - andar 7 - torre esquerda
   glColor3f( 0.96, 0.87, 0.7);
   drawPlaneED(0.455, 1.24, 0.365, 0.405, 1.26, 0.365);
@@ -344,35 +365,35 @@ void Display(void) {
   for(int i = 0; i < 3; i ++) {
     glColor3f(0.82,  0.71, 0.55);
     //Esquerda
-      glPushMatrix();
-        glTranslatef(0.6, 0.1, 0.4 - 0.3*i);
-        glRotatef(180,0,1,0);
-        drawDoor(doorAngle);
-      glPopMatrix();  
+    glPushMatrix();
+    glTranslatef(0.6, 0.1, 0.4 - 0.3*i);
+    glRotatef(180,0,1,0);
+    drawDoor(doorAngle);
+    glPopMatrix();  
 
     //Direita
-      glPushMatrix();
-        glTranslatef(0.6, 0.1, 0.2 -0.3*i);
-        drawDoor(-doorAngle);
-      glPopMatrix();
+    glPushMatrix();
+    glTranslatef(0.6, 0.1, 0.2 -0.3*i);
+    drawDoor(-doorAngle);
+    glPopMatrix();
   }
 
   //Colunas
   glEnable(GL_DEPTH_TEST);
   glColor3f(0.96, 0.96, 0.86);
-  drawColumnY(0.59, 0.5, 0.0, 0.015, 1.2);
-  drawColumnY(0.59, -0.5, 0.0, 0.015, 1.2);
+  drawColumnY(0.605, 0.5, 0.0, 0.015, 1.2);
+  drawColumnY(0.605, -0.5, 0.0, 0.015, 1.2);
   drawColumnY(0.62, 0.16, 0.41, 0.010, 0.8);
   drawColumnY(0.62, -0.16, 0.41, 0.010, 0.8);
+  
   drawColumnY(0.59, 0, 1.0, 0.015, 0.3);
-
   drawColumnY(0.585, 0, 1.3, 0.008, 0.07);
   drawColumnZ(0.585, 1.35, -0.035, 0.005, 0.07);
 
   glPopMatrix(); //Aqui acaba a matriz de objetos afetados pela escala
 
 
-  //Arcos superiores as portas 
+  //Arcos superiores às portas 
   glColor3f( 0.87,  0.72, 0.53);  
   drawSemiDiskXY(2.12, 0.8, 0.0, 0.2, 0.28);
   drawSemiDiskXY(2.12, 0.8, 0.6, 0.2, 0.28);
@@ -409,7 +430,7 @@ void Display(void) {
   //Horizontal
   glPushMatrix();
   glColor3f(0.4,0.2,0);
-  glTranslatef(-3.0, 2, 0);
+  glTranslatef(-3.4, 2, 0);
   glScalef(0.5,0.198,2.48);
   glutSolidCube(0.2);
   glPopMatrix();  
@@ -417,7 +438,7 @@ void Display(void) {
   //Vertical
   glPushMatrix();
   glColor3f(0.4,0.2,0);
-  glTranslatef(-3.0, 1.8, 0);
+  glTranslatef(-3.4, 1.8, 0);
   glScalef(0.4,4.5,0.5);
   glutSolidCube(0.2);
   glPopMatrix();  
@@ -559,124 +580,122 @@ void Display(void) {
   glutSwapBuffers();
 }
 
-// init parâmetros de rendering
-  void init (void) {   
-    glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
-    angle=45;
-
-  }
+// inicia parâmetros de rendering
+void init(void) {   
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
+  angle=45;
+}
 
 // Função usada para especificar a posição do observador virtual
-  void setCam(void) {
+void setCam(void) {
     // Especifica sistema de coordenadas do modelo
-    glMatrixMode(GL_MODELVIEW);
+  glMatrixMode(GL_MODELVIEW);
     // init sistema de coordenadas do modelo
-    glLoadIdentity();
+  glLoadIdentity();
     // Especifica posição do observador e do alvo
-    
+
     //Cãmera 1
-    gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
+  gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
 
     //Câmera 2
     //gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi) + radius, radius*sin(theta)*sin(phi), radius*cos(phi) + 0.4, radius*cos(theta)*sin(phi), 0,1,0);
-    
-  }
+
+}
 
 // Função usada para especificar o volume de visualização
-  void viewParameters(void) {
+void viewParameters(void) {
     // Especifica sistema de coordenadas de projeção
-    glMatrixMode(GL_PROJECTION);
+  glMatrixMode(GL_PROJECTION);
     // init sistema de coordenadas de projeção
-    glLoadIdentity();
+  glLoadIdentity();
 
     // Especifica a projeção perspectiva(angulo,aspecto,zMin,zMax)
-    gluPerspective(angle,fAspect,0.5,500);
+  gluPerspective(angle,fAspect,0.5,500);
 
-    setCam();
-  }
+  setCam();
+}
 
 // Função callback chamada quando o tamanho da janela é alterado 
-  void reShape(GLsizei w, GLsizei h) {
+void reShape(GLsizei w, GLsizei h) {
     // Para previnir uma divisão por zero
-    if ( h == 0 ) h = 1;
+  if ( h == 0 ) h = 1;
   
     // Especifica o tamanho da viewport
-    glViewport(0, 0, w, h);
+  glViewport(0, 0, w, h);
 
     // Calcula a correção de aspecto
-    fAspect = (GLfloat)w/(GLfloat)h;
+  fAspect = (GLfloat)w/(GLfloat)h;
 
-    viewParameters();
-  }
+  viewParameters();
+}
 
 //Câmera 1
 //Callback para gerenciar eventos do teclado para teclas especiais (F1, PgDn, entre outras)
-  void keyPressed(unsigned char key, int x, int y) {
-    glLoadIdentity();
-    switch (key) {
-      case 'a' : 
-      	theta += inc;
-      	break;
-      case 'd' :
-      	theta -= inc;
-      	break;
-      case 'w' :
-      	if(phi + inc <= PI) phi += inc;  
-      	break;
-      case 's' : 
-      	if(phi - inc >= 0) phi -= inc;
-      	break;
-      case 'i' :
-      	radius -= 0.5;
-      	break;
-      case 'k' : 
-      	radius += 0.5;
-      	break;
-      case 'q' : 
-      	exit(0);
-      break;
+void keyPressed(unsigned char key, int x, int y) {
+  glLoadIdentity();
+  switch (key) {
+    case 'a' : 
+    theta += inc;
+    break;
+    case 'd' :
+    theta -= inc;
+    break;
+    case 'w' :
+    if(phi + inc <= PI) phi += inc;  
+    break;
+    case 's' : 
+    if(phi - inc >= 0) phi -= inc;
+    break;
+    case 'i' :
+    radius -= 0.5;
+    break;
+    case 'k' : 
+    radius += 0.5;
+    break;
+    case 'q' : 
+    exit(0);
+    break;
 
-    }
-
-    phi = std::fmod(phi, 2*PI);
-    printf("%f %f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi));
-    gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
-
-    glutPostRedisplay();
   }
 
-  void mouseFunc(int button, int state, int x, int y) {
-    if (button == GLUT_LEFT_BUTTON)
-     if (state == GLUT_DOWN) {
-      openingDoor = !openingDoor;
-    }
-    glutPostRedisplay();
+  phi = std::fmod(phi, 2*PI);
+  printf("%f %f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi));
+  gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
+
+  glutPostRedisplay();
+}
+
+void mouseFunc(int button, int state, int x, int y) {
+  if (button == GLUT_LEFT_BUTTON)
+   if (state == GLUT_DOWN) {
+    openingDoor = !openingDoor;
+  }
+  glutPostRedisplay();
+}
+
+void Timer(int value){    
+  if(openingDoor && doorAngle < 90){
+    doorAngle += 5;
+  }else if(!openingDoor && doorAngle > 0){
+    doorAngle -= 5;
   }
 
-  void Timer(int value){
-    if(openingDoor && doorAngle < 90){
-      doorAngle += 5;
-    }else if(!openingDoor && doorAngle > 0){
-      doorAngle -= 5;
-    }
-
-    glutPostRedisplay();
-    glutTimerFunc(33,Timer, 1);
-  }
+  glutPostRedisplay();
+  glutTimerFunc(33,Timer, 1);
+}
 
 // Programa Principal
-  int main(int argc, char** argv) 
-  {
-    glutInit(&argc, argv);
-    glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
-    glutInitWindowSize(1000,1000);
-    glutCreateWindow("Catedral");
+int main(int argc, char** argv) {
+  glutInit(&argc, argv);
+  glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB | GLUT_DEPTH);
+  glutInitWindowSize(1000,1000);
+  glutCreateWindow("Catedral");
 
-    glutDisplayFunc(Display);
-    glutReshapeFunc(reShape);
-    glutKeyboardFunc(keyPressed);
-    glutMouseFunc(mouseFunc);
-    glutTimerFunc(33, Timer, 1);
-    init();
-    glutMainLoop();
-  }
+  glutDisplayFunc(Display);
+  glutReshapeFunc(reShape);
+  glutKeyboardFunc(keyPressed);
+  glutMouseFunc(mouseFunc);
+  glutTimerFunc(33, Timer, 1);
+  init();
+  glutMainLoop();
+}
