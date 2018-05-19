@@ -17,7 +17,7 @@
 #include <stdio.h>
 #include "draw.cpp"
 
-GLdouble eyeX = 0, eyeY = 0.4, eyeZ = 11, phi = PI/2, theta = 0, radius = 12;
+GLdouble eyeX = 0, eyeY = 0.4, eyeZ = 11, phi = PI/2 - 0.4, theta = 0, radius = 12;
 GLdouble centerX = 0, centerY = 0, centerZ = 0;
 GLfloat doorAngle, angle, fAspect;
 bool openingDoor = false; 
@@ -27,7 +27,7 @@ bool isRotate;
 // inicia parâmetros de rendering
 void init(void) {   
   // Define a cor de fundo da janela de visualização como branca
-  glClearColor(1.0f, 1.0f, 1.0f, 1.0f);    
+  glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    
 
   // Habilita a definição da cor do material a partir da cor corrente
   glEnable(GL_COLOR_MATERIAL);
@@ -50,10 +50,11 @@ void init(void) {
 
 // Função usada para especificar aspectos de iluminação
 void setLight(void) {
-  GLfloat luzAmbiente[4]={0.3,0.3,0.3,1.0}; 
+  GLfloat luzAmbiente[4]={0.32,0.32,0.32,1.0}; 
   GLfloat luzDifusa[4]={0.6,0.6,0.6,1.0}; // "cor" 
   GLfloat luzEspecular[4]={0.2, 0.2, 0.2, 1.0}; // "brilho" 
-  GLfloat posicaoLuz[4]={50.0, 10.0, 0.0, 1.0};
+  GLfloat posicaoLuz[4]={50.0, 0.0, 10.0, 1.0};
+  ///GLfloat posicaoLuz[4]={0.0, 10.0, 0.0, 1.0};
 
   // Capacidade de brilho do material
   //GLfloat especularidade[4]={1.0,1.0,1.0,1.0}; 
@@ -185,310 +186,311 @@ void Display(void) {
 
   //Chão
   glColor3f(0.4, 0.4, 0.4); 
-  drawPlaneTC(1.0, 0.0, -1.0, -1.0, 0.0, 1.0);         
+  drawPlaneTC(1.0, 0.0, -1.0, -1.0, 0.0, 1.0, 1);         
 
+  //frente, cima, direita: -1. fundo, baixo, esquerda: 1
   //Andar 1
   //Parede direita - andar 1
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneED(-1.0, 0.75 , 0.49, 0.6, 0.0, 0.49);
+  drawPlaneED(-1.0, 0.75 , 0.49, 0.6, 0.0, 0.49, 1);
   glColor3f(0.96, 0.87, 0.7); //https://sistemas.riopomba.ifsudestemg.edu.br/dcc/materiais/926330044_Cores.pdf
-  drawPlaneED(-1.0, 0.75 , 0.5, 0.6, 0.0, 0.5);
+  drawPlaneED(-1.0, 0.75 , 0.5, 0.6, 0.0, 0.5, 1);
 
   //Parede esquerda - andar 1
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneED(0.6, 0.75, -0.49, -1.0, 0.0, -0.49);
+  drawPlaneED(0.6, 0.75, -0.49, -1.0, 0.0, -0.49, -1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.6, 0.75, -0.5, -1.0, 0.0, -0.5);
+  drawPlaneED(0.6, 0.75, -0.5, -1.0, 0.0, -0.5, -1);
 
   //Parede fundo - andar 1
   glColor3f(0.69, 0.93, 0.93);
-  drawPlaneFF(-0.99, 0.75, -0.5, -0.99, 0.0, 0.5);
+  drawPlaneFF(-0.99, 0.75, -0.5, -0.99, 0.0, 0.5, 1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(-1, 0.75, -0.5, -1, 0.0, 0.5);
+  drawPlaneFF(-1, 0.75, -0.5, -1, 0.0, 0.5, 1);
 
   // Parede frente - andar 1 - superior
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.59, 0.75, -0.5, 0.59, 0.2, 0.5);
+  drawPlaneFF(0.59, 0.75, -0.5, 0.59, 0.2, 0.5, 1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.6, 0.75, -0.5, 0.6, 0.2, 0.5);
+  drawPlaneFF(0.6, 0.75, -0.5, 0.6, 0.2, 0.5, -1);
 
   //Parede frente - andar 1 - inferior esquerda
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.59, 0.2, 0.4, 0.59, 0.0, 0.5);
+  drawPlaneFF(0.59, 0.2, 0.4, 0.59, 0.0, 0.5, -1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.6, 0.2, 0.4, 0.6, 0.0, 0.5);
+  drawPlaneFF(0.6, 0.2, 0.4, 0.6, 0.0, 0.5, -1);
 
   //Parede frente - andar 1 - inferior direita
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.59, 0.2, -0.4, 0.59, 0.0, -0.5);
+  drawPlaneFF(0.59, 0.2, -0.4, 0.59, 0.0, -0.5, -1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.6, 0.2, -0.4, 0.6, 0.0, -0.5);
+  drawPlaneFF(0.6, 0.2, -0.4, 0.6, 0.0, -0.5, -1);
 
   //Parede frente - andar 1 - inferior centro direita
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.59, 0.2, -0.2, 0.59, 0.0, -0.1);
+  drawPlaneFF(0.59, 0.2, -0.2, 0.59, 0.0, -0.1, -1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.6, 0.2, -0.2, 0.6, 0.0, -0.1);
+  drawPlaneFF(0.6, 0.2, -0.2, 0.6, 0.0, -0.1, -1);
 
   //Parede frente - andar 1 - inferior centro esquerda
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.59, 0.2, 0.2, 0.59, 0.0, 0.1);
+  drawPlaneFF(0.59, 0.2, 0.2, 0.59, 0.0, 0.1, -1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.6, 0.2, 0.2, 0.6, 0.0, 0.1);
+  drawPlaneFF(0.6, 0.2, 0.2, 0.6, 0.0, 0.1, -1);
 
   //Interior
   //Essas paredes são uma translação da frente da catedral, a entrada
   //Parede interior - superior
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneTC(0.39, 0.4, -0.5, 0.39, 0.2, 0.5);
+  drawPlaneTC(0.39, 0.4, -0.5, 0.39, 0.2, 0.5, 1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneTC(0.4, 0.4, -0.5, 0.4, 0.2, 0.5);
+  drawPlaneTC(0.4, 0.4, -0.5, 0.4, 0.2, 0.5, 1);
 
   //Parede interior - inferior esquerda
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.39, 0.2, 0.4, 0.39, 0.0, 0.5);
+  drawPlaneFF(0.39, 0.2, 0.4, 0.39, 0.0, 0.5, 1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.4, 0.2, 0.4, 0.4, 0.0, 0.5);
+  drawPlaneFF(0.4, 0.2, 0.4, 0.4, 0.0, 0.5, 1);
 
   //Parede interior - inferior direita
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.39, 0.2, -0.4, 0.39, 0.0, -0.5);
+  drawPlaneFF(0.39, 0.2, -0.4, 0.39, 0.0, -0.5, 1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.4, 0.2, -0.4, 0.4, 0.0, -0.5);   
+  drawPlaneFF(0.4, 0.2, -0.4, 0.4, 0.0, -0.5, 1);   
 
   //Parede interior - inferior centro direita
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.39, 0.2, -0.2, 0.39, 0.0, -0.1);
+  drawPlaneFF(0.39, 0.2, -0.2, 0.39, 0.0, -0.1, 1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.4, 0.2, -0.2, 0.4, 0.0, -0.1);
+  drawPlaneFF(0.4, 0.2, -0.2, 0.4, 0.0, -0.1, 1);
 
   //Parede frente - inferior centro esquerda
   glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.39, 0.2, 0.2, 0.39, 0.0, 0.1);
+  drawPlaneFF(0.39, 0.2, 0.2, 0.39, 0.0, 0.1, 1);
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.4, 0.2, 0.2, 0.4, 0.0, 0.1);
+  drawPlaneFF(0.4, 0.2, 0.2, 0.4, 0.0, 0.1, 1);
 
   //Parede interior corredor direita 
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.59, 0.75, 0.15, 0.39, 0.0, 0.15);
+  drawPlaneED(0.59, 0.75, 0.15, 0.39, 0.0, 0.15, 1);
 
   //Parede interior corredor esquerda 
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.59, 0.75, -0.15, 0.39, 0.0, -0.15);
+  drawPlaneED(0.59, 0.75, -0.15, 0.39, 0.0, -0.15, 1);  
 
   //Varanda - andar 1 - camada 1 // Falta fechar os lados
   glColor3f( 0.87,  0.72, 0.53);
-  drawPlaneTC(0.6, 0.4, -0.5, 0.4, 0.4, 0.5);
-  drawPlaneTC(0.6, 0.405, -0.5, 0.4, 0.405, 0.5);
+  drawPlaneTC(0.6, 0.4, -0.5, 0.4, 0.4, 0.5, 1);
+  drawPlaneTC(0.6, 0.405, -0.5, 0.4, 0.405, 0.5, 1);
 
   //Varanda - andar 1 - camada 2 // Falta fechar os lados
-  drawPlaneTC(0.6,  0.405, -0.5, 0.4, 0.405, 0.5);
-  drawPlaneTC(0.6,  0.41, -0.5, 0.4, 0.41, 0.5);
+  drawPlaneTC(0.6,  0.405, -0.5, 0.4, 0.405, 0.5, 1);
+  drawPlaneTC(0.6,  0.41, -0.5, 0.4, 0.41, 0.5, 1);
 
   //Teto
   //Teto - andar 1 - camada 1 // Falta fechar os lados
   glColor3f( 0.87,  0.72, 0.53);
-  drawPlaneTC(0.605, 0.75, -0.505, -1.005, 0.75, 0.505);
-  drawPlaneTC(0.605, 0.755, -0.505, -1.005, 0.755, 0.505);
+  drawPlaneTC(0.605, 0.75, -0.505, -1.005, 0.75, 0.505, 1);
+  drawPlaneTC(0.605, 0.755, -0.505, -1.005, 0.755, 0.505, 1);
 
   //Teto - andar 1 - camada 2 // Falta fechar os lados
-  drawPlaneTC(0.61, 0.755, -0.51, -1.01, 0.755, 0.51);
-  drawPlaneTC(0.61, 0.76, -0.51, -1.01, 0.76, 0.51);
+  drawPlaneTC(0.61, 0.755, -0.51, -1.01, 0.755, 0.51, -1);
+  drawPlaneTC(0.61, 0.76, -0.51, -1.01, 0.76, 0.51, -1);
 
   //Andar 2  
   //Parede direita - andar 2
   glColor3f( 0.96, 0.87, 0.7);
-  drawPlaneED(0.6, 1.0, 0.5, 0.3, 0.76, 0.5);
+  drawPlaneED(0.6, 1.0, 0.5, 0.3, 0.76, 0.5, 1);
   
   //Parede esquerda - andar 2
-  drawPlaneED(0.6, 1.0, -0.5, 0.3, 0.76, -0.5);
+  drawPlaneED(0.6, 1.0, -0.5, 0.3, 0.76, -0.5, -1);
 
   //Parede fundo - andar 2
-  drawPlaneFF(0.3, 1.0, -0.5, 0.3, 0.76, 0.5);
+  drawPlaneFF(0.3, 1.0, -0.5, 0.3, 0.76, 0.5, 1);
 
   //Parede frente - andar 2
-  drawPlaneFF(0.6, 1.0, -0.5, 0.6, 0.76, 0.5);
+  drawPlaneFF(0.6, 1.0, -0.5, 0.6, 0.76, 0.5, -1);
 
   //Teto
   //Teto - andar 2 - camada 1 // Falta fechar os lados
   glColor3f( 0.87,  0.72, 0.53);
-  drawPlaneTC(0.61, 1.0, -0.51, 0.28, 1.0, 0.5);
-  drawPlaneTC(0.61, 1.01, -0.51, 0.28, 1.01, 0.5);
+  drawPlaneTC(0.61, 1.0, -0.51, 0.28, 1.0, 0.5, -1);
+  drawPlaneTC(0.61, 1.01, -0.51, 0.28, 1.01, 0.5, -1);
 
   //Andar 3
   //Parede direita - andar 3 - torre esquerda
   glColor3f( 0.96, 0.87, 0.7);
-  drawPlaneED(0.56, 1.01, 0.48, 0.30, 1.08, 0.48);
+  drawPlaneED(0.56, 1.01, 0.48, 0.30, 1.08, 0.48, 1);
 
   //Parede esquerda - andar 3 - torre esquerda
-  drawPlaneED(0.56, 1.01, 0.18, 0.30, 1.08, 0.18);
+  drawPlaneED(0.56, 1.01, 0.18, 0.30, 1.08, 0.18, -1);
 
   //Parede fundo - andar 3 - torre esquerda
-  drawPlaneFF(0.30, 1.01, 0.18, 0.30, 1.08, 0.48);
+  drawPlaneFF(0.30, 1.01, 0.18, 0.30, 1.08, 0.48, 1);
 
   //Parede frente - andar 3 - torre esquerda
-  drawPlaneFF(0.56, 1.01, 0.18, 0.56, 1.08, 0.48);
+  drawPlaneFF(0.56, 1.01, 0.18, 0.56, 1.08, 0.48, -1);
 
   //Teto - andar 3 - torre esquerda
   glColor3f( 0.87,  0.72, 0.53);
-  drawPlaneTC(0.5605, 1.08, 0.1805, 0.3005, 1.08, 0.4805);
+  drawPlaneTC(0.5605, 1.08, 0.1805, 0.3005, 1.08, 0.4805, -1);
 
   //Parede direita - andar 3 - torre direita
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.56, 1.01, -0.48, 0.30, 1.08, -0.48);
+  drawPlaneED(0.56, 1.01, -0.48, 0.30, 1.08, -0.48, -1);
 
   //Parede esquerda - andar 3 - torre direita
-  drawPlaneED(0.56, 1.01, -0.18, 0.30, 1.08, -0.18);
+  drawPlaneED(0.56, 1.01, -0.18, 0.30, 1.08, -0.18, 1);
 
   //Parede fundo - andar 3 - torre direita
-  drawPlaneFF(0.30, 1.01, -0.18, 0.30, 1.08, -0.48);
+  drawPlaneFF(0.30, 1.01, -0.18, 0.30, 1.08, -0.48, 1);
 
   //Parede frente - andar 3 - torre direita
-  drawPlaneFF(0.56, 1.01, -0.18, 0.56, 1.08, -0.48);
+  drawPlaneFF(0.56, 1.01, -0.18, 0.56, 1.08, -0.48, -1);
 
   //Teto - andar 3 - torre direita
   glColor3f(0.87,  0.72, 0.53);
-  drawPlaneTC(0.5605, 1.08, -0.1805, 0.3005, 1.08, -0.4805);
+  drawPlaneTC(0.5605, 1.08, -0.1805, 0.3005, 1.08, -0.4805, -1);
 
   //Andar 4
   //Parede direita - andar 4 - torre direita 
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.53, 1.08, -0.45, 0.33, 1.20, -0.45);
+  drawPlaneED(0.53, 1.08, -0.45, 0.33, 1.20, -0.45, -1);
 
   //Parede esquerda - andar 4 - torre direita
-  drawPlaneED(0.53, 1.08, -0.21, 0.33, 1.20, -0.21);
+  drawPlaneED(0.53, 1.08, -0.21, 0.33, 1.20, -0.21, 1);
 
   //Parede fundo - andar 4 - torre direita
-  drawPlaneFF(0.33, 1.08, -0.21, 0.33, 1.20, -0.45);
+  drawPlaneFF(0.33, 1.08, -0.21, 0.33, 1.20, -0.45, 1);
 
   //Parede frente - andar 4 - torre direita
-  drawPlaneFF(0.53, 1.08, -0.21, 0.53, 1.20, -0.45);
+  drawPlaneFF(0.53, 1.08, -0.21, 0.53, 1.20, -0.45, -1);
 
   //Teto - andar 4 - torre direita
   glColor3f(0.87,  0.72, 0.53);
-  drawPlaneTC(0.53, 1.20, -0.21, 0.33, 1.20, -0.45);
+  drawPlaneTC(0.53, 1.20, -0.21, 0.33, 1.20, -0.45, -1);
 
   //Parede direita - andar 4 - torre esquerda 
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.53, 1.08, 0.45, 0.33, 1.20, 0.45);
+  drawPlaneED(0.53, 1.08, 0.45, 0.33, 1.20, 0.45, 1);
 
   //Parede esquerda - andar 4 - torre esquerda
-  drawPlaneED(0.53, 1.08, 0.21, 0.33, 1.20, 0.21);
+  drawPlaneED(0.53, 1.08, 0.21, 0.33, 1.20, 0.21, -1);
 
   //Parede fundo - andar 4 - torre esquerda
-  drawPlaneFF(0.33, 1.08, 0.21, 0.33, 1.20, 0.45);
+  drawPlaneFF(0.33, 1.08, 0.21, 0.33, 1.20, 0.45, 1);
 
   //Parede frente - andar 4 - torre esquerda
-  drawPlaneFF(0.53, 1.08, 0.21, 0.53, 1.20, 0.45);
+  drawPlaneFF(0.53, 1.08, 0.21, 0.53, 1.20, 0.45, -1);
 
   //Teto - andar 4 - torre esquerda
   glColor3f( 0.87,  0.72, 0.53);
-  drawPlaneTC(0.53, 1.20, 0.21, 0.33, 1.20, 0.45);
+  drawPlaneTC(0.53, 1.20, 0.21, 0.33, 1.20, 0.45, -1);
 
   //Pirâmides 
   //Andar 5
   //Parede direita - andar 5 - torre direita
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.505, 1.20, -0.425, 0.355, 1.22, -0.425);
+  drawPlaneED(0.505, 1.20, -0.425, 0.355, 1.22, -0.425, -1);
 
   //Parede esquerda - andar 5 - torre direita
-  drawPlaneED(0.505, 1.20, -0.24, 0.355, 1.22, -0.24);
+  drawPlaneED(0.505, 1.20, -0.24, 0.355, 1.22, -0.24, 1);
 
   //Parede frente - andar 5 - torre direita
-  drawPlaneFF(0.505, 1.20, -0.24, 0.505, 1.22, -0.425);
+  drawPlaneFF(0.505, 1.20, -0.24, 0.505, 1.22, -0.425, -1);
 
   //Parede traz - andar 5 - torre direita
-  drawPlaneFF(0.355, 1.20, -0.24, 0.355, 1.22, -0.425);
+  drawPlaneFF(0.355, 1.20, -0.24, 0.355, 1.22, -0.425, 1);
 
   //Teto - andar 5 - torre direita
   glColor3f(0.87,  0.72, 0.53);
-  drawPlaneTC(0.505, 1.22, -0.24, 0.355, 1.22, -0.425);
+  drawPlaneTC(0.505, 1.22, -0.24, 0.355, 1.22, -0.425, -1);
 
   //Parede direita - andar 5 - torre esquerda
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.505, 1.20, 0.425, 0.355, 1.22, 0.425);
+  drawPlaneED(0.505, 1.20, 0.425, 0.355, 1.22, 0.425, 1);
 
   //Parede esquerda - andar 5 - torre esquerda
-  drawPlaneED(0.505, 1.20, 0.24, 0.355, 1.22, 0.24);
+  drawPlaneED(0.505, 1.20, 0.24, 0.355, 1.22, 0.24, -1);
 
   //Parede frente - andar 5 - torre esquerda
-  drawPlaneFF(0.505, 1.20, 0.24, 0.505, 1.22, 0.425);
+  drawPlaneFF(0.505, 1.20, 0.24, 0.505, 1.22, 0.425, -1);
 
   //Parede fundo - andar 5 - torre esquerda
-  drawPlaneFF(0.355, 1.20, 0.24, 0.355, 1.22, 0.425);
+  drawPlaneFF(0.355, 1.20, 0.24, 0.355, 1.22, 0.425, 1);
 
   //Teto - andar 5 - torre direita
   glColor3f( 0.87,  0.72, 0.53);
-  drawPlaneTC(0.505, 1.22, 0.24, 0.355, 1.22, 0.425);
+  drawPlaneTC(0.505, 1.22, 0.24, 0.355, 1.22, 0.425, -1);
 
   //Parede direita - andar 6 - torre direita
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.48, 1.22, -0.395, 0.38, 1.24, -0.395);
+  drawPlaneED(0.48, 1.22, -0.395, 0.38, 1.24, -0.395, -1);
 
   //Parede esquerda - andar 6 - torre direita
-  drawPlaneED(0.48, 1.22, -0.265, 0.38, 1.24, -0.265);
+  drawPlaneED(0.48, 1.22, -0.265, 0.38, 1.24, -0.265, 1);
 
   //Parede frente - andar 6 - torre direita
-  drawPlaneFF(0.48, 1.22, -0.265, 0.48, 1.24, -0.395);
+  drawPlaneFF(0.48, 1.22, -0.265, 0.48, 1.24, -0.395, -1);
 
   //Parede fundo - andar 6 - torre direita
-  drawPlaneFF(0.38, 1.22, -0.265, 0.38, 1.24, -0.395);
+  drawPlaneFF(0.38, 1.22, -0.265, 0.38, 1.24, -0.395, 1);
 
   //Teto - andar 6 - torre direita
   glColor3f(0.87,  0.72, 0.53);
-  drawPlaneTC(0.48, 1.24, -0.265, 0.38, 1.24, -0.395);
+  drawPlaneTC(0.48, 1.24, -0.265, 0.38, 1.24, -0.395, -1);
 
   //Parede direita - andar 6 - torre esquerda
   glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.48, 1.22, 0.395, 0.38, 1.24, 0.395);
+  drawPlaneED(0.48, 1.22, 0.395, 0.38, 1.24, 0.395, 1);
 
   //Parede esquerda - andar 6 - torre esquerda
-  drawPlaneED(0.48, 1.22, 0.265, 0.38, 1.24, 0.265);
+  drawPlaneED(0.48, 1.22, 0.265, 0.38, 1.24, 0.265, -1);
 
   //Parede frente - andar 6 - torre esquerda
-  drawPlaneFF(0.48, 1.22, 0.265, 0.48, 1.24, 0.395);
+  drawPlaneFF(0.48, 1.22, 0.265, 0.48, 1.24, 0.395, -1);
 
   //Parede fundo - andar 6 - torre esquerda
-  drawPlaneFF(0.38, 1.22, 0.265, 0.38, 1.24, 0.395);
+  drawPlaneFF(0.38, 1.22, 0.265, 0.38, 1.24, 0.395, 1);
 
   //Teto - andar 6 - torre esquerda
   glColor3f(0.87,  0.72, 0.53);
-  drawPlaneTC(0.48, 1.24, 0.265, 0.38, 1.24, 0.395);
+  drawPlaneTC(0.48, 1.24, 0.265, 0.38, 1.24, 0.395, -1);
 
   //Andar 7
   //Parede direita - andar 7 - torre direita
   glColor3f( 0.96, 0.87, 0.7);
-  drawPlaneED(0.455, 1.24, -0.365, 0.405, 1.26, -0.365);
+  drawPlaneED(0.455, 1.24, -0.365, 0.405, 1.26, -0.365, -1);
 
   //Parede esquerda - andar 7 - torre direita
-  drawPlaneED(0.455, 1.24, -0.295, 0.405, 1.26, -0.295);
+  drawPlaneED(0.455, 1.24, -0.295, 0.405, 1.26, -0.295, 1);
 
   //Parede frente - andar 7 - torre direita
-  drawPlaneFF(0.455, 1.24, -0.295, 0.455, 1.26, -0.365);
+  drawPlaneFF(0.455, 1.24, -0.295, 0.455, 1.26, -0.365, -1);
 
   //Parede fundo - andar 7 - torre direita
-  drawPlaneFF(0.405, 1.24, -0.295, 0.405, 1.26, -0.365);
+  drawPlaneFF(0.405, 1.24, -0.295, 0.405, 1.26, -0.365, 1);
 
   //Teto - andar 7 - torre direita
   glColor3f( 0.87,  0.72, 0.53);
-  drawPlaneTC(0.455, 1.26, -0.295, 0.405, 1.26, -0.365);
+  drawPlaneTC(0.455, 1.26, -0.295, 0.405, 1.26, -0.365, -1);
 
   //Parede direita - andar 7 - torre esquerda
   glColor3f( 0.96, 0.87, 0.7);
-  drawPlaneED(0.455, 1.24, 0.365, 0.405, 1.26, 0.365);
+  drawPlaneED(0.455, 1.24, 0.365, 0.405, 1.26, 0.365, 1);
 
   //Parede esquerda - andar 7 - torre esquerda
-  drawPlaneED(0.455, 1.24, 0.295, 0.405, 1.26, 0.295);
+  drawPlaneED(0.455, 1.24, 0.295, 0.405, 1.26, 0.295, -1);
 
   //Parede frente - andar 7 - torre esquerda
-  drawPlaneFF(0.455, 1.24, 0.295, 0.455, 1.26, 0.365);
+  drawPlaneFF(0.455, 1.24, 0.295, 0.455, 1.26, 0.365, -1);
 
   //Parede fundo - andar 7 - torre esquerda
-  drawPlaneFF(0.405, 1.24, 0.295, 0.405, 1.26, 0.365);
+  drawPlaneFF(0.405, 1.24, 0.295, 0.405, 1.26, 0.365, 1);
 
   //Teto - andar 7 - torre esquerda
   glColor3f( 0.87,  0.72, 0.53);
-  drawPlaneTC(0.455, 1.26, 0.295, 0.405, 1.26, 0.365);
+  drawPlaneTC(0.455, 1.26, 0.295, 0.405, 1.26, 0.365, -1);
 
   for(int i = 0; i < 3; i ++) {
     glColor3f(0.82,  0.71, 0.55);
@@ -522,7 +524,7 @@ void Display(void) {
 
 
   //Arcos superiores às portas 
-  glColor3f( 0.87,  0.72, 0.53);  
+  glColor3f(0.87,  0.72, 0.53);  
   drawSemiDiskXY(2.12, 0.8, 0.0, 0.2, 0.28);
   drawSemiDiskXY(2.12, 0.8, 0.6, 0.2, 0.28);
   drawSemiDiskXY(2.12, 0.8, -0.6, 0.2, 0.28);
@@ -552,6 +554,7 @@ void Display(void) {
   drawDiskXY(2.12, 3.1, -0.65, 0.0, 0.1);
 
   drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1);
+
   drawDiskZY(1.6, 3.1, -1.01, 0.0, 0.1);
 
   //Cruz
