@@ -50,11 +50,11 @@ void init(void) {
 
 // Função usada para especificar aspectos de iluminação
 void setLight(void) {
-  GLfloat luzAmbiente[4]={0.32,0.32,0.32,1.0}; 
+  GLfloat luzAmbiente[4]={0.35, 0.35, 0.35, 1.0}; 
   GLfloat luzDifusa[4]={0.6,0.6,0.6,1.0}; // "cor" 
   GLfloat luzEspecular[4]={0.2, 0.2, 0.2, 1.0}; // "brilho" 
-  GLfloat posicaoLuz[4]={50.0, 0.0, 10.0, 1.0};
-  ///GLfloat posicaoLuz[4]={0.0, 10.0, 0.0, 1.0};
+  GLfloat posicaoLuz[4]={50.0, 50.0, 50.0, 1.0};
+  //GLfloat posicaoLuz[4]={50.0, 0.0, 0.0, 1.0};
 
   // Capacidade de brilho do material
   //GLfloat especularidade[4]={1.0,1.0,1.0,1.0}; 
@@ -188,8 +188,8 @@ void Display(void) {
   glColor3f(0.4, 0.4, 0.4); 
   drawPlaneTC(1.0, 0.0, -1.0, -1.0, 0.0, 1.0, 1);         
 
-  //frente, cima, direita: -1. fundo, baixo, esquerda: 1
-  //Andar 1
+  // frente, cima, direita: -1. fundo, baixo, esquerda: 1
+  // Andar 1
   //Parede direita - andar 1
   glColor3f(0.96, 0.87, 0.87);
   drawPlaneED(-1.0, 0.75 , 0.49, 0.6, 0.0, 0.49, 1);
@@ -289,7 +289,7 @@ void Display(void) {
 
   //Teto
   //Teto - andar 1 - camada 1 // Falta fechar os lados
-  glColor3f( 0.87,  0.72, 0.53);
+  glColor3f(0.87,  0.72, 0.53);
   drawPlaneTC(0.605, 0.75, -0.505, -1.005, 0.75, 0.505, 1);
   drawPlaneTC(0.605, 0.755, -0.505, -1.005, 0.755, 0.505, 1);
 
@@ -493,7 +493,7 @@ void Display(void) {
   drawPlaneTC(0.455, 1.26, 0.295, 0.405, 1.26, 0.365, -1);
 
   for(int i = 0; i < 3; i ++) {
-    glColor3f(0.82,  0.71, 0.55);
+    glColor3f(0.5,  0.5, 0.5);
     //Esquerda
     glPushMatrix();
     glTranslatef(0.6, 0.1, 0.4 - 0.3*i);
@@ -525,37 +525,38 @@ void Display(void) {
 
   //Arcos superiores às portas 
   glColor3f(0.87,  0.72, 0.53);  
-  drawSemiDiskXY(2.12, 0.8, 0.0, 0.2, 0.28);
-  drawSemiDiskXY(2.12, 0.8, 0.6, 0.2, 0.28);
-  drawSemiDiskXY(2.12, 0.8, -0.6, 0.2, 0.28);
+  drawSemiDiskXY(2.12, 0.8, 0.0, 0.2, 0.28, 1);
+  drawSemiDiskXY(2.12, 0.8, 0.6, 0.2, 0.28, 1);
+  drawSemiDiskXY(2.12, 0.8, -0.6, 0.2, 0.28, 1);
 
-  glColor3f( 0.48, 0.63, 0.36); 
-  drawSemiDiskXY(2.12, 0.8, 0.0, 0.0, 0.15);
-  drawSemiDiskXY(2.12, 0.8, 0.6, 0.0, 0.15);
-  drawSemiDiskXY(2.12, 0.8, -0.6, 0.0, 0.15);
+  glColor3f(0.48, 0.63, 0.36); 
+  drawSemiDiskXY(2.12, 0.8, 0.0, 0.0, 0.15, 1);
+  drawSemiDiskXY(2.12, 0.8, 0.6, 0.0, 0.15, 1);
+  drawSemiDiskXY(2.12, 0.8, -0.6, 0.0, 0.15, 1);
 
   //Arco Teto
-  glColor3f( 0.87,  0.72, 0.53);  
-  drawSemiDiskXY(2.12, 3.50, 0.0, 0.0, 0.4);
-  drawSemiDiskXY(1.82, 3.50, 0.0, 0.0, 0.4);
+  glColor3f(0.87,  0.72, 0.53);  
+  drawSemiDiskXY(2.12, 3.50, 0.0, 0.0, 0.4, -1);
+  drawSemiDiskXY(2.13, 3.50, 0.0, 0.0, 0.4, 1);
+  drawSemiDiskXY(1.81, 3.50, 0.0, 0.0, 0.4, -1);
+  drawSemiDiskXY(1.82, 3.50, 0.0, 0.0, 0.4, 1);
   
   //Circunferências do segundo andar
-  glColor3f( 0.87,  0.72, 0.53);
-  drawDiskXY(2.12, 3.1, 0.0, 0.15, 0.2);
-  drawDiskXY(2.12, 3.1, 0.65, 0.1, 0.15);
-  drawDiskXY(2.12, 3.1, -0.65, 0.1, 0.15);
+  glColor3f(0.87,  0.72, 0.53);
+  drawDiskXY(2.12, 3.1, 0.0, 0.15, 0.2, -1);
+  drawDiskXY(2.12, 3.1, 0.65, 0.1, 0.15, -1);
+  drawDiskXY(2.12, 3.1, -0.65, 0.1, 0.15, -1);
 
-  drawDiskZY(1.6, 3.1, 1.01, 0.1, 0.15);
-  drawDiskZY(1.6, 3.1, -1.01, 0.1, 0.15);
+  drawDiskZY(1.6, 3.1, 1.01, 0.1, 0.15, -1);
+  drawDiskZY(1.6, 3.1, -1.01, 0.1, 0.15, 1);
 
   glColor3f( 0.66, 0.66, 0.66); 
-  drawDiskXY(2.12, 3.1, 0.0, 0.0, 0.15);
-  drawDiskXY(2.12, 3.1, 0.65, 0.0, 0.1);
-  drawDiskXY(2.12, 3.1, -0.65, 0.0, 0.1);
+  drawDiskXY(2.12, 3.1, 0.0, 0.0, 0.15, -1);
+  drawDiskXY(2.12, 3.1, 0.65, 0.0, 0.1, -1);
+  drawDiskXY(2.12, 3.1, -0.65, 0.0, 0.1, -1);
 
-  drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1);
-
-  drawDiskZY(1.6, 3.1, -1.01, 0.0, 0.1);
+  drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1, -1);
+  drawDiskZY(1.6, 3.1, -1.01, 0.0, 0.1, 1);
 
   //Cruz
   //Horizontal
