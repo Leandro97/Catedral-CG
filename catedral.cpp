@@ -16,6 +16,8 @@
 #include <cmath>
 #include <stdio.h>
 #include "draw.cpp"
+#include <SFML/Graphics.hpp>
+
 
 GLdouble eyeX = 0, eyeY = 0.4, eyeZ = 11, phi = PI/2 - 0.4, theta = 0, radius = 12;
 GLdouble centerX = 0, centerY = 0, centerZ = 0;
@@ -23,6 +25,23 @@ GLfloat doorAngle, angle, fAspect;
 bool openingDoor = false; 
 double inc = 2*PI/180;
 bool isRotate;
+
+GLuint texture_handle[10]; //Vetor que armazena as texturas
+
+
+void loadTexture(GLuint texture, const char* filename){
+    sf::Image img;
+    img.loadFromFile(filename); //Carrega o arquivo da textura
+
+   glBindTexture(GL_TEXTURE_2D, texture); //Atribui a textura carregada a uma posição no vetor de texturas
+
+   glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, img.getSize().x, img.getSize().y, 0, GL_RGBA, GL_UNSIGNED_BYTE, img.getPixelsPtr());
+
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+}
 
 // inicia parâmetros de rendering
 void init(void) {   
@@ -43,6 +62,21 @@ void init(void) {
 
   // Habilita o modelo de colorização de Gouraud
   glShadeModel(GL_SMOOTH);
+
+  glEnable(GL_BLEND);
+  glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+  glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+  int n = 7;
+  glGenTextures(n, texture_handle); 
+  loadTexture(texture_handle[0], "parede.jpg");
+  loadTexture(texture_handle[1], "chaoInt.jpg");
+  loadTexture(texture_handle[2], "porta.jpg");
+  loadTexture(texture_handle[3], "telhado.jpg");
+  loadTexture(texture_handle[4], "detalhe.jpg");
+  loadTexture(texture_handle[5], "janela.jpg");
+  loadTexture(texture_handle[6], "chaoExt.jpg");
+
 
   // Inicializa a variável que especifica o ângulo da projeção
   angle=45;
@@ -148,7 +182,6 @@ void keyPressed(unsigned char key, int x, int y) {
   }
 
   phi = std::fmod(phi, 2*PI);
-  printf("%f %f %f %f\n", radius*sin(theta)*sin(phi),radius*cos(phi),radius*cos(theta)*sin(phi));
   gluLookAt(radius*sin(theta)*sin(phi), radius*cos(phi) + 1, radius*cos(theta)*sin(phi), 0, 1, 0, 0,1,0);
 
   glutPostRedisplay();
@@ -165,11 +198,13 @@ void mouseFunc(int button, int state, int x, int y) {
 void Timer(int value){    
   if(openingDoor && doorAngle < 90){
     doorAngle += 5;
+    glutPostRedisplay();
   }else if(!openingDoor && doorAngle > 0){
     doorAngle -= 5;
+    glutPostRedisplay();
   }
 
-  glutPostRedisplay();
+  
   glutTimerFunc(33,Timer, 1);
 }
 
@@ -185,101 +220,125 @@ void Display(void) {
   glScalef(3.5,3.5,2);
 
   //Chão
-  glColor3f(0.4, 0.4, 0.4); 
-  drawPlaneTC(1.0, 0.0, -1.0, -1.0, 0.0, 1.0, 1);         
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[1]);
+  drawPlaneTC(0.6, 0.001, -0.5, -1, 0.001, 0.5, 1);
+  glDisable (GL_TEXTURE_2D);
+
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[6]);
+  drawPlaneTC(1.0, 0.0, -1.0, -1.3, 0.0, 1.0, 1);
+  glDisable (GL_TEXTURE_2D);
+
 
   // frente, cima, direita: -1. fundo, baixo, esquerda: 1
   // Andar 1
   //Parede direita - andar 1
-  glColor3f(0.96, 0.87, 0.87);
-  drawPlaneED(-1.0, 0.75 , 0.49, 0.6, 0.0, 0.49, 1);
-  glColor3f(0.96, 0.87, 0.7); //https://sistemas.riopomba.ifsudestemg.edu.br/dcc/materiais/926330044_Cores.pdf
-  drawPlaneED(-1.0, 0.75 , 0.5, 0.6, 0.0, 0.5, 1);
-
+  drawPlaneED(-1.0, 0.76 , 0.49, 0.6, 0.0, 0.49, 1);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
+  drawPlaneED(-1.0, 0.76 , 0.5, 0.6, 0.0, 0.5, 1);
+  glDisable (GL_TEXTURE_2D);
+  
   //Parede esquerda - andar 1
-  glColor3f(0.96, 0.87, 0.87);
-  drawPlaneED(0.6, 0.75, -0.49, -1.0, 0.0, -0.49, -1);
-  glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.6, 0.75, -0.5, -1.0, 0.0, -0.5, -1);
-
+  drawPlaneED(0.6, 0.76, -0.49, -1.0, 0.0, -0.49, -1);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
+  drawPlaneED(0.6, 0.76, -0.5, -1.0, 0.0, -0.5, -1);
+  glDisable (GL_TEXTURE_2D);
+  
   //Parede fundo - andar 1
-  glColor3f(0.69, 0.93, 0.93);
-  drawPlaneFF(-0.99, 0.75, -0.5, -0.99, 0.0, 0.5, 1);
-  glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(-1, 0.75, -0.5, -1, 0.0, 0.5, 1);
-
+  drawPlaneFF(-0.99, 0.76, -0.5, -0.99, 0.0, 0.5, 1);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
+  drawPlaneFF(-1, 0.76, -0.5, -1, 0.0, 0.5, 1);
+  glDisable (GL_TEXTURE_2D);
+  
   // Parede frente - andar 1 - superior
-  glColor3f(0.96, 0.87, 0.87);
-  drawPlaneFF(0.59, 0.75, -0.5, 0.59, 0.2, 0.5, 1);
-  glColor3f(0.96, 0.87, 0.7);
-  drawPlaneFF(0.6, 0.75, -0.5, 0.6, 0.2, 0.5, -1);
-
+  drawPlaneFF(0.59, 0.76, -0.5, 0.59, 0.2, 0.5, 1);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
+  drawPlaneFF(0.6, 0.76, -0.5, 0.6, 0.2, 0.5, -1);
+  glDisable (GL_TEXTURE_2D);
+  
   //Parede frente - andar 1 - inferior esquerda
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.59, 0.2, 0.4, 0.59, 0.0, 0.5, -1);
-  glColor3f(0.96, 0.87, 0.7);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
   drawPlaneFF(0.6, 0.2, 0.4, 0.6, 0.0, 0.5, -1);
-
+  glDisable (GL_TEXTURE_2D);
+  
   //Parede frente - andar 1 - inferior direita
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.59, 0.2, -0.4, 0.59, 0.0, -0.5, -1);
-  glColor3f(0.96, 0.87, 0.7);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
   drawPlaneFF(0.6, 0.2, -0.4, 0.6, 0.0, -0.5, -1);
+  glDisable (GL_TEXTURE_2D);
+  
 
   //Parede frente - andar 1 - inferior centro direita
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.59, 0.2, -0.2, 0.59, 0.0, -0.1, -1);
-  glColor3f(0.96, 0.87, 0.7);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
   drawPlaneFF(0.6, 0.2, -0.2, 0.6, 0.0, -0.1, -1);
-
+  glDisable (GL_TEXTURE_2D);
+  
+  
   //Parede frente - andar 1 - inferior centro esquerda
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.59, 0.2, 0.2, 0.59, 0.0, 0.1, -1);
-  glColor3f(0.96, 0.87, 0.7);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
   drawPlaneFF(0.6, 0.2, 0.2, 0.6, 0.0, 0.1, -1);
+  glDisable (GL_TEXTURE_2D);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[4]);
+  drawPlaneED(0.6, 0.42, -0.5005, -1, 0.39, -0.5, -1);
+  drawPlaneED(0.6, 0.42, 0.5005, -1, 0.39, 0.5, 1);
+  drawPlaneFF(0.6005, 0.42, -0.5, 0.6005, 0.39, 0.5, -1);
+    
+  drawPlaneED(0.6, 0.46, -0.5005, -1, 0.45, -0.5, -1);
+  drawPlaneED(0.6, 0.46, 0.5005, -1, 0.45, 0.5, 1);
+  drawPlaneFF(0.6005, 0.46, -0.5, 0.6005, 0.45, 0.5, -1);
+  glDisable (GL_TEXTURE_2D);
 
   //Interior
   //Essas paredes são uma translação da frente da catedral, a entrada
   //Parede interior - superior
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneTC(0.39, 0.4, -0.5, 0.39, 0.2, 0.5, 1);
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneTC(0.4, 0.4, -0.5, 0.4, 0.2, 0.5, 1);
 
   //Parede interior - inferior esquerda
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.39, 0.2, 0.4, 0.39, 0.0, 0.5, 1);
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneFF(0.4, 0.2, 0.4, 0.4, 0.0, 0.5, 1);
 
   //Parede interior - inferior direita
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.39, 0.2, -0.4, 0.39, 0.0, -0.5, 1);
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneFF(0.4, 0.2, -0.4, 0.4, 0.0, -0.5, 1);   
 
   //Parede interior - inferior centro direita
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.39, 0.2, -0.2, 0.39, 0.0, -0.1, 1);
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneFF(0.4, 0.2, -0.2, 0.4, 0.0, -0.1, 1);
 
   //Parede frente - inferior centro esquerda
-  glColor3f(0.96, 0.87, 0.87);
   drawPlaneFF(0.39, 0.2, 0.2, 0.39, 0.0, 0.1, 1);
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneFF(0.4, 0.2, 0.2, 0.4, 0.0, 0.1, 1);
 
   //Parede interior corredor direita 
-  glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.59, 0.75, 0.15, 0.39, 0.0, 0.15, 1);
+  drawPlaneED(0.59, 0.76, 0.15, 0.39, 0.0, 0.15, 1);
 
   //Parede interior corredor esquerda 
-  glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.59, 0.75, -0.15, 0.39, 0.0, -0.15, 1);  
+  drawPlaneED(0.59, 0.76, -0.15, 0.39, 0.0, -0.15, 1);  
 
   //Varanda - andar 1 - camada 1 // Falta fechar os lados
-  glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.6, 0.4, -0.5, 0.4, 0.4, 0.5, 1);
   drawPlaneTC(0.6, 0.405, -0.5, 0.4, 0.405, 0.5, 1);
 
@@ -289,72 +348,96 @@ void Display(void) {
 
   //Teto
   //Teto - andar 1 - camada 1 // Falta fechar os lados
-  glColor3f(0.87,  0.72, 0.53);
-  drawPlaneTC(0.605, 0.75, -0.505, -1.005, 0.75, 0.505, 1);
-  drawPlaneTC(0.605, 0.755, -0.505, -1.005, 0.755, 0.505, 1);
+  drawPlaneTC(0.6, 0.76, -0.50, -1.00, 0.76, 0.50, 1);
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[3]);
+  drawPlaneTC(0.6, 0.76005, -0.50, -1.00, 0.76005, 0.50, 1);
 
-  //Teto - andar 1 - camada 2 // Falta fechar os lados
-  drawPlaneTC(0.61, 0.755, -0.51, -1.01, 0.755, 0.51, -1);
-  drawPlaneTC(0.61, 0.76, -0.51, -1.01, 0.76, 0.51, -1);
-
-  //Andar 2  
-  //Parede direita - andar 2
-  glColor3f( 0.96, 0.87, 0.7);
-  drawPlaneED(0.6, 1.0, 0.5, 0.3, 0.76, 0.5, 1);
+  glDisable (GL_TEXTURE_2D);
   
+ 
+  //Andar 2  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
+  //Parede direita - andar 2
+  drawPlaneED(0.6, 1.0, 0.5, 0.3, 0.76, 0.5, 1);
   //Parede esquerda - andar 2
   drawPlaneED(0.6, 1.0, -0.5, 0.3, 0.76, -0.5, -1);
-
   //Parede fundo - andar 2
   drawPlaneFF(0.3, 1.0, -0.5, 0.3, 0.76, 0.5, 1);
-
-  //Parede frente - andar 2
+  //Parede frente - andar 2  
   drawPlaneFF(0.6, 1.0, -0.5, 0.6, 0.76, 0.5, -1);
+  glDisable (GL_TEXTURE_2D);
 
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[4]);
+  //Parede direita - andar 2
+  drawPlaneED(0.6, 0.78, -0.5005, 0.3, 0.76, -0.5, -1);
+  //Parede esquerda - andar 2
+  drawPlaneED(0.6, 0.78, 0.5005, 0.3, 0.76, 0.5, 1);
+  //Parede frente - andar 2
+  drawPlaneFF(0.6005, 0.78, -0.5, 0.6005, 0.76, 0.5, -1);
+  glDisable (GL_TEXTURE_2D);
+
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[4]);
+  //Parede direita - andar 2
+  drawPlaneED(0.6, 0.82, -0.5005, 0.3, 0.81, -0.5, -1);
+  //Parede esquerda - andar 2
+  drawPlaneED(0.6, 0.82, 0.5005, 0.3, 0.81, 0.5, 1);
+  //Parede frente - andar 2
+  drawPlaneFF(0.6005, 0.82, -0.5, 0.6005, 0.81, 0.5, -1);
+  glDisable (GL_TEXTURE_2D);
+
+
+  //Portas do segundo andar
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[5]);
+  drawPlaneFF(0.6005, 0.62, -0.075, 0.6005, 0.46, 0.075, -1);
+  drawPlaneFF(0.6005, 0.62,  0.26, 0.6005, 0.46, 0.41, -1);
+  drawPlaneFF(0.6005, 0.62,  -0.26, 0.6005, 0.46, -0.41, -1);
+  glDisable (GL_TEXTURE_2D);
+
+ 
   //Teto
   //Teto - andar 2 - camada 1 // Falta fechar os lados
-  glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.61, 1.0, -0.51, 0.28, 1.0, 0.5, -1);
-  drawPlaneTC(0.61, 1.01, -0.51, 0.28, 1.01, 0.5, -1);
 
   //Andar 3
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
   //Parede direita - andar 3 - torre esquerda
-  glColor3f( 0.96, 0.87, 0.7);
-  drawPlaneED(0.56, 1.01, 0.48, 0.30, 1.08, 0.48, 1);
+  drawPlaneED(0.56, 1.0, 0.48, 0.30, 1.08, 0.48, 1);
 
   //Parede esquerda - andar 3 - torre esquerda
-  drawPlaneED(0.56, 1.01, 0.18, 0.30, 1.08, 0.18, -1);
+  drawPlaneED(0.56, 1.0, 0.18, 0.30, 1.08, 0.18, -1);
 
   //Parede fundo - andar 3 - torre esquerda
-  drawPlaneFF(0.30, 1.01, 0.18, 0.30, 1.08, 0.48, 1);
+  drawPlaneFF(0.30, 1.0, 0.18, 0.30, 1.08, 0.48, 1);
 
   //Parede frente - andar 3 - torre esquerda
-  drawPlaneFF(0.56, 1.01, 0.18, 0.56, 1.08, 0.48, -1);
+  drawPlaneFF(0.56, 1.0, 0.18, 0.56, 1.08, 0.48, -1);
 
   //Teto - andar 3 - torre esquerda
-  glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.5605, 1.08, 0.1805, 0.3005, 1.08, 0.4805, -1);
 
   //Parede direita - andar 3 - torre direita
-  glColor3f(0.96, 0.87, 0.7);
-  drawPlaneED(0.56, 1.01, -0.48, 0.30, 1.08, -0.48, -1);
+  drawPlaneED(0.56, 1.0, -0.48, 0.30, 1.08, -0.48, -1);
 
   //Parede esquerda - andar 3 - torre direita
-  drawPlaneED(0.56, 1.01, -0.18, 0.30, 1.08, -0.18, 1);
+  drawPlaneED(0.56, 1.0, -0.18, 0.30, 1.08, -0.18, 1);
 
   //Parede fundo - andar 3 - torre direita
-  drawPlaneFF(0.30, 1.01, -0.18, 0.30, 1.08, -0.48, 1);
+  drawPlaneFF(0.30, 1.0, -0.18, 0.30, 1.08, -0.48, 1);
 
   //Parede frente - andar 3 - torre direita
-  drawPlaneFF(0.56, 1.01, -0.18, 0.56, 1.08, -0.48, -1);
+  drawPlaneFF(0.56, 1.0, -0.18, 0.56, 1.08, -0.48, -1);
 
   //Teto - andar 3 - torre direita
-  glColor3f(0.87,  0.72, 0.53);
   drawPlaneTC(0.5605, 1.08, -0.1805, 0.3005, 1.08, -0.4805, -1);
 
   //Andar 4
   //Parede direita - andar 4 - torre direita 
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.53, 1.08, -0.45, 0.33, 1.20, -0.45, -1);
 
   //Parede esquerda - andar 4 - torre direita
@@ -367,11 +450,9 @@ void Display(void) {
   drawPlaneFF(0.53, 1.08, -0.21, 0.53, 1.20, -0.45, -1);
 
   //Teto - andar 4 - torre direita
-  glColor3f(0.87,  0.72, 0.53);
   drawPlaneTC(0.53, 1.20, -0.21, 0.33, 1.20, -0.45, -1);
 
   //Parede direita - andar 4 - torre esquerda 
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.53, 1.08, 0.45, 0.33, 1.20, 0.45, 1);
 
   //Parede esquerda - andar 4 - torre esquerda
@@ -384,13 +465,11 @@ void Display(void) {
   drawPlaneFF(0.53, 1.08, 0.21, 0.53, 1.20, 0.45, -1);
 
   //Teto - andar 4 - torre esquerda
-  glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.53, 1.20, 0.21, 0.33, 1.20, 0.45, -1);
 
   //Pirâmides 
   //Andar 5
   //Parede direita - andar 5 - torre direita
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.505, 1.20, -0.425, 0.355, 1.22, -0.425, -1);
 
   //Parede esquerda - andar 5 - torre direita
@@ -403,11 +482,9 @@ void Display(void) {
   drawPlaneFF(0.355, 1.20, -0.24, 0.355, 1.22, -0.425, 1);
 
   //Teto - andar 5 - torre direita
-  glColor3f(0.87,  0.72, 0.53);
   drawPlaneTC(0.505, 1.22, -0.24, 0.355, 1.22, -0.425, -1);
 
   //Parede direita - andar 5 - torre esquerda
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.505, 1.20, 0.425, 0.355, 1.22, 0.425, 1);
 
   //Parede esquerda - andar 5 - torre esquerda
@@ -420,11 +497,9 @@ void Display(void) {
   drawPlaneFF(0.355, 1.20, 0.24, 0.355, 1.22, 0.425, 1);
 
   //Teto - andar 5 - torre direita
-  glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.505, 1.22, 0.24, 0.355, 1.22, 0.425, -1);
 
   //Parede direita - andar 6 - torre direita
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.48, 1.22, -0.395, 0.38, 1.24, -0.395, -1);
 
   //Parede esquerda - andar 6 - torre direita
@@ -437,11 +512,9 @@ void Display(void) {
   drawPlaneFF(0.38, 1.22, -0.265, 0.38, 1.24, -0.395, 1);
 
   //Teto - andar 6 - torre direita
-  glColor3f(0.87,  0.72, 0.53);
   drawPlaneTC(0.48, 1.24, -0.265, 0.38, 1.24, -0.395, -1);
 
   //Parede direita - andar 6 - torre esquerda
-  glColor3f(0.96, 0.87, 0.7);
   drawPlaneED(0.48, 1.22, 0.395, 0.38, 1.24, 0.395, 1);
 
   //Parede esquerda - andar 6 - torre esquerda
@@ -454,12 +527,10 @@ void Display(void) {
   drawPlaneFF(0.38, 1.22, 0.265, 0.38, 1.24, 0.395, 1);
 
   //Teto - andar 6 - torre esquerda
-  glColor3f(0.87,  0.72, 0.53);
   drawPlaneTC(0.48, 1.24, 0.265, 0.38, 1.24, 0.395, -1);
 
   //Andar 7
   //Parede direita - andar 7 - torre direita
-  glColor3f( 0.96, 0.87, 0.7);
   drawPlaneED(0.455, 1.24, -0.365, 0.405, 1.26, -0.365, -1);
 
   //Parede esquerda - andar 7 - torre direita
@@ -472,11 +543,9 @@ void Display(void) {
   drawPlaneFF(0.405, 1.24, -0.295, 0.405, 1.26, -0.365, 1);
 
   //Teto - andar 7 - torre direita
-  glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.455, 1.26, -0.295, 0.405, 1.26, -0.365, -1);
 
   //Parede direita - andar 7 - torre esquerda
-  glColor3f( 0.96, 0.87, 0.7);
   drawPlaneED(0.455, 1.24, 0.365, 0.405, 1.26, 0.365, 1);
 
   //Parede esquerda - andar 7 - torre esquerda
@@ -489,13 +558,16 @@ void Display(void) {
   drawPlaneFF(0.405, 1.24, 0.295, 0.405, 1.26, 0.365, 1);
 
   //Teto - andar 7 - torre esquerda
-  glColor3f( 0.87,  0.72, 0.53);
   drawPlaneTC(0.455, 1.26, 0.295, 0.405, 1.26, 0.365, -1);
+
+  glDisable (GL_TEXTURE_2D);
+
 
   for(int i = 0; i < 3; i ++) {
     glColor3f(0.5,  0.5, 0.5);
     //Esquerda
     glPushMatrix();
+  
     glTranslatef(0.6, 0.1, 0.4 - 0.3*i);
     glRotatef(180,0,1,0);
     drawDoor(doorAngle);
@@ -506,6 +578,7 @@ void Display(void) {
     glTranslatef(0.6, 0.1, 0.2 -0.3*i);
     drawDoor(-doorAngle);
     glPopMatrix();
+  
   }
 
   //Colunas
@@ -524,36 +597,38 @@ void Display(void) {
 
 
   //Arcos superiores às portas 
-  glColor3f(0.87,  0.72, 0.53);  
-  drawSemiDiskXY(2.12, 0.8, 0.0, 0.2, 0.28, 1);
-  drawSemiDiskXY(2.12, 0.8, 0.6, 0.2, 0.28, 1);
-  drawSemiDiskXY(2.12, 0.8, -0.6, 0.2, 0.28, 1);
+  //Primeiro andar
+  drawSemiDiskXY(2.105, 0.8, 0.0, 0.2, 0.28, 1);
+  drawSemiDiskXY(2.105, 0.8, 0.6, 0.2, 0.28, 1);
+  drawSemiDiskXY(2.105, 0.8, -0.6, 0.2, 0.28, 1);
 
-  glColor3f(0.48, 0.63, 0.36); 
-  drawSemiDiskXY(2.12, 0.8, 0.0, 0.0, 0.15, 1);
-  drawSemiDiskXY(2.12, 0.8, 0.6, 0.0, 0.15, 1);
-  drawSemiDiskXY(2.12, 0.8, -0.6, 0.0, 0.15, 1);
+  drawSemiDiskXY(2.105, 0.8, 0.0, 0.0, 0.15, 1);
+  drawSemiDiskXY(2.105, 0.8, 0.6, 0.0, 0.15, 1);
+  drawSemiDiskXY(2.105, 0.8, -0.6, 0.0, 0.15, 1);
 
+  //Segundo andar
+  drawSemiDiskXY(2.105, 2.175 , 0.0, 0, 0.15, 1);
+  drawSemiDiskXY(2.105, 2.175, 0.665, 0, 0.15, 1);
+  drawSemiDiskXY(2.105, 2.175, -0.665, 0, 0.15, 1);
+  
   //Arco Teto
   glColor3f(0.87,  0.72, 0.53);  
-  drawSemiDiskXY(2.12, 3.50, 0.0, 0.0, 0.4, -1);
   drawSemiDiskXY(2.13, 3.50, 0.0, 0.0, 0.4, 1);
-  drawSemiDiskXY(1.81, 3.50, 0.0, 0.0, 0.4, -1);
-  drawSemiDiskXY(1.82, 3.50, 0.0, 0.0, 0.4, 1);
+  drawSemiDiskXY(2.00, 3.50, 0.0, 0.0, 0.4, 1);
   
   //Circunferências do segundo andar
   glColor3f(0.87,  0.72, 0.53);
-  drawDiskXY(2.12, 3.1, 0.0, 0.15, 0.2, -1);
-  drawDiskXY(2.12, 3.1, 0.65, 0.1, 0.15, -1);
-  drawDiskXY(2.12, 3.1, -0.65, 0.1, 0.15, -1);
+  drawDiskXY(2.105, 3.1, 0.0, 0.15, 0.2, -1);
+  drawDiskXY(2.105, 3.1, 0.65, 0.1, 0.15, -1);
+  drawDiskXY(2.105, 3.1, -0.65, 0.1, 0.15, -1);
 
   drawDiskZY(1.6, 3.1, 1.01, 0.1, 0.15, -1);
   drawDiskZY(1.6, 3.1, -1.01, 0.1, 0.15, 1);
 
   glColor3f( 0.66, 0.66, 0.66); 
-  drawDiskXY(2.12, 3.1, 0.0, 0.0, 0.15, -1);
-  drawDiskXY(2.12, 3.1, 0.65, 0.0, 0.1, -1);
-  drawDiskXY(2.12, 3.1, -0.65, 0.0, 0.1, -1);
+  drawDiskXY(2.105, 3.1, 0.0, 0.0, 0.15, -1);
+  drawDiskXY(2.105, 3.1, 0.65, 0.0, 0.1, -1);
+  drawDiskXY(2.105, 3.1, -0.65, 0.0, 0.1, -1);
 
   drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1, -1);
   drawDiskZY(1.6, 3.1, -1.01, 0.0, 0.1, 1);
@@ -583,6 +658,10 @@ void Display(void) {
   glScalef(1,2.3,5);
   glutSolidCube(0.2);
   glPopMatrix();   
+  
+  //Tapete altar
+  glColor3f(1, 0, 0); 
+  drawPlaneTC(0.41, 0.002, -0.09, -0.75, 0.002, 0.09, 1);  
 
   //Lustres
   for(int i = 0; i < 2; i++) {
@@ -707,7 +786,9 @@ void Display(void) {
   }
 
   glPopMatrix();  
+
   glClear(GL_DEPTH_BUFFER_BIT);
+  glColor3f(1, 1, 1);
   glFlush();
   glutSwapBuffers();
 }

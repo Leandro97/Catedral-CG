@@ -1,3 +1,9 @@
+#ifdef __APPLE__
+    #include <OpenGL/gl.h>
+#elif __linux__
+    #include <GL/gl.h>
+#endif
+
 #define PI 3.14159265
 GLUquadricObj *obj = gluNewQuadric();
 
@@ -90,7 +96,6 @@ void drawDoor(float angle){
   glRotatef(angle, 0.0, 1.0, 0.0);
   glTranslatef(0,0,0.05);
   glScalef(0.001, 0.2, 0.1);
-
   glutSolidCube(1.0f);
   glPopMatrix();
 }
@@ -109,21 +114,25 @@ void drawSemiSphere(float radius) {
 void drawPlaneED(float x1, float y1, float z1, float x2, float y2, float z2, float mult) {
   glBegin(GL_POLYGON);
   glNormal3f(0,0, 1*mult);
-  glVertex3f(x1, y1, z1);
-  glVertex3f(x2, y1, z1);
-  glVertex3f(x2, y2, z2);
-  glVertex3f(x1, y2, z2);
+
+  glTexCoord2f(0.0, 0.0); glVertex3f(x1, y1, z1);
+  glTexCoord2f(0.0, 100.0); glVertex3f(x2, y1, z1);
+  glTexCoord2f(100.0, 100.0); glVertex3f(x2, y2, z2);
+  glTexCoord2f(100.0, 0.0); glVertex3f(x1, y2, z2);
+  
   glEnd();
 }
 
 //Teto e chão
-void drawPlaneTC(float x1, float y1, float z1, float x2, float y2, float z2, float mult) {
+void drawPlaneTC(float x1, float y1, float z1, float x2, float y2, float z2, float mult) {  
   glBegin(GL_POLYGON);
   glNormal3f(0, -1*mult,0);
-  glVertex3f(x1, y1, z1);
-  glVertex3f(x1, y1, z2);
-  glVertex3f(x2, y2, z2);
-  glVertex3f(x2, y2, z1);
+
+  glTexCoord2f(0.0, 0.0);   glVertex3f(x1, y1, z1);
+  glTexCoord2f(0.0, 20.0);   glVertex3f(x1, y1, z2);
+  glTexCoord2f(20.0, 20.0);  glVertex3f(x2, y2, z2);
+  glTexCoord2f(20.0, 0.0);   glVertex3f(x2, y2, z1);
+
   glEnd();
 }
 
@@ -131,9 +140,11 @@ void drawPlaneTC(float x1, float y1, float z1, float x2, float y2, float z2, flo
 void drawPlaneFF(float x1, float y1, float z1, float x2, float y2, float z2, float mult) {
   glBegin(GL_POLYGON);
   glNormal3f(-1*mult,0,0);
-  glVertex3f(x1, y1, z1);
-  glVertex3f(x2, y1, z2);
-  glVertex3f(x2, y2, z2);
-  glVertex3f(x1, y2, z1);
+
+  glTexCoord2f(0.0, 0.0);  glVertex3f(x1, y1, z1);
+  glTexCoord2f(0.0, 1.0);  glVertex3f(x2, y1, z2);
+  glTexCoord2f(1.0, 1.0);  glVertex3f(x2, y2, z2);
+  glTexCoord2f(1.0, 0.0);  glVertex3f(x1, y2, z1);
+  
   glEnd();
 }
