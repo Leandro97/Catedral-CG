@@ -116,9 +116,9 @@ void drawPlaneED(float x1, float y1, float z1, float x2, float y2, float z2, flo
   glNormal3f(0,0, 1*mult);
 
   glTexCoord2f(0.0, 0.0); glVertex3f(x1, y1, z1);
-  glTexCoord2f(0.0, 100.0); glVertex3f(x2, y1, z1);
-  glTexCoord2f(100.0, 100.0); glVertex3f(x2, y2, z2);
-  glTexCoord2f(100.0, 0.0); glVertex3f(x1, y2, z2);
+  glTexCoord2f(0.0, 10.0); glVertex3f(x2, y1, z1);
+  glTexCoord2f(10.0, 10.0); glVertex3f(x2, y2, z2);
+  glTexCoord2f(10.0, 0.0); glVertex3f(x1, y2, z2);
   
   glEnd();
 }
@@ -129,9 +129,9 @@ void drawPlaneTC(float x1, float y1, float z1, float x2, float y2, float z2, flo
   glNormal3f(0, -1*mult,0);
 
   glTexCoord2f(0.0, 0.0);   glVertex3f(x1, y1, z1);
-  glTexCoord2f(0.0, 20.0);   glVertex3f(x1, y1, z2);
-  glTexCoord2f(20.0, 20.0);  glVertex3f(x2, y2, z2);
-  glTexCoord2f(20.0, 0.0);   glVertex3f(x2, y2, z1);
+  glTexCoord2f(0.0, 100.0);   glVertex3f(x1, y1, z2);
+  glTexCoord2f(100.0, 100.0);  glVertex3f(x2, y2, z2);
+  glTexCoord2f(100.0, 0.0);   glVertex3f(x2, y2, z1);
 
   glEnd();
 }

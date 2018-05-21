@@ -26,11 +26,11 @@ bool openingDoor = false;
 double inc = 2*PI/180;
 bool isRotate;
 
-GLuint texture_handle[10]; //Vetor que armazena as texturas
+GLuint texture_handle[20]; //Vetor que armazena as texturas
 
 
 void loadTexture(GLuint texture, const char* filename){
-    sf::Image img;
+  sf::Image img;
     img.loadFromFile(filename); //Carrega o arquivo da textura
 
    glBindTexture(GL_TEXTURE_2D, texture); //Atribui a textura carregada a uma posição no vetor de texturas
@@ -41,10 +41,10 @@ void loadTexture(GLuint texture, const char* filename){
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-}
+ }
 
 // inicia parâmetros de rendering
-void init(void) {   
+ void init(void) {   
   // Define a cor de fundo da janela de visualização como branca
   glClearColor(0.0f, 0.0f, 0.0f, 1.0f);    
 
@@ -67,7 +67,7 @@ void init(void) {
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-  int n = 7;
+  int n = 11;
   glGenTextures(n, texture_handle); 
   loadTexture(texture_handle[0], "parede.jpg");
   loadTexture(texture_handle[1], "chaoInt.jpg");
@@ -76,7 +76,10 @@ void init(void) {
   loadTexture(texture_handle[4], "detalhe.jpg");
   loadTexture(texture_handle[5], "janela.jpg");
   loadTexture(texture_handle[6], "chaoExt.jpg");
-
+  loadTexture(texture_handle[7], "paredeInt.jpeg");
+  loadTexture(texture_handle[8], "fundoInt.jpg");
+  loadTexture(texture_handle[9], "teto.jpeg");
+    loadTexture(texture_handle[10], "paredeMeio.jpeg");
 
   // Inicializa a variável que especifica o ângulo da projeção
   angle=45;
@@ -221,20 +224,27 @@ void Display(void) {
 
   //Chão
   glEnable (GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, texture_handle[1]);
-  drawPlaneTC(0.6, 0.001, -0.5, -1, 0.001, 0.5, 1);
-  glDisable (GL_TEXTURE_2D);
-
-  glEnable (GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture_handle[6]);
   drawPlaneTC(1.0, 0.0, -1.0, -1.3, 0.0, 1.0, 1);
   glDisable (GL_TEXTURE_2D);
 
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[1]);
+  drawPlaneTC(0.6, 0.001, -0.5, -1, 0.001, 0.5, 1);
+  glDisable (GL_TEXTURE_2D);
 
   // frente, cima, direita: -1. fundo, baixo, esquerda: 1
   // Andar 1
   //Parede direita - andar 1
-  drawPlaneED(-1.0, 0.76 , 0.49, 0.6, 0.0, 0.49, 1);
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[10]);
+  drawPlaneED(-1.0, 0.1 , 0.48, 0.6, 0.0, 0.48, -1);
+  glDisable (GL_TEXTURE_2D);
+
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[7]);
+  drawPlaneED(-1.0, 0.76 , 0.49, 0.6, 0.0, 0.49, -1);
+  glDisable (GL_TEXTURE_2D);
   
   glEnable (GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
@@ -242,7 +252,15 @@ void Display(void) {
   glDisable (GL_TEXTURE_2D);
   
   //Parede esquerda - andar 1
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[10]);
+  drawPlaneED(0.6, 0.1, -0.48, -1.0, 0.0, -0.48, -1);
+  glDisable (GL_TEXTURE_2D);
+
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[7]);
   drawPlaneED(0.6, 0.76, -0.49, -1.0, 0.0, -0.49, -1);
+  glDisable (GL_TEXTURE_2D);
   
   glEnable (GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
@@ -250,7 +268,10 @@ void Display(void) {
   glDisable (GL_TEXTURE_2D);
   
   //Parede fundo - andar 1
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[8]);
   drawPlaneFF(-0.99, 0.76, -0.5, -0.99, 0.0, 0.5, 1);
+  glDisable (GL_TEXTURE_2D);
   
   glEnable (GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
@@ -258,7 +279,19 @@ void Display(void) {
   glDisable (GL_TEXTURE_2D);
   
   // Parede frente - andar 1 - superior
-  drawPlaneFF(0.59, 0.76, -0.5, 0.59, 0.2, 0.5, 1);
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[7]);
+  glBegin(GL_POLYGON);
+  glNormal3f(-1,0,0);
+
+  glTexCoord2f(0.0, 0.0);  glVertex3f(0.59, 0.76, -0.5);
+  glTexCoord2f(0.0, 10.0);  glVertex3f(0.59, 0.76, 0.5);
+  glTexCoord2f(10.0, 10.0);  glVertex3f(0.59, 0.2, 0.5);
+  glTexCoord2f(10.0, 0.0);  glVertex3f(0.59, 0.2, -0.5);
+  
+  glEnd();
+  //drawPlaneFF(0.59, 0.76, -0.5, 0.59, 0.2, 0.5, 1);
+  glDisable (GL_TEXTURE_2D);
   
   glEnable (GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
@@ -304,7 +337,7 @@ void Display(void) {
   drawPlaneED(0.6, 0.42, -0.5005, -1, 0.39, -0.5, -1);
   drawPlaneED(0.6, 0.42, 0.5005, -1, 0.39, 0.5, 1);
   drawPlaneFF(0.6005, 0.42, -0.5, 0.6005, 0.39, 0.5, -1);
-    
+
   drawPlaneED(0.6, 0.46, -0.5005, -1, 0.45, -0.5, -1);
   drawPlaneED(0.6, 0.46, 0.5005, -1, 0.45, 0.5, 1);
   drawPlaneFF(0.6005, 0.46, -0.5, 0.6005, 0.45, 0.5, -1);
@@ -348,14 +381,16 @@ void Display(void) {
 
   //Teto
   //Teto - andar 1 - camada 1 // Falta fechar os lados
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[9]);
   drawPlaneTC(0.6, 0.76, -0.50, -1.00, 0.76, 0.50, 1);
+  glDisable (GL_TEXTURE_2D);
+  
   glEnable (GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture_handle[3]);
   drawPlaneTC(0.6, 0.76005, -0.50, -1.00, 0.76005, 0.50, 1);
-
   glDisable (GL_TEXTURE_2D);
   
- 
   //Andar 2  
   glEnable (GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture_handle[0]);
@@ -398,7 +433,7 @@ void Display(void) {
   drawPlaneFF(0.6005, 0.62,  -0.26, 0.6005, 0.46, -0.41, -1);
   glDisable (GL_TEXTURE_2D);
 
- 
+
   //Teto
   //Teto - andar 2 - camada 1 // Falta fechar os lados
   drawPlaneTC(0.61, 1.0, -0.51, 0.28, 1.0, 0.5, -1);
@@ -567,7 +602,7 @@ void Display(void) {
     glColor3f(0.5,  0.5, 0.5);
     //Esquerda
     glPushMatrix();
-  
+
     glTranslatef(0.6, 0.1, 0.4 - 0.3*i);
     glRotatef(180,0,1,0);
     drawDoor(doorAngle);
@@ -578,7 +613,7 @@ void Display(void) {
     glTranslatef(0.6, 0.1, 0.2 -0.3*i);
     drawDoor(-doorAngle);
     glPopMatrix();
-  
+
   }
 
   //Colunas
