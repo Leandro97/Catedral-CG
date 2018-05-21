@@ -98,12 +98,14 @@ void drawSemiDiskZY(float x, float y, float z, float radiusIn, float radiusOut){
 
 void drawDoor(float angle){
   glPushMatrix();   
+  glNormal3f(-1,0,0);
   glRotatef(angle, 0.0, 1.0, 0.0);
-  glTranslatef(0,0,0.05);
-  glScalef(0.001, 0.2, 0.1);
-
-  glutSolidCube(1.0f);
-  
+  glBegin(GL_POLYGON);
+  glTexCoord2f(0.0, 0.0);  glVertex3f(0, 0.1, 0);
+  glTexCoord2f(0.0, 1.0);  glVertex3f(0, 0.1, 0.1);
+  glTexCoord2f(1.0, 1.0);  glVertex3f(0, -0.1, 0.1);
+  glTexCoord2f(1.0, 0.0);  glVertex3f(0, -0.1, 0);
+  glEnd();
   glPopMatrix();
 }
 

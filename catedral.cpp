@@ -67,7 +67,7 @@ void loadTexture(GLuint texture, const char* filename){
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-  int n = 13;
+  int n = 14;
   glGenTextures(n, texture_handle); 
   loadTexture(texture_handle[0], "parede.jpg");
   loadTexture(texture_handle[1], "chaoInt.jpg");
@@ -82,6 +82,7 @@ void loadTexture(GLuint texture, const char* filename){
   loadTexture(texture_handle[10], "paredeMeio.jpeg");
   loadTexture(texture_handle[11], "detalhearco.jpg");
   loadTexture(texture_handle[12], "escuro.jpg");
+  loadTexture(texture_handle[13], "door.jpeg");
   // Inicializa a variável que especifica o ângulo da projeção
   angle=45;
 }
@@ -425,7 +426,7 @@ void Display(void) {
   drawPlaneFF(0.6005, 0.82, -0.5, 0.6005, 0.81, 0.5, -1);
   glDisable (GL_TEXTURE_2D);
 
- 
+
   //Portas do segundo andar 
   glEnable (GL_TEXTURE_2D);
   glBindTexture(GL_TEXTURE_2D, texture_handle[5]); 
@@ -605,7 +606,8 @@ void Display(void) {
 
     //Esquerda
     glPushMatrix();
-
+    glEnable (GL_TEXTURE_2D);
+    glBindTexture(GL_TEXTURE_2D, texture_handle[13]);
     glTranslatef(0.6, 0.1, 0.4 - 0.3*i);
     glRotatef(180,0,1,0);
     drawDoor(doorAngle);
@@ -615,6 +617,7 @@ void Display(void) {
     glPushMatrix();
     glTranslatef(0.6, 0.1, 0.2 -0.3*i);
     drawDoor(-doorAngle);
+    glDisable (GL_TEXTURE_2D);
     glPopMatrix();
 
   }
@@ -687,14 +690,18 @@ void Display(void) {
   glDisable (GL_TEXTURE_2D);
 
   glEnable (GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, texture_handle[12]);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[11]);
 
   drawDiskXY(2.105, 3.1, 0.0, 0.0, 0.15, 1);
   drawDiskXY(2.105, 3.1, 0.65, 0.0, 0.1, 1);
   drawDiskXY(2.105, 3.1, -0.65, 0.0, 0.1, 1);
 
-  drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1, 1);
-  drawDiskZY(1.6, 3.1, -1.01, 0.0, 0.1, 1);
+  glPushMatrix();
+    glRotatef(90, 0,0,1);
+    glTranslatef(1.5, -4.7, 0);
+    drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1, 1);
+    drawDiskZY(1.6, 3.1, -1.01, 0.0, 0.1, 1);
+  glPopMatrix();
   glDisable (GL_TEXTURE_2D);
 
   glPushMatrix(); // Matriz dos objetos internos
