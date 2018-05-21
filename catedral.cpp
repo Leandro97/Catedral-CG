@@ -67,7 +67,7 @@ void loadTexture(GLuint texture, const char* filename){
   glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
   glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
 
-  int n = 11;
+  int n = 13;
   glGenTextures(n, texture_handle); 
   loadTexture(texture_handle[0], "parede.jpg");
   loadTexture(texture_handle[1], "chaoInt.jpg");
@@ -79,8 +79,9 @@ void loadTexture(GLuint texture, const char* filename){
   loadTexture(texture_handle[7], "paredeInt.jpeg");
   loadTexture(texture_handle[8], "fundoInt.jpg");
   loadTexture(texture_handle[9], "teto.jpeg");
-    loadTexture(texture_handle[10], "paredeMeio.jpeg");
-
+  loadTexture(texture_handle[10], "paredeMeio.jpeg");
+  loadTexture(texture_handle[11], "detalhearco.jpg");
+  loadTexture(texture_handle[12], "escuro.jpg");
   // Inicializa a variável que especifica o ângulo da projeção
   angle=45;
 }
@@ -424,19 +425,21 @@ void Display(void) {
   drawPlaneFF(0.6005, 0.82, -0.5, 0.6005, 0.81, 0.5, -1);
   glDisable (GL_TEXTURE_2D);
 
-
-  //Portas do segundo andar
+ 
+  //Portas do segundo andar 
   glEnable (GL_TEXTURE_2D);
-  glBindTexture(GL_TEXTURE_2D, texture_handle[5]);
-  drawPlaneFF(0.6005, 0.62, -0.075, 0.6005, 0.46, 0.075, -1);
-  drawPlaneFF(0.6005, 0.62,  0.26, 0.6005, 0.46, 0.41, -1);
-  drawPlaneFF(0.6005, 0.62,  -0.26, 0.6005, 0.46, -0.41, -1);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[5]); 
+  drawPlaneFF(0.6005, 0.62, -0.075, 0.6005, 0.46, 0.075, -1); 
+  drawPlaneFF(0.6005, 0.58,  0.285, 0.6005, 0.46, 0.385, -1);
+  drawPlaneFF(0.6005, 0.58,  -0.285, 0.6005, 0.46, -0.385, -1);
   glDisable (GL_TEXTURE_2D);
 
-
   //Teto
-  //Teto - andar 2 - camada 1 // Falta fechar os lados
+  //Teto - andar 2 
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[4]);
   drawPlaneTC(0.61, 1.0, -0.51, 0.28, 1.0, 0.5, -1);
+  glDisable (GL_TEXTURE_2D);
 
   //Andar 3
   glEnable (GL_TEXTURE_2D);
@@ -599,7 +602,7 @@ void Display(void) {
 
 
   for(int i = 0; i < 3; i ++) {
-    glColor3f(0.5,  0.5, 0.5);
+
     //Esquerda
     glPushMatrix();
 
@@ -617,6 +620,7 @@ void Display(void) {
   }
 
   //Colunas
+  glPushMatrix();
   glEnable(GL_DEPTH_TEST);
   glColor3f(0.96, 0.96, 0.86);
   drawColumnY(0.605, 0.5, 0.0, 0.015, 1.2);
@@ -627,47 +631,73 @@ void Display(void) {
   drawColumnY(0.59, 0, 1.0, 0.015, 0.3);
   drawColumnY(0.585, 0, 1.3, 0.008, 0.07);
   drawColumnZ(0.585, 1.35, -0.035, 0.005, 0.07);
+  glPopMatrix();
 
   glPopMatrix(); //Aqui acaba a matriz de objetos afetados pela escala
 
+   //Arco Teto
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[4]);
+  
+  drawSemiDiskXY(2.13, 3.50, 0.0, 0.0, 0.4, -1);
+  drawSemiDiskXY(2.00, 3.50, 0.0, 0.0, 0.4, -1);
+  
+  glDisable (GL_TEXTURE_2D);
 
   //Arcos superiores às portas 
   //Primeiro andar
-  drawSemiDiskXY(2.105, 0.8, 0.0, 0.2, 0.28, 1);
-  drawSemiDiskXY(2.105, 0.8, 0.6, 0.2, 0.28, 1);
-  drawSemiDiskXY(2.105, 0.8, -0.6, 0.2, 0.28, 1);
-
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[4]);
+  
+  drawSemiDiskXY(2.105, 0.8, 0.0, 0.2, 0.28, -1);
+  drawSemiDiskXY(2.105, 0.8, 0.6, 0.2, 0.28, -1);
+  drawSemiDiskXY(2.105, 0.8, -0.6, 0.2, 0.28, -1);
+  
+  glDisable (GL_TEXTURE_2D);
+  
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[11]);
+  
   drawSemiDiskXY(2.105, 0.8, 0.0, 0.0, 0.15, 1);
   drawSemiDiskXY(2.105, 0.8, 0.6, 0.0, 0.15, 1);
   drawSemiDiskXY(2.105, 0.8, -0.6, 0.0, 0.15, 1);
 
-  //Segundo andar
-  drawSemiDiskXY(2.105, 2.175 , 0.0, 0, 0.15, 1);
-  drawSemiDiskXY(2.105, 2.175, 0.665, 0, 0.15, 1);
-  drawSemiDiskXY(2.105, 2.175, -0.665, 0, 0.15, 1);
+  glDisable (GL_TEXTURE_2D);
+
+  //Segundo andar 
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[11]);
   
-  //Arco Teto
-  glColor3f(0.87,  0.72, 0.53);  
-  drawSemiDiskXY(2.13, 3.50, 0.0, 0.0, 0.4, 1);
-  drawSemiDiskXY(2.00, 3.50, 0.0, 0.0, 0.4, 1);
+  drawSemiDiskXY(2.105, 2.170 , 0.0, 0, 0.15, 1);
+  drawSemiDiskXY(2.105, 2.03, 0.667, 0, 0.10, 1);
+  drawSemiDiskXY(2.105, 2.03, -0.667, 0, 0.10, 1);
   
+  glDisable (GL_TEXTURE_2D);
+
   //Circunferências do segundo andar
-  glColor3f(0.87,  0.72, 0.53);
-  drawDiskXY(2.105, 3.1, 0.0, 0.15, 0.2, -1);
-  drawDiskXY(2.105, 3.1, 0.65, 0.1, 0.15, -1);
-  drawDiskXY(2.105, 3.1, -0.65, 0.1, 0.15, -1);
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[4]);
 
-  drawDiskZY(1.6, 3.1, 1.01, 0.1, 0.15, -1);
+  drawDiskXY(2.105, 3.1, 0.0, 0.15, 0.2, 1);
+  drawDiskXY(2.105, 3.1, 0.65, 0.1, 0.15, 1);
+  drawDiskXY(2.105, 3.1, -0.65, 0.1, 0.15, 1);
+  
+  drawDiskZY(1.6, 3.1, 1.01, 0.1, 0.15, 1);
   drawDiskZY(1.6, 3.1, -1.01, 0.1, 0.15, 1);
+  glDisable (GL_TEXTURE_2D);
 
-  glColor3f( 0.66, 0.66, 0.66); 
-  drawDiskXY(2.105, 3.1, 0.0, 0.0, 0.15, -1);
-  drawDiskXY(2.105, 3.1, 0.65, 0.0, 0.1, -1);
-  drawDiskXY(2.105, 3.1, -0.65, 0.0, 0.1, -1);
+  glEnable (GL_TEXTURE_2D);
+  glBindTexture(GL_TEXTURE_2D, texture_handle[12]);
 
-  drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1, -1);
+  drawDiskXY(2.105, 3.1, 0.0, 0.0, 0.15, 1);
+  drawDiskXY(2.105, 3.1, 0.65, 0.0, 0.1, 1);
+  drawDiskXY(2.105, 3.1, -0.65, 0.0, 0.1, 1);
+
+  drawDiskZY(1.6, 3.1, 1.01, 0.0, 0.1, 1);
   drawDiskZY(1.6, 3.1, -1.01, 0.0, 0.1, 1);
+  glDisable (GL_TEXTURE_2D);
 
+  glPushMatrix(); // Matriz dos objetos internos
   //Cruz
   //Horizontal
   glPushMatrix();
@@ -820,6 +850,7 @@ void Display(void) {
     }
   }
 
+  glPopMatrix();
   glPopMatrix();  
 
   glClear(GL_DEPTH_BUFFER_BIT);

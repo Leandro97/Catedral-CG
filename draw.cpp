@@ -13,6 +13,7 @@ void drawColumnY(float x, float y, float z, float radius, float size){
   glTranslatef(x, y, z);
   gluQuadricOrientation(obj, GLU_OUTSIDE);
   gluQuadricDrawStyle(obj, GLU_FILL);
+  gluQuadricTexture(obj, true);
   gluCylinder(obj, radius, radius, size, 100, 100);
   glPopMatrix();
 }
@@ -22,6 +23,7 @@ void drawColumnZ(float x, float y, float z, float radius, float size){
   glTranslatef(x, y, z);
   gluQuadricOrientation(obj, GLU_OUTSIDE);
   gluQuadricDrawStyle(obj, GLU_FILL);
+  gluQuadricTexture(obj, true);
   gluCylinder(obj, radius, radius, size, 100, 100);
   glPopMatrix();
 }
@@ -30,7 +32,6 @@ void drawDiskXY(float x, float y, float z, float radiusIn, float radiusOut, int 
   glPushMatrix();
   glTranslatef(x, y, z);
   glRotatef(90, 0.0, 1.0, 0.0 );
-  gluQuadricDrawStyle(obj, GLU_FILL);
 
   if(mult == 1) {
     gluQuadricOrientation(obj, GLU_INSIDE);
@@ -38,6 +39,8 @@ void drawDiskXY(float x, float y, float z, float radiusIn, float radiusOut, int 
     gluQuadricOrientation(obj, GLU_OUTSIDE);
   }
 
+  gluQuadricTexture(obj, true);
+  gluQuadricDrawStyle(obj, GLU_FILL);
   gluDisk(obj, radiusIn, radiusOut, 100, 100);
   glPopMatrix();
 }
@@ -53,6 +56,7 @@ void drawDiskZY(float x, float y, float z, float radiusIn, float radiusOut, int 
     gluQuadricOrientation(obj, GLU_OUTSIDE);
   }
 
+  gluQuadricTexture(obj, true);
   gluQuadricDrawStyle(obj, GLU_FILL);
   gluDisk(obj, radiusIn, radiusOut, 100, 100);
   glPopMatrix();
@@ -71,7 +75,7 @@ void drawSemiDiskXY(float x, float y, float z, float radiusIn, float radiusOut, 
   } else {
     gluQuadricOrientation(obj, GLU_OUTSIDE);
   }
-
+  gluQuadricTexture(obj, true);
   gluQuadricDrawStyle(obj, GLU_FILL);
   gluDisk(obj, radiusIn, radiusOut, 100, 100);
   glDisable(GL_CLIP_PLANE0);
@@ -86,6 +90,7 @@ void drawSemiDiskZY(float x, float y, float z, float radiusIn, float radiusOut){
   glClipPlane (GL_CLIP_PLANE0, eqnBottom);
   glEnable (GL_CLIP_PLANE0);
   gluQuadricDrawStyle(obj, GLU_FILL);
+  gluQuadricTexture(obj, true);
   gluDisk(obj, radiusIn, radiusOut, 100, 100);
   glDisable(GL_CLIP_PLANE0);
   glPopMatrix();
@@ -96,7 +101,9 @@ void drawDoor(float angle){
   glRotatef(angle, 0.0, 1.0, 0.0);
   glTranslatef(0,0,0.05);
   glScalef(0.001, 0.2, 0.1);
+
   glutSolidCube(1.0f);
+  
   glPopMatrix();
 }
 
@@ -129,9 +136,9 @@ void drawPlaneTC(float x1, float y1, float z1, float x2, float y2, float z2, flo
   glNormal3f(0, -1*mult,0);
 
   glTexCoord2f(0.0, 0.0);   glVertex3f(x1, y1, z1);
-  glTexCoord2f(0.0, 100.0);   glVertex3f(x1, y1, z2);
-  glTexCoord2f(100.0, 100.0);  glVertex3f(x2, y2, z2);
-  glTexCoord2f(100.0, 0.0);   glVertex3f(x2, y2, z1);
+  glTexCoord2f(0.0, 20.0);   glVertex3f(x1, y1, z2);
+  glTexCoord2f(20.0, 20.0);  glVertex3f(x2, y2, z2);
+  glTexCoord2f(20.0, 0.0);   glVertex3f(x2, y2, z1);
 
   glEnd();
 }
